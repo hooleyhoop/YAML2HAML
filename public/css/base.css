@@ -48,6 +48,10 @@ button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
 textarea{overflow:auto;vertical-align:top}
 table{border-collapse:collapse;border-spacing:0}
 
+/* apply a natural box layout model to all elements */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+img { display:block; }
+
 html {
 	background: url(images/bg.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;

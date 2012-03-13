@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
-require 'haml'
 require 'psych'
 
 require_relative 'src/hoo_util'

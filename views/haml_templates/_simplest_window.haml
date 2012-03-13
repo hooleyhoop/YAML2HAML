@@ -7,7 +7,10 @@
     -# load some CSS 
     - _('css').each do |css_file_path|
       %link( rel='stylesheet' href="#{HooUtil.cssHelper(css_file_path)}" )
-      
+
+    - _('scss').each do |scss_file_path|
+      %link( rel='stylesheet' href="#{HooUtil.scssHelper(scss_file_path)}" )
+
     -# load some script
     - _('javascript').each do |js_file_path|
       %script( src="#{HooUtil.javascriptHelper(js_file_path)}" )

@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'coffee-script'
+require 'sass'
+
 # sinatra-url-for # check this out for better urls
 require_relative 'hoo_renderer'
 
@@ -8,6 +10,21 @@ class HooUtil
   #
   def HooUtil.cssHelper( filename )
     "css/#{filename}.css"
+  end
+
+  #
+  def HooUtil.scssHelper( filename )
+    src_file = "public/scss/#{filename}.scss"
+    isFile = File.file?( src_file )
+    raise "cant find #{src_file} scss" if !isFile
+    compiled_styles = Sass::Engine.for_file(src_file, { syntax: :scss, cache: false } ).render
+
+    dst_file_path = "css/#{filename}.css"
+    absolute_dst_file_path = File.join( 'public', dst_file_path )
+    dst_file = File.new( absolute_dst_file_path, "w")
+    dst_file.write( compiled_styles )
+    dst_file.close
+    return dst_file_path
   end
 
   #
@@ -21,8 +38,11 @@ class HooUtil
     src_file = "public/coffeescript/#{filename}.coffee"
     isFile = File.file?( src_file )   
     raise "cant find #{src_file} coffeescript" if !isFile
+
     raw_script = File.new( src_file, "r" )
     compiled_script = CoffeeScript.compile( raw_script )
+    raw_script.close
+
     dst_file_path = "javascript/#{filename}.js"
     absolute_dst_file_path = File.join( 'public', dst_file_path )
     dst_file = File.new( absolute_dst_file_path, "w")

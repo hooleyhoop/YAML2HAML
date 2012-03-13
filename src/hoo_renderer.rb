@@ -1,4 +1,5 @@
 class HooRenderer
+  require 'haml'
 
   attr_accessor :engine
   attr_accessor :subrenderers
