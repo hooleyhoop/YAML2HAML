@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'coffee-script'
+# sinatra-url-for # check this out for better urls
 require_relative 'hoo_renderer'
 
 class HooUtil
@@ -30,6 +31,11 @@ class HooUtil
     return dst_file_path
   end
   
+  #
+  def HooUtil.imageHelper( filename )
+    "images/#{filename}"
+  end
+
   #
   def HooUtil.loadYAML( yaml_template_name, page_directory )
     template_path = File.join( page_directory, "#{yaml_template_name}.yaml" )

@@ -43,12 +43,12 @@ def renderPage( page_name )
 end
 
 # ROUTES
-get '/:page' do
+get '/:page/?' do
   content_type 'text/html', :charset =>'utf-8'
   renderPage( params[:page] )
 end
 
-get '/' do
+get '/?' do
   renderPage( 'index' )
 end
 
