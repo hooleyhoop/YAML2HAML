@@ -1,0 +1,18 @@
+!!!
+%html( lang='en' )
+  %head
+    %meta( charset='utf-8' )
+    %title=_ 'title', 'untitled'
+    
+    -# load some CSS 
+    - _('css').each do |css_file_path|
+      %link( rel='stylesheet' href="#{cssHelper(css_file_path)}" )
+      
+    -# load some script
+    - _('javascript').each do |js_file_path|
+      %script( src="#{javascriptHelper(js_file_path)}" )
+
+  %body
+    Wlecome to YAML2Haml
+    -#- _('subrenderers').each do |subrenderer|
+    -#  YES

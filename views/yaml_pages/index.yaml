@@ -6,7 +6,7 @@ _two:
 _header:
   text: small things amuse small minds
   color: red
-
+  
 # wrap lines in paragraph tags
 _simplest_story:
   text: |

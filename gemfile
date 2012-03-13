@@ -2,3 +2,4 @@ source :rubygems
 gem 'sinatra', :git => 'git://github.com/sinatra/sinatra.git'
 gem 'haml'
 gem 'sinatra-reloader'
+gem 'thin'

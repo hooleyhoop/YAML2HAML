@@ -84,6 +84,14 @@ class HooRenderer
     @properties[prop_name.to_sym] = default_value
   end
   
+  def cssHelper( filename )
+    "css/#{filename}.css"
+  end
+
+  def javascriptHelper( filename )
+    "javascript/#{filename}.js"
+  end
+  
   #
   def subrenderers
     @subrenderers ||= []

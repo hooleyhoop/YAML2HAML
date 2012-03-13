@@ -2,6 +2,13 @@ require_relative 'hoo_renderer'
 
 class HooUtil
 
+  def HooUtil.loadYAML( yaml_template_name, page_directory )
+    template_path = File.join( page_directory, "#{yaml_template_name}.yaml" )
+    isFile = File.file?( template_path )   
+    raise "cant find engine #{yaml_template_name} YAML" if !isFile
+    test_yaml_hash = Psych.load_file( template_path )  
+  end
+
   # badly recursively get unique keys
   def HooUtil.uniqueKeys( in_yaml_hash, result_set )
     in_yaml_hash.each do |key, value|
@@ -68,7 +75,7 @@ class HooUtil
     template_engines = Hash.new
     paths_hash.each do |key, value|    
       template_as_string = IO.read( value )
-      engine = Haml::Engine.new( template_as_string )
+      engine = Haml::Engine.new( template_as_string, { format: :html5, ugly: true } )
       template_engines[key] = engine
     end
     return template_engines
