@@ -1,0 +1,19 @@
+https://github.com/csswizardry/CSS-Guidelines/blob/master/CSS%20Guidelines.md
+
+If you have to build a new component split it into structure and skin; build the structure of the component using very generic classes so that we can reuse that construct and then use more specific classes to skin it up and add design treatments.
+
+All components should be left totally free of widths; your components should always remain fluid and their widths should be governed by a grid system.
+
+Heights should never be be applied to elements. 
+
+You should never apply any styles to a grid item,
+
+Do not use IDs in CSS at all.
+
+// NO MAGIC NUMBER
+.dropdown-nav li:hover ul{ top:37px; }
+
+// YES! How does this work?
+.dropdown-nav li:hover ul{ top:100%; }
+
+ I also set margin-bottom in rems 

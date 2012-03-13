@@ -33,13 +33,11 @@ get '/' do
   unique_keys = Set.new
   HooUtil.uniqueKeys( test_yaml_hash, unique_keys )
 
-  template_paths_hash = HooUtil.buildTemplatePathsForKeys( template_directory, unique_keys )
+  template_keys = HooUtil.keysStartingWith( unique_keys, '_' )
+  
+  template_paths_hash = HooUtil.buildTemplatePathsForKeys( template_directory, template_keys )
   engine_hash = HooUtil.buildTemplateEngines( template_paths_hash )
 
-  #template_keys = Set.new
-  #HooUtil.keysStartingWith( unique_keys, '_', template_keys )
-  #puts template_keys.inspect
-  
   root_renderer = HooUtil.buildViewHierarchy( test_yaml_hash, engine_hash )
   return root_renderer.render
 end
@@ -48,7 +46,7 @@ end
   #puts YAML::dump(engine_hash)
 
   #puts "#Loaded yaml> #{test_yaml_hash.inspect}"
-  #puts YAML::dump(root_view)
+  #puts YAML::dump(test_yaml_hash)
   
   #isFile = File.file?( test_haml_file ) 
   #raise "test file not found" if isFile==false

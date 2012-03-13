@@ -10,15 +10,18 @@ class HooUtil
         uniqueKeys( value, result_set )
       end
     end
+    result_set
   end
 
   # badly filter keys
-  def HooUtil.keysStartingWith( in_set, firstChar, out_set )
-      in_set.each do |value|
-        if value[0] == firstChar
-          out_set.add value
-        end      
-      end  
+  def HooUtil.keysStartingWith( in_set, firstChar )
+    filtered_keys = Set.new  
+    in_set.each do |value|
+      if value[0] == firstChar
+        filtered_keys << value
+      end      
+    end
+    filtered_keys
   end
 
   # start building the view hierarchy
@@ -32,12 +35,19 @@ class HooUtil
   def HooUtil.buildViewHierarchyForParent( in_yaml_hash, parent_renderer, engine_hash )
     in_yaml_hash.each do |key, value|
         engine_for_child = engine_hash[key]
-        raise "cant find engine #{key} in #{engine_hash}" if engine_for_child.nil? 
-        child_view = HooRenderer.new( engine_for_child )
-        if value.instance_of? Hash
-          buildViewHierarchyForParent( value, child_view, engine_hash )
+        #raise "cant find engine #{key} in #{engine_hash}" if engine_for_child.nil?
+        
+        # set a child template
+        unless engine_for_child.nil?
+          child_view = HooRenderer.new( engine_for_child )
+          if value.instance_of? Hash
+            buildViewHierarchyForParent( value, child_view, engine_hash )
+          end
+          parent_renderer.addSubRenderer(child_view)
+        else
+          # set a custom property
+          parent_renderer.setCustomProperty( key, value ) 
         end
-        parent_renderer.addSubRenderer(child_view)
     end
   end
 
@@ -45,12 +55,12 @@ class HooUtil
   def HooUtil.buildTemplatePathsForKeys( template_directory, unique_keys )
     #  if key[0] == '.'
     #    template_name = key[1..-1]
-    template_paths = Hash.new
+    template_paths_h = Hash.new
     unique_keys.each do |value|
-      template_path = File.join( template_directory, "#{value.to_s}.haml" )
-      template_paths[value.to_sym] = template_path
+      template_path = File.join( template_directory, "#{value}.haml" )
+      template_paths_h[value.to_sym] = template_path
     end
-    return template_paths
+    return template_paths_h
   end
 
   #

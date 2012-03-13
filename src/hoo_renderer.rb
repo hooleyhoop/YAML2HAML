@@ -3,11 +3,13 @@ class HooRenderer
   attr_accessor :engine
   attr_accessor :subrenderers
   attr_accessor :parentRenderer
-
+  attr_accessor :properties
+  
   #
   def initialize( engine=nil )
     @engine = engine
-    @subrenderers=[]    
+    @subrenderers=[]
+    @properties={}
   end
   
   #
@@ -71,6 +73,17 @@ class HooRenderer
     end
   end
 
+  #
+  def _( prop_name, default_value=nil )
+    custom_prop = @properties[prop_name.to_sym]
+    return custom_prop || default_value
+  end
+  
+  #
+  def setCustomProperty( prop_name, default_value )
+    @properties[prop_name.to_sym] = default_value
+  end
+  
   #
   def subrenderers
     @subrenderers ||= []
