@@ -14,7 +14,8 @@ configure :development do |config|
   require "sinatra/reloader"
   config.also_reload( File.join( File.dirname(__FILE__), "src/*.rb" ) )
 
-  set :haml, :format => :html5 # default Haml format is :xhtml
+  #set :haml, :format => :html5 # default Haml format is :xhtml
+  mime_type :js, 'application/x-javascript'
 
   # Constants - just directory names
   set :views_directory, File.join( File.dirname(__FILE__), 'views' )
@@ -22,6 +23,8 @@ configure :development do |config|
   set :page_directory, File.join( settings.views_directory, 'yaml_pages' )
 end
 
+helpers do
+end
 
 #
 def renderPage( page_name )
@@ -41,6 +44,7 @@ end
 
 # ROUTES
 get '/:page' do
+  content_type 'text/html', :charset =>'utf-8'
   renderPage( params[:page] )
 end
 

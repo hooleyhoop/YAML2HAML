@@ -3,3 +3,4 @@ _simplest_window:
   title: YAML2Haml
   css: [base]
   javascript: [jquery-1.7.1.min]
+  coffeescript: [test]

@@ -1,7 +1,36 @@
+require 'sinatra'
+require 'coffee-script'
 require_relative 'hoo_renderer'
 
 class HooUtil
 
+  #
+  def HooUtil.cssHelper( filename )
+    "css/#{filename}.css"
+  end
+
+  #
+  def HooUtil.javascriptHelper( filename )
+    "javascript/#{filename}.js"
+  end
+  
+  # Compile a coffeescript to disk
+  #
+  def HooUtil.coffeescriptHelper( filename )
+    src_file = "public/coffeescript/#{filename}.coffee"
+    isFile = File.file?( src_file )   
+    raise "cant find #{src_file} coffeescript" if !isFile
+    raw_script = File.new( src_file, "r" )
+    compiled_script = CoffeeScript.compile( raw_script )
+    dst_file_path = "javascript/#{filename}.js"
+    absolute_dst_file_path = File.join( 'public', dst_file_path )
+    dst_file = File.new( absolute_dst_file_path, "w")
+    dst_file.write( compiled_script )
+    dst_file.close
+    return dst_file_path
+  end
+  
+  #
   def HooUtil.loadYAML( yaml_template_name, page_directory )
     template_path = File.join( page_directory, "#{yaml_template_name}.yaml" )
     isFile = File.file?( template_path )   
