@@ -49,7 +49,7 @@ class HooRenderer
   end
     
   #
-  def render
+  def render( locals={} )
     rendered_output = ''
     if( @engine.nil? )
       #rendered_output << "no engine :("
@@ -58,7 +58,7 @@ class HooRenderer
       end      
     elsif
       #rendered_output << "yay engine!"
-      rendered_template = @engine.render( self )
+      rendered_template = @engine.render( self, locals )
       rendered_output << rendered_template 
     end
     return rendered_output    
@@ -66,10 +66,10 @@ class HooRenderer
 
   # not sure how this works but it does
   # somehow self is the render context
-  def insert( index )
+  def insert( index, locals={} )
     subrenderer = @subrenderers[index]
     unless subrenderer.nil?
-      subrenderer.render
+      subrenderer.render( locals )
     end
   end
 

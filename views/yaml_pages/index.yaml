@@ -20,3 +20,12 @@ _simplest_list:
     { title: hello },
     { title: hello }
   ]
+
+# simplest cell renderer
+_simplest_cell_renderer:
+  _simplest_cell:
+  content: [
+    { title: monkey zoo },
+    { title: camel house },
+    { title: penguin food }
+  ]
