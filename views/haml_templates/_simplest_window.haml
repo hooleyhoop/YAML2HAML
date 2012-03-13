@@ -5,28 +5,24 @@
     %title=_ 'title', 'untitled'
     
     -# load some CSS 
-    - _('css').each do |css_file_path|
-      %link( rel='stylesheet' href="#{HooUtil.cssHelper(css_file_path)}" )
+    - _('css', []).each do |css_file_path|
+      %link( rel='stylesheet' href="#{HooUtil.cssHelper(css_file_path)}" type="text/css" )
 
-    - _('scss').each do |scss_file_path|
-      %link( rel='stylesheet' href="#{HooUtil.scssHelper(scss_file_path)}" )
+    - _('scss', []).each do |scss_file_path|
+      %link( rel='stylesheet' href="#{HooUtil.scssHelper(scss_file_path)}" type="text/css" )
 
     -# load some script
-    - _('javascript').each do |js_file_path|
-      %script( src="#{HooUtil.javascriptHelper(js_file_path)}" )
+    - _('javascript', []).each do |js_file_path|
+      %script( src="#{HooUtil.javascriptHelper(js_file_path)}" type="text/javascript" )
 
-    - _('coffeescript').each do |coffee_file_path|
-      %script( src="#{HooUtil.coffeescriptHelper(coffee_file_path)}" )
+    - _('coffeescript', []).each do |coffee_file_path|
+      %script( src="#{HooUtil.coffeescriptHelper(coffee_file_path)}" type="text/javascript" )
       
 
-  %body   
-    Wlecome to YAML2Haml
-    
-    = insert 0
-    -#- _('subrenderers').each do |subrenderer|
-    -#  YES
-    
-    
+  %body    
+    - _('subrenderers', []).each_with_index do |subrenderer, i|
+      = insert i
+
 :javascript
   $(document).ready(function(){
     console.log("shaboosh!")

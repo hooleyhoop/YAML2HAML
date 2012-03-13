@@ -14,7 +14,8 @@ configure :development do |config|
   config.also_reload( File.join( File.dirname(__FILE__), "src/*.rb" ) )
 
   #set :haml, :format => :html5 # default Haml format is :xhtml
-  mime_type :js, 'application/x-javascript'
+  mime_type :js, 'application/javascript'
+  mime_type :css, 'text/css'
 
   # Constants - just directory names
   set :views_directory, File.join( File.dirname(__FILE__), 'views' )
@@ -42,6 +43,13 @@ def renderPage( page_name )
 end
 
 # ROUTES
+
+# /public are served automatically?
+#get "/css/type.css" do
+#  content_type 'text/css'
+#  send_file File.expand_path('index.html', settings.public)
+#end
+
 get '/:page/?' do
   content_type 'text/html', :charset =>'utf-8'
   renderPage( params[:page] )

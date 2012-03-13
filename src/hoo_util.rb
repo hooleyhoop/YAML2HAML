@@ -17,7 +17,7 @@ class HooUtil
     src_file = "public/scss/#{filename}.scss"
     isFile = File.file?( src_file )
     raise "cant find #{src_file} scss" if !isFile
-    compiled_styles = Sass::Engine.for_file(src_file, { syntax: :scss, cache: false } ).render
+    compiled_styles = Sass::Engine.for_file(src_file, { syntax: :scss, load_paths: ["public/scss/partials/"] } ).render
 
     dst_file_path = "css/#{filename}.css"
     absolute_dst_file_path = File.join( 'public', dst_file_path )
