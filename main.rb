@@ -61,8 +61,6 @@ end
 #end
 get '/:page/?' do
   renderPage( params[:page] )
-  
-  "temporary holding string"  
 end
 
 get '/' do

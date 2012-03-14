@@ -29,3 +29,6 @@ _simplest_cell_renderer:
     { title: camel house },
     { title: penguin food }
   ]
+
+# render a sub template
+yaml: simplest_template
