@@ -1,0 +1,31 @@
+# simple template inclusion
+_one:
+  _kat:
+_two:
+  _kit:
+_header:
+  text: small things amuse small minds
+  color: red
+  
+# wrap lines in paragraph tags
+_simplest_story:
+  text: |
+    This is a title
+    This is the paragraph body and it could be any length.
+
+# recursively render text
+_simplest_list:
+  content: [
+    { title: hello },
+    { title: hello },
+    { title: hello }
+  ]
+
+# simplest cell renderer
+_simplest_cell_renderer:
+  _simplest_cell:
+  content: [
+    { title: monkey zoo },
+    { title: camel house },
+    { title: penguin food }
+  ]

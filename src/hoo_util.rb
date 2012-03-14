@@ -1,16 +1,15 @@
 require 'sinatra'
 require 'coffee-script'
 require 'sass'
-require 'pathname'
 
 # sinatra-url-for # check this out for better urls
 require_relative 'hoo_renderer'
 
 class HooUtil
-
+  
   #
   def HooUtil.cssHelper( filename )
-    "css/#{filename}.css"
+    "#{$base_url}/css/#{filename}.css"
   end
 
   #
@@ -18,7 +17,7 @@ class HooUtil
     src_file = "public/scss/#{filename}.scss"
     isFile = File.file?( src_file )
     raise "cant find #{src_file} scss" if !isFile
-    compiled_styles = Sass::Engine.for_file(src_file, { syntax: :scss, load_paths: ["public/scss/partials/"] } ).render
+    compiled_styles = Sass::Engine.for_file(src_file, { syntax: :scss, load_paths: ["public/scss/partials/"], cache: true , cache_location: '/caches-hoo/sass' } ).render
 
     dst_file_path = "css/#{filename}.css"
     absolute_dst_file_path = File.join( 'public', dst_file_path )
