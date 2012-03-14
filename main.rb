@@ -47,11 +47,9 @@ def renderPage( page_name )
   engine_hash = buildTemplateEngines( template_paths_hash )
 
   #TODO: The engine needs access to the global scope, no?
-  
-  
-  #root_renderer = HooUtil.buildViewHierarchy( test_yaml_hash, engine_hash )
-  #return root_renderer.render()
-  "Not yet"
+
+  root_renderer = buildViewHierarchy( yaml_hash, engine_hash )
+  return root_renderer.render()
 end
 
 # ROUTES
@@ -69,8 +67,6 @@ end
 
 get '/' do
   renderPage( 'index' )
-  
-  "temporary holding string"
 end
 
 # Use to test access to helper methods from .erb and haml

@@ -151,7 +151,33 @@ module Sinatra
     return template_engines
   end
 
+  # start building the view hierarchy
+  def buildViewHierarchy( in_yaml_hash, engine_hash )
+    root_view = HooRenderer.new
+    buildViewHierarchyForParent( in_yaml_hash, root_view, engine_hash )
+    root_view
+  end
 
+  # recursively build the view hierarchy
+  def buildViewHierarchyForParent( in_yaml_hash, parent_renderer, engine_hash )
+    in_yaml_hash.each do |key, value|
+        engine_for_child = engine_hash[key]
+        #raise "cant find engine #{key} in #{engine_hash}" if engine_for_child.nil?
+        
+        # set a child template
+        unless engine_for_child.nil?
+          child_view = HooRenderer.new( engine_for_child )
+          if value.instance_of? Hash
+            buildViewHierarchyForParent( value, child_view, engine_hash )
+          end
+          parent_renderer.addSubRenderer(child_view)
+        else
+          # set a custom property
+          parent_renderer.setCustomProperty( key, value ) 
+        end
+    end
+  end
+  
   end
   helpers HooHelp
 end
