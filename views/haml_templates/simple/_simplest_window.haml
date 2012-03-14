@@ -20,7 +20,7 @@
       
 
   %body    
-    - _('subrenderers', []).each_with_index do |subrenderer, i|
+    - @subrenderers.each_with_index do |subrenderer, i|
       = insert i
 
 :javascript

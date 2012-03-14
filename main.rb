@@ -13,17 +13,10 @@ configure :development do |config|
   require "sinatra/reloader"
   config.also_reload( File.join( File.dirname(__FILE__), "src/*.rb" ) )
 
-  #set :haml, :format => :html5 # default Haml format is :xhtml
-  mime_type :js, 'application/javascript'
-  mime_type :css, 'text/css'
-
   # Constants - just directory names
   set :views_directory, File.join( File.dirname(__FILE__), 'views' )
   set :template_directory, File.join( settings.views_directory, 'haml_templates' )
   set :page_directory, File.join( settings.views_directory, 'yaml_pages' )
-end
-
-helpers do
 end
 
 #
@@ -49,13 +42,11 @@ end
 #  content_type 'text/css'
 #  send_file File.expand_path('index.html', settings.public)
 #end
-
 get '/:page/?' do
-  content_type 'text/html', :charset =>'utf-8'
   renderPage( params[:page] )
 end
 
-get '/?' do
+get '/' do
   renderPage( 'index' )
 end
 

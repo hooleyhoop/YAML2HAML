@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'coffee-script'
 require 'sass'
+require 'pathname'
 
 # sinatra-url-for # check this out for better urls
 require_relative 'hoo_renderer'
@@ -64,10 +65,10 @@ class HooUtil
     test_yaml_hash = Psych.load_file( template_path )  
   end
 
-  # badly recursively get unique keys
+  # badly recursively get unique keys as symbols
   def HooUtil.uniqueKeys( in_yaml_hash, result_set )
     in_yaml_hash.each do |key, value|
-      result_set << key.to_s
+      result_set << key
       if value.instance_of? Hash
         uniqueKeys( value, result_set )
       end
@@ -113,24 +114,35 @@ class HooUtil
     end
   end
 
-  # most simple case for now
+  # template names must be unique but can be in sub-directories
+  #
   def HooUtil.buildTemplatePathsForKeys( template_directory, unique_keys )
-    #  if key[0] == '.'
+    #  if key[0] == '_'
     #    template_name = key[1..-1]
-    template_paths_h = Hash.new
-    unique_keys.each do |value|
-      template_path = File.join( template_directory, "#{value}.haml" )
-      template_paths_h[value.to_sym] = template_path
+    
+    # recursively go thru the dir comparing each file against needed keys until all are found
+    template_paths_h = Hash.new    
+    keys_to_find = Set.new(unique_keys)
+    Dir.glob("#{template_directory}/**/*.haml").each do|f|
+      name = File.basename(f,'.*').to_sym
+      if keys_to_find.include?(name)
+        template_paths_h[name] = f
+        keys_to_find.delete(name)
+        if keys_to_find.length == 0
+          break
+        end
+      end
     end
+
     return template_paths_h
   end
 
   #
   def HooUtil.buildTemplateEngines( paths_hash )
     template_engines = Hash.new
-    paths_hash.each do |key, value|    
-      template_as_string = IO.read( value )
-      engine = Haml::Engine.new( template_as_string, { format: :html5, ugly: true } )
+    paths_hash.each do |key, path_value|    
+      template_as_string = IO.read( path_value )
+      engine = Haml::Engine.new( template_as_string, { format: :html5, ugly: true, filename: path_value } )
       template_engines[key] = engine
     end
     return template_engines
