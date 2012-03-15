@@ -15,8 +15,8 @@
     - _['javascript', []].each do |js_file_name|
       %script( src="#{javascriptHelper(js_file_name)}" type="text/javascript" )
 
-    -#- _('coffeescript', []).each do |coffee_file_name|
-    -#  %script( src="#{coffeescriptHelper(coffee_file_name)}" type="text/javascript" )
+    - _['coffeescript', []].each do |coffee_file_name|
+      %script( src="#{coffeescriptHelper(coffee_file_name)}" type="text/javascript" )
       
 
   %body    

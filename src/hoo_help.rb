@@ -220,7 +220,8 @@ module Sinatra
     js_file_path = File.join( $base_url, 'javascript',  relative_path )
     return js_file_path
   end
-    
+
+
   #
   def scssHelper( filename )
   
@@ -229,20 +230,38 @@ module Sinatra
     # scss_dir = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/views/scss
     # required = http://0.0.0.0:4567scss/#{filename}.css
     
-    # TODO: search recursilvely    
-    src_file = File.join( settings.scss_directory, "#{filename}.scss" )
-    isFile = File.file?( src_file )
-    raise "cant find #{src_file} scss" if !isFile
-    compiled_styles = Sass::Engine.for_file( src_file, { syntax: :scss, load_paths: ["public/scss/partials/"], cache: true , cache_location: '/caches-hoo/sass' } ).render
+    src_file = assertSingleFile( Dir.glob("#{settings.scss_directory}/**/#{filename}.scss"), filename )
+
+    sass_cache = File.join( settings.root, '/caches-hoo/sass' )
+    partials_paths = [ File.join( settings.scss_directory, 'partials' ) ]
+    compiled_style_sheet = Sass::Engine.for_file( src_file, { syntax: :scss, load_paths: partials_paths, cache: true , cache_location: sass_cache } ).render
 
     # create and save the css
-    absolute_dst_file_path = File.join( settings.css_directory, "#{filename}.css" )
-    dst_file = File.new( absolute_dst_file_path, "w")
-    dst_file.write( compiled_styles )
+    absolute_dst_file_path = File.join( settings.css_directory, "generated/#{filename}.css" )
+    dst_file = File.new( absolute_dst_file_path, "w" )
+    dst_file.write( compiled_style_sheet )
     dst_file.close()
     
     return cssHelper( filename )
   end
+      
+      
+  # Compile a coffeescript to disk
+  #
+  def coffeescriptHelper( filename )
+  
+    src_file = assertSingleFile( Dir.glob("#{settings.coffeescript_directory}/**/#{filename}.coffee"), filename )
+    raw_script = File.new( src_file, "r" )
+    compiled_script = CoffeeScript.compile( raw_script )
+    raw_script.close
+
+    dst_file_path = File.join( settings.javascript_directory, "generated/#{filename}.js" )
+    dst_file = File.new( dst_file_path, "w")
+    dst_file.write( compiled_script )
+    dst_file.close
+    
+    return javascriptHelper( filename )
+  end      
       
   end
   helpers HooHelp
