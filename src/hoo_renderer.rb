@@ -53,7 +53,7 @@ class HooRenderer
   end
     
   #
-  def render_the_engine( cntx )
+  def render_the_engine( cntx, additional_locals=nil )
 
     @current_cntx = cntx
     rendered_output = ''
@@ -63,8 +63,9 @@ class HooRenderer
         rendered_output << value.render_the_engine( @current_cntx )
       end      
     elsif
-      #rendered_output << "yay engine!"
-      rendered_template = @engine.render( @current_cntx, { :_ =>self } )
+      haml_locals = { :_ =>self }
+      haml_locals.merge!(additional_locals) unless additional_locals.nil? 
+      rendered_template = @engine.render( @current_cntx, haml_locals )
       rendered_output << rendered_template 
     end
     @current_cntx = nil
@@ -72,13 +73,13 @@ class HooRenderer
   end
 
   #
-  def insert( index )
+  def insert( index, overidden_locals=nil )
     subrenderer = @subrenderers[index]
     unless subrenderer.nil?
       if( @current_cntx.nil? )
         raise "No renderering context!" 
       end
-      return subrenderer.render_the_engine( @current_cntx )
+      return subrenderer.render_the_engine( @current_cntx, overidden_locals )
     end
   end
 
