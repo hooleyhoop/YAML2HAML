@@ -8,7 +8,8 @@ class HooRenderer
   attr_accessor :properties
   
   #
-  def initialize( engine=nil )
+  def initialize( template_name, engine=nil )
+    @template_name = template_name
     @engine = engine
     @subrenderers=[]
     @properties={}
@@ -97,4 +98,15 @@ class HooRenderer
     add_subrenderers( new_subrenderers )
   end
 
+  # 2168956940
+  def id
+    self.object_id
+  end
+  
+  def haml_object_ref
+    if @template_name[0] == '_'
+      return @template_name[1..-1]
+    end
+    @template_name
+  end  
 end

@@ -120,8 +120,6 @@ module Sinatra
   # template names must be unique but can be in sub-directories
   #
   def buildTemplatePathsForKeys( template_directory, unique_keys )
-    #  if key[0] == '_'
-    #    template_name = key[1..-1]
     
     # recursively go thru the dir comparing each file against needed keys until all are found
     template_paths_h = Hash.new    
@@ -154,7 +152,7 @@ module Sinatra
 
   # start building the view hierarchy
   def buildViewHierarchy( in_yaml_hash, engine_hash )
-    root_view = HooRenderer.new
+    root_view = HooRenderer.new( 'root' )
     buildViewHierarchyForParent( in_yaml_hash, root_view, engine_hash )
     root_view
   end
@@ -167,7 +165,7 @@ module Sinatra
         
         # set a child template
         unless engine_for_child.nil?
-          child_view = HooRenderer.new( engine_for_child )
+          child_view = HooRenderer.new( key, engine_for_child )
           if value.instance_of? Hash
             buildViewHierarchyForParent( value, child_view, engine_hash )
           end
