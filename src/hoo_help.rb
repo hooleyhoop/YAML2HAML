@@ -14,14 +14,8 @@ module Sinatra
   #
   def yamlTemplatePathForName( yaml_template_name, page_directory )
 
-    found_files = Dir.glob("#{page_directory}/**/#{yaml_template_name}.yaml*")
-    raise "can't find yaml '#{yaml_template_name}'" if found_files.length == 0
-    warn("more than one '#{yaml_template_name}' template found") if found_files.length > 1
-
-    template_path = found_files[0]
-    isFile = File.file?( template_path )   
-    raise "cant find engine #{yaml_template_name} YAML" if !isFile
-    return template_path
+    found_file = assertSingleFile( Dir.glob("#{page_directory}/**/#{yaml_template_name}.yaml*"), yaml_template_name )
+    return found_file
   end
 
   # .yaml or .yaml.erb
@@ -185,6 +179,15 @@ module Sinatra
     end
   end
   
+  def assertSingleFile( found_files, filename )
+    raise "can't find file '#{filename}'" if found_files.length == 0
+    warn("more than one '#{filename}' found") if found_files.length > 1
+    absolute_path = found_files[0]
+    isFile = File.file?( absolute_path )   
+    raise "cant find file #{filename}" if !isFile
+    return absolute_path
+  end
+  
   # --------------------------------------------------------------------------------------
   # VIEW HELPERS
   # --------------------------------------------------------------------------------------
@@ -192,15 +195,7 @@ module Sinatra
   #
   def cssHelper( filename )
 
-    found_files = Dir.glob("#{settings.css_directory}/**/#{filename}.css")
-    raise "can't find yaml '#{yaml_template_name}'" if found_files.length == 0
-    warn("more than one '#{filename}' css found") if found_files.length > 1
-
-    absolute_path = found_files[0]
-    isFile = File.file?( absolute_path )   
-    raise "cant find css #{filename}" if !isFile
-
-    absolute_css_dir = settings.css_directory
+    found_file = assertSingleFile( Dir.glob("#{settings.css_directory}/**/#{filename}.css"), filename )
     
     # real = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/public/css/third_party/base.css
     # needed = http://0.0.0.0:4567/css/third_party/base.css
@@ -210,13 +205,22 @@ module Sinatra
     # absolute_css_dir = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/views/scss
     # relative_css_dir = /css
     
-    relative_path = Pathname.new( absolute_path ).relative_path_from( Pathname.new(absolute_css_dir) ).to_s
+    relative_path = Pathname.new( found_file ).relative_path_from( Pathname.new( settings.css_directory ) ).to_s
     # third_party/base.css
 
     css_file_path = File.join( $base_url, 'css',  relative_path )
     return css_file_path
   end
   
+  #
+  def javascriptHelper( filename )
+  
+    found_file = assertSingleFile( Dir.glob("#{settings.javascript_directory}/**/#{filename}.js"), filename )
+    relative_path = Pathname.new( found_file ).relative_path_from( Pathname.new( settings.javascript_directory ) ).to_s
+    js_file_path = File.join( $base_url, 'javascript',  relative_path )
+    return js_file_path
+  end
+    
   #
   def scssHelper( filename )
   
