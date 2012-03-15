@@ -51,35 +51,35 @@ class HooRenderer
   end
     
   #
-  def render( locals={} )
+  def render( cntx )
     rendered_output = ''
     if( @engine.nil? )
       #rendered_output << "no engine :("
       @subrenderers.each do |value|
-        rendered_output << value.render
+        rendered_output << value.render( cntx )
       end      
     elsif
       #rendered_output << "yay engine!"
-      rendered_template = @engine.render( self, locals )
+      rendered_template = @engine.render( cntx, { :_ =>self } )
       rendered_output << rendered_template 
     end
     return rendered_output    
   end
 
-  # not sure how this works but it does
-  # somehow self is the render context
+  #
   def insert( index, locals={} )
-    subrenderer = @subrenderers[index]
-    unless subrenderer.nil?
-      subrenderer.render( locals )
-    end
+    #subrenderer = @subrenderers[index]
+    #unless subrenderer.nil?
+    #  subrenderer.render( locals )
+    #end
   end
 
   #
-  def _( prop_name, default_value=nil )
+  def prop( prop_name, default_value=nil )
     custom_prop = @properties[prop_name.to_sym]
     return custom_prop || default_value
   end
+  alias :[] :prop
 
   #
   def setCustomProperty( prop_name, default_value )

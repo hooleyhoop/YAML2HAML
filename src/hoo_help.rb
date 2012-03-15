@@ -1,9 +1,16 @@
 require 'sinatra/base'
 require 'erb'
+require 'coffee-script'
+require 'sass'
+require 'pathname'
 
 module Sinatra
   module HooHelp
 
+  # --------------------------------------------------------------------------------------
+  # TEMPLATE PARSING
+  # --------------------------------------------------------------------------------------
+  
   #
   def yamlTemplatePathForName( yaml_template_name, page_directory )
 
@@ -178,6 +185,61 @@ module Sinatra
     end
   end
   
+  # --------------------------------------------------------------------------------------
+  # VIEW HELPERS
+  # --------------------------------------------------------------------------------------
+  
+  #
+  def cssHelper( filename )
+
+    found_files = Dir.glob("#{settings.css_directory}/**/#{filename}.css")
+    raise "can't find yaml '#{yaml_template_name}'" if found_files.length == 0
+    warn("more than one '#{filename}' css found") if found_files.length > 1
+
+    absolute_path = found_files[0]
+    isFile = File.file?( absolute_path )   
+    raise "cant find css #{filename}" if !isFile
+
+    absolute_css_dir = settings.css_directory
+    
+    # real = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/public/css/third_party/base.css
+    # needed = http://0.0.0.0:4567/css/third_party/base.css
+    
+    # root = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test
+    # base = http://0.0.0.0:4567
+    # absolute_css_dir = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/views/scss
+    # relative_css_dir = /css
+    
+    relative_path = Pathname.new( absolute_path ).relative_path_from( Pathname.new(absolute_css_dir) ).to_s
+    # third_party/base.css
+
+    css_file_path = File.join( $base_url, 'css',  relative_path )
+    return css_file_path
+  end
+  
+  #
+  def scssHelper( filename )
+  
+    # root = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test
+    # base = http://0.0.0.0:4567
+    # scss_dir = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/views/scss
+    # required = http://0.0.0.0:4567scss/#{filename}.css
+    
+    # TODO: search recursilvely    
+    src_file = File.join( settings.scss_directory, "#{filename}.scss" )
+    isFile = File.file?( src_file )
+    raise "cant find #{src_file} scss" if !isFile
+    compiled_styles = Sass::Engine.for_file( src_file, { syntax: :scss, load_paths: ["public/scss/partials/"], cache: true , cache_location: '/caches-hoo/sass' } ).render
+
+    # create and save the css
+    absolute_dst_file_path = File.join( settings.css_directory, "#{filename}.css" )
+    dst_file = File.new( absolute_dst_file_path, "w")
+    dst_file.write( compiled_styles )
+    dst_file.close()
+    
+    return cssHelper( filename )
+  end
+      
   end
   helpers HooHelp
 end

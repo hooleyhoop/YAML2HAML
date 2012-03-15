@@ -3,7 +3,6 @@ require 'bundler/setup'
 require 'sinatra'
 require 'psych'
 
-require_relative 'src/hoo_util'
 require_relative 'src/hoo_renderer'
 require_relative 'src/hoo_help'
 
@@ -16,13 +15,16 @@ configure :development do |config|
 
   # Constants - just directory names
   set :views_directory, File.join( File.dirname(__FILE__), 'views' )
+
   set :template_directory, File.join( settings.views_directory, 'haml_templates' )
   set :page_directory, File.join( settings.views_directory, 'yaml_pages' )
+
   set :css_directory, File.join( settings.public_folder, 'css' )
-  set :scss_directory, File.join( settings.public_folder, 'scss' )
   set :images_directory, File.join( settings.public_folder, 'images' )
   set :javascript_directory, File.join( settings.public_folder, 'javascript' )
-  set :coffeescript_directory, File.join( settings.public_folder, 'coffeescript' )
+
+  set :scss_directory, File.join( settings.views_directory, 'scss' )  
+  set :coffeescript_directory, File.join( settings.views_directory, 'coffeescript' )
 end
 
 #
@@ -49,7 +51,7 @@ def renderPage( page_name )
   #TODO: The engine needs access to the global scope, no?
 
   root_renderer = buildViewHierarchy( yaml_hash, engine_hash )
-  return root_renderer.render()
+  return root_renderer.render( self )
 end
 
 # ROUTES
@@ -69,37 +71,11 @@ end
 
 # Use to test access to helper methods from .erb and haml
 helpers do
-  def all_the_cats
-    msg = "say meow"
+  def example_global_helper
+    msg = "Congratulations, you called a global helper"
     puts msg
     return msg
   end
 end
 
-#get '/hello' do
-#  "Hello #{params[:name]}"
-#end
-
 #puts YAML::dump(engine_hash)
-
-#puts "#Loaded yaml> #{test_yaml_hash.inspect}"
-#puts YAML::dump(test_yaml_hash)
-
-#isFile = File.file?( test_haml_file ) 
-#raise "test file not found" if isFile==false
-
-#test1_haml_file_path = File.join( @template_directory, 'test1.haml' )
-#test2_haml_file_path = File.join( @template_directory, 'test2.haml' )
-#test3_haml_file_path = File.join( @template_directory, 'test3.haml' )
-
-#test1_file_string = IO.read( test1_haml_file_path )
-#test2_file_string = IO.read( test2_haml_file_path )
-#test3_file_string = IO.read( test3_haml_file_path )
-
-#inner1_html = Haml::Engine.new( test2_file_string ).render()
-#inner2_html = Haml::Engine.new( test3_file_string ).render()
-
-#root_html = Haml::Engine.new( test1_file_string ).render {
-#  inner1_html
-#}
-#root_html + root_html
