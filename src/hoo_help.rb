@@ -260,6 +260,16 @@ module Sinatra
     
     return javascriptHelper( filename )
   end      
+     
+  #
+  def imageHelper( filename )
+    img_file = assertSingleFile( Dir.glob("#{settings.images_directory}/**/#{filename}"), filename )
+    relative_path = Pathname.new( img_file ).relative_path_from( Pathname.new( settings.images_directory ) ).to_s
+    img_file_path = File.join( $base_url, 'images',  relative_path )
+    return img_file_path
+  end     
+     
+     
       
   end
   helpers HooHelp

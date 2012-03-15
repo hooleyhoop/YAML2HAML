@@ -13,6 +13,7 @@ class HooRenderer
     @engine = engine
     @subrenderers=[]
     @properties={}
+    @current_cntx = nil
   end
   
   #
@@ -52,27 +53,33 @@ class HooRenderer
   end
     
   #
-  def render( cntx )
+  def render_the_engine( cntx )
+
+    @current_cntx = cntx
     rendered_output = ''
     if( @engine.nil? )
       #rendered_output << "no engine :("
       @subrenderers.each do |value|
-        rendered_output << value.render( cntx )
+        rendered_output << value.render_the_engine( @current_cntx )
       end      
     elsif
       #rendered_output << "yay engine!"
-      rendered_template = @engine.render( cntx, { :_ =>self } )
+      rendered_template = @engine.render( @current_cntx, { :_ =>self } )
       rendered_output << rendered_template 
     end
+    @current_cntx = nil
     return rendered_output    
   end
 
   #
-  def insert( index, locals={} )
-    #subrenderer = @subrenderers[index]
-    #unless subrenderer.nil?
-    #  subrenderer.render( locals )
-    #end
+  def insert( index )
+    subrenderer = @subrenderers[index]
+    unless subrenderer.nil?
+      if( @current_cntx.nil? )
+        raise "No renderering context!" 
+      end
+      return subrenderer.render_the_engine( @current_cntx )
+    end
   end
 
   #

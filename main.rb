@@ -51,7 +51,7 @@ def renderPage( page_name )
   #TODO: The engine needs access to the global scope, no?
 
   root_renderer = buildViewHierarchy( yaml_hash, engine_hash )
-  return root_renderer.render( self )
+  return root_renderer.render_the_engine( self )
 end
 
 # ROUTES

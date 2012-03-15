@@ -4,7 +4,7 @@ _simplest_window:
   css: [base]
   scss: [type]
   javascript: [jquery-1.7.1.min]
-  coffeescript: [test]
+  coffeescript: [aboo_main, test]
   
   _simplest_image:
     file: simple-image.jpg

@@ -17,14 +17,13 @@
 
     - _['coffeescript', []].each do |coffee_file_name|
       %script( src="#{coffeescriptHelper(coffee_file_name)}" type="text/javascript" )
-      
+
 
   %body    
     - _.subrenderers.each_with_index do |subrenderer, i|
-      = _.insert i
+      = _.insert(i)
 
-:javascript
-  $(document).ready(function(){
-    console.log("shaboosh!")
-  });
-    
+    :javascript
+      $(function(){
+        ABoo.main()
+      });
