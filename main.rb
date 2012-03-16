@@ -28,9 +28,8 @@ configure :development do |config|
 end
 
 #
-def renderPage( page_name )
-  $base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
-  
+def renderYAML( page_name )
+
   yaml_hash = loadYAMLNamed( page_name, settings.page_directory )
   yaml_hash = symbolize_keys( yaml_hash )
   
@@ -54,6 +53,35 @@ def renderPage( page_name )
   return root_renderer.render_the_engine( self )
 end
 
+#
+def renderHAML( page_name )
+
+  found_file = assertSingleFile( Dir.glob("#{settings.template_directory}/**/#{page_name}.haml"), page_name )
+  return haml(File.read(found_file))
+end
+
+#
+def renderPage( page_name )
+  $base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
+
+  ext = File.extname( page_name )
+  if ext.nil? == false && ext.length > 0
+    page_name_parts = page_name.split(".")
+    page_name = page_name_parts[0]
+    
+    result = case page_name_parts[1]
+      when 'yaml'
+        return renderYAML( page_name )
+      when 'haml'
+        return renderHAML( page_name )
+    end
+
+  else
+    return renderYAML( page_name )
+  end
+  return "failed to handle #{page_name}#{ext}"
+end
+
 # ROUTES
 
 # /public are served automatically?
@@ -61,8 +89,10 @@ end
 #  content_type 'text/css'
 #  send_file File.expand_path('index.html', settings.public)
 #end
-get '/:page/?' do
-  renderPage( params[:page] )
+
+
+get '/:page_name.?/?' do
+  renderPage( params[:page_name] )
 end
 
 get '/' do
