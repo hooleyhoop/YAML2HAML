@@ -6,7 +6,8 @@ class HooRenderer
   attr_accessor :subrenderers
   attr_accessor :parentRenderer
   attr_accessor :properties
-  
+  attr_accessor :template_name
+
   #
   def initialize( template_name, engine=nil )
     @template_name = template_name
@@ -96,6 +97,11 @@ class HooRenderer
     @properties[prop_name.to_sym] = default_value
   end
 
+  def addSpecialAttribute( val )
+    raise "!!! special attribute error" if val.nil?
+    puts "adding spcial attribute #{val}"
+  end
+  
   #
   def subrenderers
     @subrenderers ||= []

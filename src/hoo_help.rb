@@ -7,147 +7,86 @@ require 'pathname'
 module Sinatra
   module HooHelp
 
+  def installRenderEngines( renderer_hierachy, engine_hash )
+    renderer_hierachy.subrenderers.each do |renderer|
+      cached_engine = engine_hash[renderer.template_name]
+      raise "failed to fine engine #{renderer.template_name.to_s}" if cached_engine.nil?
+      renderer.engine = cached_engine       
+      installRenderEngines( renderer, engine_hash )
+    end  
+  end
+  
   # --------------------------------------------------------------------------------------
   # HASH AND ARRAY HELPERS
   # --------------------------------------------------------------------------------------
-  
-  #
-  def symbolize_keys( hash_or_array )
-    new_value = case hash_or_array
-      when Hash then symbolize_hash_keys( hash_or_array )
-      when Array then symbolize_array_keys( hash_or_array )
-      else hash_or_array  
-    end  
-    return new_value
-  end
 
-  # 
-  def symbolize_hash_keys( hash )
-    hash.inject({}){|result, (key, value)|
-      new_key = case key
-        when String then key.to_sym
-        else key
-      end
-      new_value = symbolize_keys( value )
-      result[new_key] = new_value
-      result
-    }
-    return hash
-  end
-
-  #
-  def symbolize_array_keys( array )
-    result = Array.new
-    array.each do |value|
-      new_value = symbolize_keys( value )
-      result << new_value
-    end
-    return result
-  end
   
   # badly recursively get unique keys as symbols
-  def uniqueKeys( in_yaml_hash_or_array, result_set )
-    case in_yaml_hash_or_array
-      when Hash then uniqueKeysFromHash( in_yaml_hash_or_array, result_set )
-      when Array then uniqueKeysFromArray( in_yaml_hash_or_array, result_set )
-    end  
-  end
-
-  #
-  def uniqueKeysFromArray( in_yaml_array, result_set )
-    in_yaml_array.each do |value|
-      uniqueKeys( value, result_set )    
+  def uniqueTemplateKeys( root_renderer, result_set )
+    root_renderer.subrenderers.each do |renderer|
+      result_set << renderer.template_name
+      uniqueTemplateKeys( renderer, result_set )
     end
   end
 
   #
-  def uniqueKeysFromHash( in_yaml_hash, result_set )
-    in_yaml_hash.each do |key, value|
-      result_set << key
-      uniqueKeys( value, result_set )
-    end
-    result_set
-  end
+  def buildViewContentsFromHash( parent_renderer, content_hash )
+    raise "!!! parent_renderer is nil" if parent_renderer.nil?
+    raise "!!! content_hash is nil" if content_hash.nil?
 
-  # badly filter keys
-  def keysStartingWith( in_set, firstChar )
-    filtered_keys = Set.new  
-    in_set.each do |value|
-      if value[0] == firstChar
-        filtered_keys << value
-      end      
-    end
-    filtered_keys
-  end
+    content_hash.each_pair do |key,value|
+      if key[0] == '_'
+        child_view = HooRenderer.new( key.to_sym )
+        unless value.nil?
+          buildViewContentsFromValue( child_view, value )
+        end
+        parent_renderer.addSubRenderer( child_view )
 
-_one:
-_two:
-  lorem:
-    value: YES
-text: yes
+      elsif key=='yaml'
+          buildViewContentsFromValue( parent_renderer, value )
 
-  #
-  def xform_hash_to_correct_hash( parent_hash, content_hash )
-
-      referenced_templates = templateKeysFromHash( content_hash )
-      other_items =   
-     
-      referenced_templates.for each key, item
-      
-        if item ARRAY
-        
-        if item HASH
-        
-        else
-          parent_hash[:templates][key] = item
+      else
+          parent_renderer.setCustomProperty( key, value ) 
       end    
-      
-      other_items.for_each( key item )
-      
-      end
-  
+    end
   end
   
   #
-  def xform_array_to_correct_hash( parent_hash, content_array )
-  
-      referenced_templates = templateNamesFromArray( content_array )
-      other_items = 
-      
-      referenced_templates.for each item
-        parent_hash[:templates][item_as_key] = nil
-      end
-      
-      other_items.for_each( item )
-        if Hash
-          xform_hash_to_correct_hash( parent_hash, item )
-        if Array
-          xform_array_to_correct_hash( parent_hash, item )
-        else
-          add special property 
-      end
+  def buildViewContentsFromArray( parent_renderer, content_array )
+    raise "!!! parent_renderer is nil" if parent_renderer.nil?
+    raise "!!! content_array is nil" if content_array.nil?
+
+    content_array.each do |value|
+      if value[0] == '_'
+        child_renderer = HooRenderer.new( value.to_sym )
+        parent_renderer.addSubRenderer( child_renderer )  
+      else
+        buildViewContentsFromValue( parent_renderer, value )
+      end    
+    end
   end
 
   #
-  def xform_hash_or_array_to_correct_hash( parent_hash, content_array_or_hash )
-  
-    new_value = case content_array_or_hash
-      when Hash then xform_hash_to_correct_hash( parent_hash, content_array_or_hash )
-      when Array then xform_array_to_correct_hash( parent_hash, content_array_or_hash )
-      else hash_or_array  
+  def buildViewContentsFromValue( parent_renderer, content_array_or_hash_or_value )
+    raise "!!! parent_renderer is nil" if parent_renderer.nil?
+    raise "!!! content_array_or_hash_or_value is nil" if content_array_or_hash_or_value.nil?
+    case content_array_or_hash_or_value
+      when Hash then buildViewContentsFromHash( parent_renderer, content_array_or_hash_or_value )
+      when Array then buildViewContentsFromArray( parent_renderer, content_array_or_hash_or_value )
+      else parent_renderer.addSpecialAttribute( content_array_or_hash_or_value ) 
     end  
-    return new_value
   end
   
   #
-  def xform_yaml_to_correct_tree( yaml_hash_or_array )
-  
-    new_root_item = new Hash
-    xform_hash_or_array_to_correct_hash( new_root_item, yaml_hash_or_array )
+  def buildRendererHierarchyFromYAML( yaml_hash_or_array )
+    raise "!!! yaml_hash_or_array is nil" if yaml_hash_or_array.nil?  
+    root_renderer = HooRenderer.new( :root )  
+    buildViewContentsFromValue( root_renderer, yaml_hash_or_array )
+    return root_renderer
   end
   
-    
-
+  
+  
   # --------------------------------------------------------------------------------------
   # TEMPLATE PARSING
   # --------------------------------------------------------------------------------------
@@ -192,33 +131,45 @@ text: yes
     
     template_path = yamlTemplatePathForName( yaml_template_name, page_directory )
     yaml_hash_or_array = yamlFileToHashOrArray( template_path )
-    
-    # TODO!
+
     # recursively replace yaml objects
-    # yaml_hash_or_array = recursivelyReplaceYaml( yaml_hash_or_array )
+    yaml_hash_or_array = recursivelyLoadYaml( yaml_hash_or_array )
+
     return yaml_hash_or_array
   end
 
   # replace all occurrences of 'yaml' with the contents of that template
-  def recursivelyReplaceYaml( hash_or_array )
-  
-    hash_or_array.inject({}){|result, (key, value)|
-      if key == 'yaml'
-        # load the sub-template and move all key values to this hash_or_array
-        new_hash = loadYAMLNamed( value, settings.page_directory )
-        new_hash.each_pair do |k,v|
-          result[k] = v      
+  def recursivelyLoadYaml( hash_or_array )
+
+    new_value = case hash_or_array
+      when Hash 
+        new_hash = Hash.new
+        hash_or_array.each_pair do |key,value|
+          if key == 'yaml'
+    
+            # load the sub-template and move all key values to this hash_or_array
+            new_hash_or_array = loadYAMLNamed( value, settings.page_directory )
+            new_hash[key] = new_hash_or_array
+    
+          else
+            new_hash[key] = recursivelyReplaceYaml( value )
+          end
         end
-      else
-        if value.is_a?(hash_or_array)
-          new_value = recursivelyReplaceYaml(value)
-          result[key] = new_value      
-        else
-          result[key] = value      
+        new_hash
+        
+      when Array 
+        new_array = Array.new
+        hash_or_array.each do |value|
+          new_array << recursivelyReplaceYaml( value )
         end
-      end
-      result
-  }
+        new_array
+
+      else 
+        hash_or_array
+
+    end      
+
+    return new_value
   end
 
   
@@ -252,7 +203,7 @@ text: yes
   #
   def buildTemplateEngines( paths_hash )
     template_engines = Hash.new
-    paths_hash.each do |key, path_value|    
+    paths_hash.each_pair do |key, path_value|    
       template_as_string = IO.read( path_value )
       engine = Haml::Engine.new( template_as_string, { format: :html5, ugly: true, filename: path_value } )
       template_engines[key] = engine
@@ -260,37 +211,7 @@ text: yes
     return template_engines
   end
 
-  # start building the view hierarchy
-  def buildViewHierarchy( in_yaml_hash, engine_hash )
-    root_view = HooRenderer.new( 'root' )
-    buildViewHierarchyForParent( in_yaml_hash, root_view, engine_hash )
-    
-    # if one child...
-    
-    root_view
-  end
-
-  # recursively build the view hierarchy
-  def buildViewHierarchyForParent( in_yaml_hash, parent_renderer, engine_hash )
-  
-    in_yaml_hash.each do |key, value|
-        engine_for_child = engine_hash[key]
-        #raise "cant find engine #{key} in #{engine_hash}" if engine_for_child.nil?
-        
-        # set a child template
-        unless engine_for_child.nil?
-          child_view = HooRenderer.new( key, engine_for_child )
-          if value.instance_of? Hash
-            buildViewHierarchyForParent( value, child_view, engine_hash )
-          end
-          parent_renderer.addSubRenderer(child_view)
-        else
-          # set a custom property
-          parent_renderer.setCustomProperty( key, value ) 
-        end
-    end
-  end
-  
+  #  
   def assertSingleFile( found_files, filename )
     raise "can't find file '#{filename}'" if found_files.length == 0
     warn("more than one '#{filename}' found") if found_files.length > 1

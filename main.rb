@@ -2,6 +2,7 @@ require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
 require 'psych'
+require 'pp'
 
 require_relative 'src/hoo_renderer'
 require_relative 'src/hoo_help'
@@ -31,28 +32,21 @@ end
 def renderYAML( page_name )
 
   yaml_hash_or_array = loadYAMLNamed( page_name, settings.page_directory )
-  yaml_hash_or_array = symbolize_keys( yaml_hash_or_array )
-  
-  tree_rep = xform_yaml_to_correct_tree( yaml_hash_or_array )
-  
-  unique_yaml_keys = Set.new
-  uniqueKeys( yaml_hash_or_array, unique_yaml_keys )
-  puts unique_yaml_keys.inspect
+  renderer_hierachy = buildRendererHierarchyFromYAML( yaml_hash_or_array )
+  puts YAML::dump(renderer_hierachy)
 
-#  return 'nothing to render' if unique_yaml_keys.length ==0
-  
-  # template keys begin with an underscore
-#  template_keys = keysStartingWith( unique_yaml_keys, '_' )
+  unique_template_keys = Set.new
+  uniqueTemplateKeys( renderer_hierachy, unique_template_keys )
 
-#  return 'nothing to render' if template_keys.length ==0
+  return 'nothing to render' if unique_template_keys.length ==0
   
   # build a hash :template_name => haml.engine
-#  template_paths_hash = buildTemplatePathsForKeys( settings.template_directory, template_keys )
-#  engine_hash = buildTemplateEngines( template_paths_hash )
+  template_paths_hash = buildTemplatePathsForKeys( settings.template_directory, unique_template_keys )
+  engine_hash = buildTemplateEngines( template_paths_hash )
 
-#  root_renderer = buildViewHierarchy( yaml_hash_or_array, engine_hash )
-#  return root_renderer.render_the_engine( self )
-  "Out of order"
+  installRenderEngines( renderer_hierachy, engine_hash )
+  
+  return renderer_hierachy.render_the_engine( self )
 end
 
 #
