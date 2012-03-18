@@ -1,0 +1,23 @@
+This is fine. we have a hash containing 3 items
+
+_heading:
+_text:
+_img:
+
+however, we couldnt do this...
+
+_heading:
+_text:
+_text:
+
+we could do this.. we have a top level array containg 3 strings
+
+- _heading
+- _text
+- _text
+
+or.. a top level array containg 3 hashes
+
+- heading:
+- text:
+- img:

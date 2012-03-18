@@ -30,27 +30,29 @@ end
 #
 def renderYAML( page_name )
 
-  yaml_hash = loadYAMLNamed( page_name, settings.page_directory )
-  yaml_hash = symbolize_keys( yaml_hash )
+  yaml_hash_or_array = loadYAMLNamed( page_name, settings.page_directory )
+  yaml_hash_or_array = symbolize_keys( yaml_hash_or_array )
+  
+  tree_rep = xform_yaml_to_correct_tree( yaml_hash_or_array )
   
   unique_yaml_keys = Set.new
-  uniqueKeys( yaml_hash, unique_yaml_keys )
+  uniqueKeys( yaml_hash_or_array, unique_yaml_keys )
+  puts unique_yaml_keys.inspect
 
-  return 'nothing to render' if unique_yaml_keys.length ==0
+#  return 'nothing to render' if unique_yaml_keys.length ==0
   
   # template keys begin with an underscore
-  template_keys = keysStartingWith( unique_yaml_keys, '_' )
+#  template_keys = keysStartingWith( unique_yaml_keys, '_' )
 
-  return 'nothing to render' if template_keys.length ==0
+#  return 'nothing to render' if template_keys.length ==0
   
   # build a hash :template_name => haml.engine
-  template_paths_hash = buildTemplatePathsForKeys( settings.template_directory, template_keys )
-  engine_hash = buildTemplateEngines( template_paths_hash )
+#  template_paths_hash = buildTemplatePathsForKeys( settings.template_directory, template_keys )
+#  engine_hash = buildTemplateEngines( template_paths_hash )
 
-  #TODO: The engine needs access to the global scope, no?
-
-  root_renderer = buildViewHierarchy( yaml_hash, engine_hash )
-  return root_renderer.render_the_engine( self )
+#  root_renderer = buildViewHierarchy( yaml_hash_or_array, engine_hash )
+#  return root_renderer.render_the_engine( self )
+  "Out of order"
 end
 
 #
@@ -107,5 +109,33 @@ helpers do
     return msg
   end
 end
+
+module Haml::Filters::Scss
+  include Haml::Filters::Base
+  def render(text)
+    "<script>#{text}</script>"
+  end
+end
+
+# ---------------------------------
+# Over riding the Javascript filter
+# ---------------------------------
+module Haml::Filters::Javascript
+  def render_with_options(text, options)
+    "javascript --> #{text}"
+  end
+end
+
+# ------------------------------
+# New Monkey filter, use :monkey
+# ------------------------------
+module Haml::Filters::Monkey
+  include Haml::Filters::Base
+  def render(text)
+    "<script>#{text}</script>"
+  end
+end
+
+
 
 #puts YAML::dump(engine_hash)

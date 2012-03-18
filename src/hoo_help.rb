@@ -8,6 +8,147 @@ module Sinatra
   module HooHelp
 
   # --------------------------------------------------------------------------------------
+  # HASH AND ARRAY HELPERS
+  # --------------------------------------------------------------------------------------
+  
+  #
+  def symbolize_keys( hash_or_array )
+    new_value = case hash_or_array
+      when Hash then symbolize_hash_keys( hash_or_array )
+      when Array then symbolize_array_keys( hash_or_array )
+      else hash_or_array  
+    end  
+    return new_value
+  end
+
+  # 
+  def symbolize_hash_keys( hash )
+    hash.inject({}){|result, (key, value)|
+      new_key = case key
+        when String then key.to_sym
+        else key
+      end
+      new_value = symbolize_keys( value )
+      result[new_key] = new_value
+      result
+    }
+    return hash
+  end
+
+  #
+  def symbolize_array_keys( array )
+    result = Array.new
+    array.each do |value|
+      new_value = symbolize_keys( value )
+      result << new_value
+    end
+    return result
+  end
+  
+  # badly recursively get unique keys as symbols
+  def uniqueKeys( in_yaml_hash_or_array, result_set )
+    case in_yaml_hash_or_array
+      when Hash then uniqueKeysFromHash( in_yaml_hash_or_array, result_set )
+      when Array then uniqueKeysFromArray( in_yaml_hash_or_array, result_set )
+    end  
+  end
+
+  #
+  def uniqueKeysFromArray( in_yaml_array, result_set )
+    in_yaml_array.each do |value|
+      uniqueKeys( value, result_set )    
+    end
+  end
+
+  #
+  def uniqueKeysFromHash( in_yaml_hash, result_set )
+    in_yaml_hash.each do |key, value|
+      result_set << key
+      uniqueKeys( value, result_set )
+    end
+    result_set
+  end
+
+  # badly filter keys
+  def keysStartingWith( in_set, firstChar )
+    filtered_keys = Set.new  
+    in_set.each do |value|
+      if value[0] == firstChar
+        filtered_keys << value
+      end      
+    end
+    filtered_keys
+  end
+
+_one:
+_two:
+  lorem:
+    value: YES
+text: yes
+
+  #
+  def xform_hash_to_correct_hash( parent_hash, content_hash )
+
+      referenced_templates = templateKeysFromHash( content_hash )
+      other_items =   
+     
+      referenced_templates.for each key, item
+      
+        if item ARRAY
+        
+        if item HASH
+        
+        else
+          parent_hash[:templates][key] = item
+      end    
+      
+      other_items.for_each( key item )
+      
+      end
+  
+  end
+  
+  #
+  def xform_array_to_correct_hash( parent_hash, content_array )
+  
+      referenced_templates = templateNamesFromArray( content_array )
+      other_items = 
+      
+      referenced_templates.for each item
+        parent_hash[:templates][item_as_key] = nil
+      end
+      
+      other_items.for_each( item )
+        if Hash
+          xform_hash_to_correct_hash( parent_hash, item )
+        if Array
+          xform_array_to_correct_hash( parent_hash, item )
+        else
+          add special property 
+      end
+  end
+
+  #
+  def xform_hash_or_array_to_correct_hash( parent_hash, content_array_or_hash )
+  
+    new_value = case content_array_or_hash
+      when Hash then xform_hash_to_correct_hash( parent_hash, content_array_or_hash )
+      when Array then xform_array_to_correct_hash( parent_hash, content_array_or_hash )
+      else hash_or_array  
+    end  
+    return new_value
+  end
+  
+  #
+  def xform_yaml_to_correct_tree( yaml_hash_or_array )
+  
+    new_root_item = new Hash
+    xform_hash_or_array_to_correct_hash( new_root_item, yaml_hash_or_array )
+  end
+  
+    
+
+  # --------------------------------------------------------------------------------------
   # TEMPLATE PARSING
   # --------------------------------------------------------------------------------------
   
@@ -19,7 +160,7 @@ module Sinatra
   end
 
   # .yaml or .yaml.erb
-  def yamlFileToHash( template_file_path )
+  def yamlFileToHashOrArray( template_file_path )
 
     # Experimental parse .erb YAML
     yaml_file_string = File.read( template_file_path )
@@ -50,25 +191,26 @@ module Sinatra
   def loadYAMLNamed( yaml_template_name, page_directory )
     
     template_path = yamlTemplatePathForName( yaml_template_name, page_directory )
-    yaml_hash = yamlFileToHash( template_path )
+    yaml_hash_or_array = yamlFileToHashOrArray( template_path )
     
+    # TODO!
     # recursively replace yaml objects
-    yaml_hash = recursivelyReplaceYaml(yaml_hash)
-    return yaml_hash
+    # yaml_hash_or_array = recursivelyReplaceYaml( yaml_hash_or_array )
+    return yaml_hash_or_array
   end
 
   # replace all occurrences of 'yaml' with the contents of that template
-  def recursivelyReplaceYaml(hash)
-    hash.inject({}){|result, (key, value)|
-            
+  def recursivelyReplaceYaml( hash_or_array )
+  
+    hash_or_array.inject({}){|result, (key, value)|
       if key == 'yaml'
-        # load the sub-template and move all key values to this hash
+        # load the sub-template and move all key values to this hash_or_array
         new_hash = loadYAMLNamed( value, settings.page_directory )
         new_hash.each_pair do |k,v|
           result[k] = v      
         end
       else
-        if value.is_a?(Hash)
+        if value.is_a?(hash_or_array)
           new_value = recursivelyReplaceYaml(value)
           result[key] = new_value      
         else
@@ -78,45 +220,13 @@ module Sinatra
       result
   }
   end
+
   
-  # Example
-  def symbolize_keys(hash)
-    hash.inject({}){|result, (key, value)|
-      new_key = case key
-        when String then key.to_sym
-        else key
-      end
-      new_value = case value
-        when Hash then symbolize_keys(value)
-        else value
-      end
-      result[new_key] = new_value
-      result
-  }
-  end
-
-  # badly recursively get unique keys as symbols
-  def uniqueKeys( in_yaml_hash, result_set )
-    in_yaml_hash.each do |key, value|
-      result_set << key
-      if value.instance_of? Hash
-        uniqueKeys( value, result_set )
-      end
-    end
-    result_set
-  end
-
-  # badly filter keys
-  def keysStartingWith( in_set, firstChar )
-    filtered_keys = Set.new  
-    in_set.each do |value|
-      if value[0] == firstChar
-        filtered_keys << value
-      end      
-    end
-    filtered_keys
-  end
-
+  # --------------------------------------------------------------------------------------
+  # TEMPLATE HELPERS
+  # --------------------------------------------------------------------------------------
+  
+  
   # template names must be unique but can be in sub-directories
   #
   def buildTemplatePathsForKeys( template_directory, unique_keys )
@@ -154,11 +264,15 @@ module Sinatra
   def buildViewHierarchy( in_yaml_hash, engine_hash )
     root_view = HooRenderer.new( 'root' )
     buildViewHierarchyForParent( in_yaml_hash, root_view, engine_hash )
+    
+    # if one child...
+    
     root_view
   end
 
   # recursively build the view hierarchy
   def buildViewHierarchyForParent( in_yaml_hash, parent_renderer, engine_hash )
+  
     in_yaml_hash.each do |key, value|
         engine_for_child = engine_hash[key]
         #raise "cant find engine #{key} in #{engine_hash}" if engine_for_child.nil?
