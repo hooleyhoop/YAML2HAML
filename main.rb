@@ -32,7 +32,6 @@ end
 def renderYAML( page_name )
 
   yaml_hash_or_array = loadYAMLNamed( page_name, settings.page_directory )
-  puts yaml_hash_or_array.inspect
 
   renderer_hierachy = buildRendererHierarchyFromYAML( yaml_hash_or_array )
   #puts YAML::dump(renderer_hierachy)

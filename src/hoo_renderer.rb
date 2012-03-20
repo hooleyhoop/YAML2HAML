@@ -61,7 +61,7 @@ class HooRenderer
     if( @engine.nil? )
       #rendered_output << "no engine :("
       @subrenderers.each_with_index do |value, i|
-        puts "rendering #{i}"      
+        #puts "rendering #{i}"      
         rendered_output << value.render_the_engine( @current_cntx )
       end      
     elsif

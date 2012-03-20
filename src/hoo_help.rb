@@ -192,7 +192,7 @@ end
     new_hash = Hash.new
     a_hash.each_pair do |key,value|
       # load linked yaml
-      if key == 'yaml'
+      if key.split('#').first == 'yaml'
         new_hash_or_array_value = loadContentsOfYAMLTag(value)
         new_hash[key] = new_hash_or_array_value
       else
@@ -277,7 +277,7 @@ end
     template_engines = Hash.new
     paths_hash.each_pair do |key, path_value|    
       template_as_string = IO.read( path_value )
-      engine = Haml::Engine.new( template_as_string, { format: :html5, ugly: true, filename: path_value } )
+      engine = Haml::Engine.new( template_as_string, { format: :html5, ugly: false, filename: path_value } )
       template_engines[key] = engine
     end
     return template_engines
