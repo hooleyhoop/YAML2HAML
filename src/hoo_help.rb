@@ -102,12 +102,16 @@ module Sinatra
   #
   def yamlTemplatePathForName( yaml_template_name, page_directory )
 
+    raise "nil args" if (yaml_template_name.nil? || page_directory.nil? )
+
     found_file = assertSingleFile( Dir.glob("#{page_directory}/**/#{yaml_template_name}.yaml*"), yaml_template_name )
     return found_file
   end
 
   # .yaml or .yaml.erb
   def yamlFileToHashOrArray( template_file_path )
+
+    raise "nil args" if template_file_path.nil? 
 
     # Experimental parse .erb YAML
     yaml_file_string = File.read( template_file_path )
@@ -137,6 +141,8 @@ module Sinatra
   #
   def loadYAMLNamed( yaml_template_name, page_directory )
 
+    raise "nil args" if (yaml_template_name.nil? || page_directory.nil? )
+
     template_path = yamlTemplatePathForName( yaml_template_name, page_directory )
     yaml_hash_or_array = yamlFileToHashOrArray( template_path )
 
@@ -149,17 +155,26 @@ module Sinatra
   
 #
 def replaceValueKeyWithContents( hash_or_array, replace_key, new_contents )
+
+  raise "nil args" if (hash_or_array.nil? || replace_key.nil? || new_contents.nil?)
+  case hash_or_array
+    when Hash || Array
+    else
+      raise "wtf? #{hash_or_array}"
+  end  
+  
   if hash_or_array.is_a? Array
     return hash_or_array.each{|v| replaceValueKeyWithContents(v, replace_key, new_contents)}
   end
   
-  hash_or_array.each_pair do |key, value|
+  hash_or_array.each do |key, value|
     if key == replace_key
       hash_or_array[key] = new_contents
     else
-      if value.is_a?(Hash) or value.is_a?(Array)
-        replaceValueKeyWithContents(value, replace_key, new_contents)
-      end
+      case value
+        when Hash || Array
+          replaceValueKeyWithContents(value, replace_key, new_contents)
+      end    
     end
   end
   hash_or_array
@@ -189,6 +204,9 @@ end
 
   #
   def recursivelyReplaceYAMLTagsInHash( a_hash )
+  
+    raise "nil args" if a_hash.nil?
+  
     new_hash = Hash.new
     a_hash.each_pair do |key,value|
       # load linked yaml
@@ -204,6 +222,9 @@ end
   
   #
   def loadContentsOfYAMLTag( tagContents )
+
+    raise "nil args" if tagContents.nil?
+  
     new_value = case tagContents
     when Hash
       loadYAMLFromHashOfTemplateNameAndProperties( tagContents )
@@ -216,19 +237,33 @@ end
   #
   def loadYAMLFromHashOfTemplateNameAndProperties( hash_of_properties )
 
-    template_name = hash_of_properties['name']
-    hash_of_properties.delete('name')  
-    
-    # load the sub-template and move all key values to this a_hash
-    new_hash_or_array = loadYAMLNamed( template_name, settings.page_directory )
+    raise "nil args" if hash_of_properties.nil?
 
-    overideTemplateProperties( new_hash_or_array, hash_of_properties )
+    template_name = hash_of_properties['name']
     
-    return new_hash_or_array
+    # hash_of_properties has the name of one template
+    if template_name.nil? == false
+      hash_of_properties.delete('name')  
+      # load the sub-template and move all key values to this a_hash
+      new_hash_or_array = loadYAMLNamed( template_name, settings.page_directory )
+
+      unless hash_of_properties.empty?
+       overideTemplateProperties( new_hash_or_array, hash_of_properties )
+      end
+    
+      return new_hash_or_array
+      
+    # hash_of_properties has a list of haml tags 
+    else
+      new_hash_or_array = recursivelyReplaceYAMLTagsInHash( hash_of_properties )
+      return new_hash_or_array
+    end
   end
   
   #
   def overideTemplateProperties( hash_or_array, new_contents )
+  
+    raise "nil args" if ( hash_or_array.nil? || new_contents.nil? )
   
     new_contents.each_pair do |key, value|
       # replace yield#? in linked haml
@@ -236,6 +271,7 @@ end
         index = key.split("#")[1]
         sub_template_hash_or_array = loadContentsOfYAMLTag( value )
         key_to_replace = "$yield##{index}"
+
         replaceValueKeyWithContents( hash_or_array, key_to_replace, sub_template_hash_or_array )
                 
       else

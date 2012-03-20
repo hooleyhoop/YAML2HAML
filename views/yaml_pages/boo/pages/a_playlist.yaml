@@ -1,31 +1,15 @@
-# -- usr details section -- #
-yaml#1: 
-  name: small_user_details
-
-# -- main content -- #
-_section#2:
-  section_name: main-content
-
-  _page_title:
-    text: Steam Trains Playlist
+yaml#window: 
+  name: demo_window
+  content_for#1:
   
-  _rss_itunes_button:
-  _share_embed_button:
-  _play_all_button:
-
-
-  # -- Boo List -- #
-
-  _row_renderer:
-    name: Boos
-    _boo_cell:
-    content: [
-      { title: My Stressful Trip to Work, img_file: cat.jpg, date: 3 minutes ago },
-      { title: At the News Conference, img_file: steam-train.jpg, date: 2 days ago },
-      { title: My Funniest Joke, img_file: otter.jpg, date: 1 week ago }
-    ]
-
-
-# -- sidebar -- #
-yaml#3:
-  name: user_sidebar
+    # -- usr details section -- #
+    yaml#1: 
+      name: small_user_details
+    
+    # -- main content -- #
+    yaml#2:
+      name: a_playlist_table
+    
+    # -- sidebar -- #
+    yaml#3:
+      name: user_sidebar

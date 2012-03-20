@@ -1,0 +1,23 @@
+# ------------- a playlist table ------------- #
+
+_section#1:
+  section_name: main-content
+
+  _page_title:
+    text: Steam Trains Playlist
+  
+  _rss_itunes_button:
+  _share_embed_button:
+  _play_all_button:
+
+
+  # -- Boo List -- #
+
+  _row_renderer:
+    name: Boos
+    _boo_cell:
+    content: [
+      { title: My Stressful Trip to Work, img_file: cat.jpg, date: 3 minutes ago },
+      { title: At the News Conference, img_file: steam-train.jpg, date: 2 days ago },
+      { title: My Funniest Joke, img_file: otter.jpg, date: 1 week ago }
+    ]

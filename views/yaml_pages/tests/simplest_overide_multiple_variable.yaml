@@ -1,0 +1,12 @@
+yaml: 
+  yaml#1: 
+    name: simplest_local_var
+    title: This is the start
+    
+  yaml#2:
+    name: simplest_local_var
+    title: This is the middle
+  
+  yaml#3:
+    name: simplest_local_var
+    title: This is the end

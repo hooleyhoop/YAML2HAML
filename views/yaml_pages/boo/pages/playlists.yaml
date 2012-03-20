@@ -1,17 +1,14 @@
 # ------------- Playlists page ------------- #
 
-yaml: 
+yaml#window: 
   name: demo_window
   content_for#1:
 
-    # -- usr details section -- #
-    yaml#1: 
+    yaml#1:
       name: small_user_details
-      
-    # -- main content -- #
+
     yaml#2:
       name: playlists_table
-    
-    # -- sidebar -- #
+
     yaml#3:
       name: user_sidebar
