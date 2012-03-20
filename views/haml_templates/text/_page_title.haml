@@ -1,0 +1,6 @@
+- text = _[:text, 'The Page Title']
+
+.page-title
+  - text.each_line do |line|
+    %h1
+      = line

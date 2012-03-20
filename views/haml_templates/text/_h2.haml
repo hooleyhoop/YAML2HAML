@@ -1,0 +1,8 @@
+- text = _['text', 'a sub heading']
+- link = _['link']
+
+%a( href=link )
+  .sub-head
+    - text.each_line do |line|
+      %h2
+        = line

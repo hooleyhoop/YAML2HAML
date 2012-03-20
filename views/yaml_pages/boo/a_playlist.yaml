@@ -1,0 +1,58 @@
+# -- usr details section -- #
+_section#1:
+  section_name: user-details,
+
+  _img:
+    src: Unknown-avatar.gif
+    link: /user_page
+    
+  _h2:
+    text: Max_von_Hasselhoff
+    link: /user_page
+  
+  _body_text:
+    text: Herr Max von Hasselhoff Schreit
+  
+  _follow_button:
+    link: http://audioboo.fm/streams/3924/unfollow
+
+
+
+# -- main content -- #
+_section#2:
+  section_name: main-content
+
+  _page_title:
+    text: Steam Trains Playlist
+  
+  _rss_itunes_button:
+  _share_embed_button:
+  _play_all_button:
+
+
+  # -- Boo List -- #
+
+  _row_renderer:
+    name: Boos
+    _boo_cell:
+    content: [
+      { title: My Stressful Trip to Work, img_file: cat.jpg, date: 3 minutes ago },
+      { title: At the News Conference, img_file: steam-train.jpg, date: 2 days ago },
+      { title: My Funniest Joke, img_file: otter.jpg, date: 1 week ago }
+    ]
+
+
+# -- sidebar -- #
+_section#3:
+  section_name: side-bar
+  
+  _list_renderer:
+    name: playlists
+    _text_link_cell:
+    content: [
+      { title: 14 boos, link: apple.com },
+      { title: 6 channels, link: apple.com },
+      { title: 3 playlists, link: apple.com },
+      { title: 9 favourites, link: apple.com },
+      { title: 16 following, link: apple.com }      
+    ]

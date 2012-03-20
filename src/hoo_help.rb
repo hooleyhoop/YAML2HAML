@@ -36,15 +36,21 @@ module Sinatra
 
     content_hash.each_pair do |key,value|
       if key[0] == '_'
+        #-- modify key
+        # hack to allow multiple same template keys in one hash - we dont use the index        
+        key = key.split("#").first # remove #index
         child_view = HooRenderer.new( key.to_sym )
         unless value.nil?
           buildViewContentsFromValue( child_view, value )
         end
         parent_renderer.addSubRenderer( child_view )
 
-      elsif key=='yaml'
+      elsif key.split('#').first=='yaml'
           buildViewContentsFromValue( parent_renderer, value )
 
+      elsif key.split('#').first=='$yield' && !value.nil?
+        buildViewContentsFromValue( parent_renderer, value )
+  
       else
           parent_renderer.setCustomProperty( key, value ) 
       end    
@@ -58,6 +64,8 @@ module Sinatra
 
     content_array.each do |value|
       if value[0] == '_'
+        # hack to allow multiple same template keys in one hash - we dont use the index
+        value = value.split("#").first # remove #index
         child_renderer = HooRenderer.new( value.to_sym )
         parent_renderer.addSubRenderer( child_renderer )  
       else
@@ -77,7 +85,7 @@ module Sinatra
     end  
   end
   
-  #
+  # root
   def buildRendererHierarchyFromYAML( yaml_hash_or_array )
     raise "!!! yaml_hash_or_array is nil" if yaml_hash_or_array.nil?  
     root_renderer = HooRenderer.new( :root )  
@@ -107,14 +115,14 @@ module Sinatra
     test_yaml_hash = nil    
     ext = File.extname( template_file_path )
     result = case ext
-      when ".yaml"
+      when '.yaml'
         # parse a YAML file
         test_yaml_hash = Psych.load( yaml_file_string )
         
-      when ".erb"
+      when '.erb'
         # parse erb > yaml
         erb_src = ERB.new( yaml_file_string )
-        # everu Object has a binding method?? allowing another object to access methods
+        # every Object has a binding method?? allowing another object to access methods
         erb_locals = binding()
         yaml_file_string = erb_src.result(erb_locals)
         test_yaml_hash = Psych.load( yaml_file_string )        
@@ -128,7 +136,7 @@ module Sinatra
   # load a template expanding referenced sub templates
   #
   def loadYAMLNamed( yaml_template_name, page_directory )
-    
+
     template_path = yamlTemplatePathForName( yaml_template_name, page_directory )
     yaml_hash_or_array = yamlFileToHashOrArray( template_path )
 
@@ -138,40 +146,104 @@ module Sinatra
     return yaml_hash_or_array
   end
 
-  # replace all occurrences of 'yaml' with the contents of that template
+  
+#
+def replaceValueKeyWithContents( hash_or_array, replace_key, new_contents )
+  if hash_or_array.is_a? Array
+    return hash_or_array.each{|v| replaceValueKeyWithContents(v, replace_key, new_contents)}
+  end
+  
+  hash_or_array.each_pair do |key, value|
+    if key == replace_key
+      hash_or_array[key] = new_contents
+    else
+      if value.is_a?(Hash) or value.is_a?(Array)
+        replaceValueKeyWithContents(value, replace_key, new_contents)
+      end
+    end
+  end
+  hash_or_array
+end
+  
+  # replace all occurrences of 'yaml' with the contents of that template by building a new hash / array
+  # i don't think there is any need any more to duplicate the hash
   def recursivelyLoadYaml( hash_or_array )
 
     new_value = case hash_or_array
       when Hash 
-        new_hash = Hash.new
-        hash_or_array.each_pair do |key,value|
-          if key == 'yaml'
-    
-            # load the sub-template and move all key values to this hash_or_array
-            new_hash_or_array = loadYAMLNamed( value, settings.page_directory )
-            new_hash[key] = new_hash_or_array
-    
-          else
-            new_hash[key] = recursivelyReplaceYaml( value )
-          end
-        end
+        new_hash = recursivelyReplaceYAMLTagsInHash( hash_or_array )
         new_hash
         
       when Array 
         new_array = Array.new
         hash_or_array.each do |value|
-          new_array << recursivelyReplaceYaml( value )
+          new_array << recursivelyLoadYaml( value )
         end
         new_array
-
       else 
         hash_or_array
-
     end      
 
     return new_value
   end
 
+  #
+  def recursivelyReplaceYAMLTagsInHash( a_hash )
+    new_hash = Hash.new
+    a_hash.each_pair do |key,value|
+      # load linked yaml
+      if key == 'yaml'
+        new_hash_or_array_value = loadContentsOfYAMLTag(value)
+        new_hash[key] = new_hash_or_array_value
+      else
+        new_hash[key] = recursivelyLoadYaml( value )
+      end
+    end
+    return new_hash
+  end
+  
+  #
+  def loadContentsOfYAMLTag( tagContents )
+    new_value = case tagContents
+    when Hash
+      loadYAMLFromHashOfTemplateNameAndProperties( tagContents )
+    else
+      loadYAMLNamed( tagContents, settings.page_directory )    
+    end
+    return new_value
+  end
+  
+  #
+  def loadYAMLFromHashOfTemplateNameAndProperties( hash_of_properties )
+
+    template_name = hash_of_properties['name']
+    hash_of_properties.delete('name')  
+    
+    # load the sub-template and move all key values to this a_hash
+    new_hash_or_array = loadYAMLNamed( template_name, settings.page_directory )
+
+    overideTemplateProperties( new_hash_or_array, hash_of_properties )
+    
+    return new_hash_or_array
+  end
+  
+  #
+  def overideTemplateProperties( hash_or_array, new_contents )
+  
+    new_contents.each_pair do |key, value|
+      # replace yield#? in linked haml
+      if key.match(/^content_for/)
+        index = key.split("#")[1]
+        sub_template_hash_or_array = loadContentsOfYAMLTag( value )
+        key_to_replace = "$yield##{index}"
+        replaceValueKeyWithContents( hash_or_array, key_to_replace, sub_template_hash_or_array )
+                
+      else
+        replaceValueKeyWithContents( hash_or_array, key, value )
+      end
+
+    end  
+  end
   
   # --------------------------------------------------------------------------------------
   # TEMPLATE HELPERS

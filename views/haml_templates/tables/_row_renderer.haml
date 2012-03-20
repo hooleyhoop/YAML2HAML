@@ -1,0 +1,7 @@
+- name = _['name']
+
+%div( class=name )
+  - _['content', []].each do |item|
+    .row
+      = _.insert( 0, item )
+

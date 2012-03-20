@@ -1,0 +1,5 @@
+- section_name = _['section_name']
+
+.section( class="#{section_name}" )
+  - _.subrenderers.each_with_index do |subrenderer, i|
+    = _.insert(i)

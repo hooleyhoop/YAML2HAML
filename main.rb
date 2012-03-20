@@ -32,10 +32,12 @@ end
 def renderYAML( page_name )
 
   yaml_hash_or_array = loadYAMLNamed( page_name, settings.page_directory )
-  renderer_hierachy = buildRendererHierarchyFromYAML( yaml_hash_or_array )
-  puts YAML::dump(renderer_hierachy)
+  puts yaml_hash_or_array.inspect
 
-  unique_template_keys = Set.new
+  renderer_hierachy = buildRendererHierarchyFromYAML( yaml_hash_or_array )
+  #puts YAML::dump(renderer_hierachy)
+
+  unique_template_keys = Set.new()
   uniqueTemplateKeys( renderer_hierachy, unique_template_keys )
 
   return 'nothing to render' if unique_template_keys.length ==0

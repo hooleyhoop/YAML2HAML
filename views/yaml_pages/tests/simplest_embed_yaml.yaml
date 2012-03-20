@@ -1,0 +1,5 @@
+yaml: 
+  name: simplest_layout
+  content_for#1:
+    name: simplest_local_var
+    title: Yes, it's working
