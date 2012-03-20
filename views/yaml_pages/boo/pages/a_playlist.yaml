@@ -1,22 +1,6 @@
 # -- usr details section -- #
-_section#1:
-  section_name: user-details,
-
-  _img:
-    src: Unknown-avatar.gif
-    link: /user_page
-    
-  _h2:
-    text: Max_von_Hasselhoff
-    link: /user_page
-  
-  _body_text:
-    text: Herr Max von Hasselhoff Schreit
-  
-  _follow_button:
-    link: http://audioboo.fm/streams/3924/unfollow
-
-
+yaml#1: 
+  name: small_user_details
 
 # -- main content -- #
 _section#2:
@@ -43,16 +27,5 @@ _section#2:
 
 
 # -- sidebar -- #
-_section#3:
-  section_name: side-bar
-  
-  _list_renderer:
-    name: playlists
-    _text_link_cell:
-    content: [
-      { title: 14 boos, link: apple.com },
-      { title: 6 channels, link: apple.com },
-      { title: 3 playlists, link: apple.com },
-      { title: 9 favourites, link: apple.com },
-      { title: 16 following, link: apple.com }      
-    ]
+yaml#3:
+  name: user_sidebar

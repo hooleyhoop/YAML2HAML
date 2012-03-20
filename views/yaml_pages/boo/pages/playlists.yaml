@@ -1,9 +1,6 @@
 # -- usr details section -- #
 yaml#1: 
   name: small_user_details
-
-yaml#2: 
-  name: small_user_details
   
 # -- main content -- #
 _section#2:
@@ -29,16 +26,5 @@ _section#2:
 
 
 # -- sidebar -- #
-_section#3:
-  section_name: side-bar
-  
-  _list_renderer:
-    name: playlists
-    _text_link_cell:
-    content: [
-      { title: 14 boos, link: apple.com },
-      { title: 6 channels, link: apple.com },
-      { title: 3 playlists, link: apple.com },
-      { title: 9 favourites, link: apple.com },
-      { title: 16 following, link: apple.com }      
-    ]
+yaml#3:
+  name: user_sidebar
