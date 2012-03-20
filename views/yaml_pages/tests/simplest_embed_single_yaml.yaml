@@ -1,3 +1,5 @@
+# ------------- Embed a template in a layout ------------- #
+
 yaml: 
   name: simplest_layout
   content_for#1:

@@ -1,0 +1,22 @@
+# ------------- playlists table ------------- #
+
+_section#1:
+  section_name: main-content
+
+  _page_title:
+    text: 3 Playlists
+  
+  _rss_itunes_button:
+  _share_embed_button:
+  _play_all_button:
+
+  # -- Playlists -- #
+
+  _row_renderer:
+    name: playlists
+    _playlist_cell:
+    content: [
+      { title: The Ten Best AudioBoos, last_updated: 21st March 2012 },
+      { title: Italy 2010, last_updated: 2nd Feb 2010 },
+      { title: Glasgow Comedy Festival, last_updated: just now… }
+    ]

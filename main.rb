@@ -115,11 +115,11 @@ end
 # ---------------------------------
 # Over riding the Javascript filter
 # ---------------------------------
-module Haml::Filters::Javascript
-  def render_with_options(text, options)
-    "javascript --> #{text}"
-  end
-end
+#module Haml::Filters::Javascript
+#  def render_with_options(text, options)
+#    "javascript --> #{text}"
+#  end
+#end
 
 # ------------------------------
 # New Monkey filter, use :monkey
