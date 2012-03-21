@@ -1,5 +1,63 @@
-@import "partials/definitions";
+$page-width: 600px;
+$side-bar-width: 180px;
+$main-col-width: 420px;
 
-.serifVSmall {
-  text-decoration: none;
+#page {
+  margin: 0 auto;
+  width: $page-width;
+  position: relative;
+}
+
+.small-user-details {
+  width: $main-col-width;
+  position: relative;
+  .info {
+    float: left;
+  }
+  .actions {
+    float: right;
+  }
+  &:before, &:after { content: ""; display: table; } &:after { clear: both; }  
+}
+
+.main-content {
+  width: $main-col-width;
+  float: left;
+  
+  .table-header {
+    .media {
+      float: left;
+      img {
+        width: 96px;
+        height: 96px;
+      }
+    }
+    .details {
+      float: left;
+    }
+    .actions {
+      float: left;
+    }
+    .rss-itunes-button-wrapper, .share-embed-button-wrapper, .play-all-button-wrapper {
+      float: left;
+    }
+    &:before, &:after { content: ""; display: table; }
+    &:after { clear: both; }    
+  }
+
+  .table-content {
+    .row {
+      .playlist-cell {
+        .media {
+          float: left;
+        }
+      }
+    }
+  
+  }
+}
+
+.side-bar {
+  width: $side-bar-width;
+  float: left;  
 }

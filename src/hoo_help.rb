@@ -35,24 +35,29 @@ module Sinatra
     raise "!!! content_hash is nil" if content_hash.nil?
 
     content_hash.each_pair do |key,value|
-      if key[0] == '_'
-        #-- modify key
-        # hack to allow multiple same template keys in one hash - we dont use the index        
-        key = key.split("#").first # remove #index
-        child_view = HooRenderer.new( key.to_sym )
+      #-- modify key
+      # hack to allow multiple same template keys in one hash - we dont use the index     
+      key_parts = key.split("#")
+      key_first = key_parts.first
+      key_index = key_parts[1] || '_anon'
+      if key_first[0] == '_'
+        child_view = HooRenderer.new( key_first.to_sym )
         unless value.nil?
           buildViewContentsFromValue( child_view, value )
         end
+        unless key_index.nil?        
+          child_view.setCustomProperty( '_index_string', key_index )
+        end
         parent_renderer.addSubRenderer( child_view )
 
-      elsif key.split('#').first=='yaml'
+      elsif key_first=='yaml'
           buildViewContentsFromValue( parent_renderer, value )
 
-      elsif key.split('#').first=='$yield' && !value.nil?
+      elsif key_first=='$yield' && !value.nil?
         buildViewContentsFromValue( parent_renderer, value )
   
       else
-          parent_renderer.setCustomProperty( key, value ) 
+          parent_renderer.setCustomProperty( key, value )
       end    
     end
   end
@@ -121,7 +126,7 @@ module Sinatra
     result = case ext
       when '.yaml'
         # parse a YAML file
-        test_yaml_hash = Psych.load( yaml_file_string )
+        test_yaml_hash = YAML.load( yaml_file_string )
         
       when '.erb'
         # parse erb > yaml
@@ -129,7 +134,7 @@ module Sinatra
         # every Object has a binding method?? allowing another object to access methods
         erb_locals = binding()
         yaml_file_string = erb_src.result(erb_locals)
-        test_yaml_hash = Psych.load( yaml_file_string )        
+        test_yaml_hash = YAML.load( yaml_file_string )        
       
       else
         puts "What?? #{ext}"
@@ -174,7 +179,7 @@ def replaceValueKeyWithContents( hash_or_array, replace_key, new_contents )
       case value
         when Hash || Array
           replaceValueKeyWithContents(value, replace_key, new_contents)
-      end    
+      end
     end
   end
   hash_or_array
@@ -333,36 +338,29 @@ end
   # VIEW HELPERS
   # --------------------------------------------------------------------------------------
   
+  def absolutePathFromPublicFolder( file_path )
+    relative_path = Pathname.new( file_path ).relative_path_from( Pathname.new( settings.public_folder ) ).to_s
+    absolute_file_path = File.join( '/',  relative_path )
+  end
+
   #
   def cssHelper( filename )
-
     found_file = assertSingleFile( Dir.glob("#{settings.css_directory}/**/#{filename}.css"), filename )
-    
-    # real = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/public/css/third_party/base.css
-    # needed = http://0.0.0.0:4567/css/third_party/base.css
-    
-    # root = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test
-    # base = http://0.0.0.0:4567
-    # absolute_css_dir = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/views/scss
-    # relative_css_dir = /css
-    
-    relative_path = Pathname.new( found_file ).relative_path_from( Pathname.new( settings.css_directory ) ).to_s
-    # third_party/base.css
-
-    css_file_path = File.join( $base_url, 'css',  relative_path )
-    return css_file_path
+    absolutePathFromPublicFolder( found_file )
   end
   
   #
   def javascriptHelper( filename )
-  
     found_file = assertSingleFile( Dir.glob("#{settings.javascript_directory}/**/#{filename}.js"), filename )
-    relative_path = Pathname.new( found_file ).relative_path_from( Pathname.new( settings.javascript_directory ) ).to_s
-    js_file_path = File.join( $base_url, 'javascript',  relative_path )
-    return js_file_path
+    absolutePathFromPublicFolder( found_file )
   end
 
-
+  #
+  def imageHelper( filename )
+    img_file = assertSingleFile( Dir.glob("#{settings.images_directory}/**/#{filename}"), filename )
+    absolutePathFromPublicFolder( img_file )
+  end     
+     
   #
   def scssHelper( filename )
   
@@ -404,14 +402,7 @@ end
     return javascriptHelper( filename )
   end      
      
-  #
-  def imageHelper( filename )
-    img_file = assertSingleFile( Dir.glob("#{settings.images_directory}/**/#{filename}"), filename )
-    relative_path = Pathname.new( img_file ).relative_path_from( Pathname.new( settings.images_directory ) ).to_s
-    img_file_path = File.join( $base_url, 'images',  relative_path )
-    return img_file_path
-  end     
-     
+
      
       
   end

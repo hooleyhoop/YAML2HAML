@@ -1,15 +1,19 @@
 # ------------- usr sidebar ------------- #
 
-_section#1:
-  section_name: side-bar
+__#side_bar:
   
-  _list_renderer:
-    name: playlists
-    _text_link_cell:
-    content: [
-      { title: 14 boos, link: apple.com },
-      { title: 6 channels, link: apple.com },
-      { title: 3 playlists, link: apple.com },
-      { title: 9 favourites, link: apple.com },
-      { title: 16 following, link: apple.com }      
-    ]
+  __#heading:
+    _body_text:
+      text: Steve's Stuff
+  
+  __#contents:  
+    _list_renderer:
+      name: playlists
+      _text_link_cell:
+      content: [
+        { title: 14 boos, link: apple.com },
+        { title: 6 channels, link: apple.com },
+        { title: 3 playlists, link: apple.com },
+        { title: 9 favourites, link: apple.com },
+        { title: 16 following, link: apple.com }      
+      ]

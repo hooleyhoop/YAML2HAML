@@ -1,18 +1,15 @@
 # ------------- usr details section ------------- #
 
-_section#1:
-  section_name: user-details
+__#small-user-details:
 
-  _img:
-    src: Unknown-avatar.gif
-    link: /user_page
+  __#info:
+    _h2:
+      text: Max_von_Hasselhoff
+      link: /user_page
     
-  _h2:
-    text: Max_von_Hasselhoff
-    link: /user_page
-  
-  _body_text:
-    text: Herr Max von Hasselhoff Schreit
-  
-  _follow_button:
-    link: http://audioboo.fm/streams/3924/unfollow
+    _body_text:
+      text: Herr Max von Hasselhoff Schreit
+
+  __#actions:  
+    _follow_button:
+      link: http://audioboo.fm/streams/3924/unfollow

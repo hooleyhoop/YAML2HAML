@@ -1,0 +1,43 @@
+#page {
+  margin: 0 auto;
+  width: 600px;
+  position: relative; }
+
+.small-user-details {
+  width: 420px;
+  position: relative; }
+  .small-user-details .info {
+    float: left; }
+  .small-user-details .actions {
+    float: right; }
+  .small-user-details:before, .small-user-details:after {
+    content: "";
+    display: table; }
+  .small-user-details:after {
+    clear: both; }
+
+.main-content {
+  width: 420px;
+  float: left; }
+  .main-content .table-header .media {
+    float: left; }
+    .main-content .table-header .media img {
+      width: 96px;
+      height: 96px; }
+  .main-content .table-header .details {
+    float: left; }
+  .main-content .table-header .actions {
+    float: left; }
+  .main-content .table-header .rss-itunes-button-wrapper, .main-content .table-header .share-embed-button-wrapper, .main-content .table-header .play-all-button-wrapper {
+    float: left; }
+  .main-content .table-header:before, .main-content .table-header:after {
+    content: "";
+    display: table; }
+  .main-content .table-header:after {
+    clear: both; }
+  .main-content .table-content .row .playlist-cell .media {
+    float: left; }
+
+.side-bar {
+  width: 180px;
+  float: left; }
