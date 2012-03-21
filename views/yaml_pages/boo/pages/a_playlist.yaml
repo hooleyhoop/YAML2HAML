@@ -9,7 +9,8 @@ yaml#window:
     # -- main content -- #
     yaml#2:
       name: a_playlist_table
-    
+      _page_title.text: Steam Trains Rule
+
     # -- sidebar -- #
     yaml#3:
       name: user_sidebar

@@ -4,7 +4,8 @@ __#main-content:
 
   yaml#1:
     name: table_header
-
+    _page_title.text: Hello i am a Playlist
+    
   # -- Boo List -- #
   __#table-content:
     _row_renderer:

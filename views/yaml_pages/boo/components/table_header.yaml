@@ -8,9 +8,13 @@ __#table-header:
         
   __#details:
     _page_title:
-      text: Steam Trains Playlist  dddd adsasddas
+      text: Steam Trains Playlist
 
     __#actions:
       _rss_itunes_button:
       _share_embed_button:
       _play_all_button:
+      
+      
+      
+      

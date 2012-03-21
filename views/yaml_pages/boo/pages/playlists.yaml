@@ -9,6 +9,7 @@ yaml#window:
 
     yaml#2:
       name: playlists_table
+      _page_title.text: 6 Playlists
 
     yaml#3:
       name: user_sidebar

@@ -157,7 +157,45 @@ module Sinatra
     return yaml_hash_or_array
   end
 
-  
+
+#
+def firstHashThatContainsKeyFromHashOrArray( hash_or_array, key ) 
+  x = case hash_or_array
+    when Hash
+      firstHashThatContainsKeyFromHash( hash_or_array, key )
+    when Array
+      firstHashThatContainsKeyFromArray( hash_or_array, key )
+    else
+      nil
+  end
+  return x
+end
+
+#
+def firstHashThatContainsKeyFromArray( array, key )
+  x = array.each do |v|
+    found = firstHashThatContainsKeyFromHashOrArray( v, key )
+    break found if found.nil? == false
+  end
+  return x
+end
+
+#
+def firstHashThatContainsKeyFromHash( a_hash, key )
+
+  if a_hash.has_key?( key )
+    return a_hash
+  else
+    a_hash.each_pair do |k,v|
+      found = firstHashThatContainsKeyFromHashOrArray( v, key )
+      unless found.nil?
+        return found
+      end
+    end
+  end
+  return nil
+end
+
 #
 def replaceValueKeyWithContents( hash_or_array, replace_key, new_contents )
 
@@ -271,6 +309,7 @@ end
     raise "nil args" if ( hash_or_array.nil? || new_contents.nil? )
   
     new_contents.each_pair do |key, value|
+    
       # replace yield#? in linked haml
       if key.match(/^content_for/)
         index = key.split("#")[1]
@@ -280,7 +319,17 @@ end
         replaceValueKeyWithContents( hash_or_array, key_to_replace, sub_template_hash_or_array )
                 
       else
-        replaceValueKeyWithContents( hash_or_array, key, value )
+      
+        # crappy kvc type approach
+        array_of_key_paths = key.split('.')
+        key_value = array_of_key_paths.pop
+        target = hash_or_array
+        
+        array_of_key_paths.each do |key_path_part|
+          target = firstHashThatContainsKeyFromHashOrArray( target, key_path_part )
+        end
+     
+        replaceValueKeyWithContents( target, key_value, value )
       end
 
     end  
