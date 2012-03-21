@@ -2,21 +2,8 @@
 
 __#main-content:
 
-  __#table-header:
-    __#media:
-      _img:
-        src: Unknown-avatar.gif
-        link: /user_page
-          
-    __#details:
-      _page_title:
-        text: Steam Trains Playlist  dddd adsasddas
-
-    __#actions:
-      _rss_itunes_button:
-      _share_embed_button:
-      _play_all_button:
-
+  yaml#1:
+    name: table_header
 
   # -- Boo List -- #
   __#table-content:

@@ -97,9 +97,10 @@ class HooRenderer
     @properties[prop_name.to_sym] = default_value
   end
 
+  # a key without a value, eg. locked: hidden: etc.
   def addSpecialAttribute( val )
     raise "!!! special attribute error" if val.nil?
-    puts "adding spcial attribute #{val}"
+    puts "TODO: adding spcial attribute #{val}"
   end
   
   #

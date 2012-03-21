@@ -2,14 +2,16 @@
 
 __#small-user-details:
 
-  __#info:
-    _h2:
-      text: Max_von_Hasselhoff
-      link: /user_page
-    
-    _body_text:
-      text: Herr Max von Hasselhoff Schreit
+  __#wrapper:
 
-  __#actions:  
-    _follow_button:
-      link: http://audioboo.fm/streams/3924/unfollow
+    __#info:
+      _h2:
+        text: Max_von_Hasselhoff the third majestic leader of cheese land surrender monkey
+        link: /user_page
+      
+      _body_text:
+        text: Herr Max von Hasselhoff Schreit
+  
+    __#actions:  
+      _follow_button:
+        link: http://audioboo.fm/streams/3924/unfollow

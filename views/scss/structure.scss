@@ -1,6 +1,11 @@
-$page-width: 600px;
-$side-bar-width: 180px;
-$main-col-width: 420px;
+$side-bar-width: 300px;
+$main-col-width: 600px;
+$page-width: $main-col-width + $side-bar-width;
+
+@mixin bor {
+  border: 1px solid red;
+}
+
 
 #page {
   margin: 0 auto;
@@ -9,22 +14,26 @@ $main-col-width: 420px;
 }
 
 .small-user-details {
-  width: $main-col-width;
+  width: $page-width;
   position: relative;
+  .wrapper {
+    width: $main-col-width;
+    display: -webkit-box;
+  }
   .info {
-    float: left;
+    -webkit-box-flex: 1;
   }
   .actions {
-    float: right;
+    -webkit-box-flex: 0;
   }
-  &:before, &:after { content: ""; display: table; } &:after { clear: both; }  
 }
 
 .main-content {
   width: $main-col-width;
-  float: left;
+  float:left;
   
   .table-header {
+    overflow: auto;
     .media {
       float: left;
       img {
@@ -33,31 +42,23 @@ $main-col-width: 420px;
       }
     }
     .details {
-      float: left;
+      overflow: auto;    
     }
-    .actions {
-      float: left;
-    }
-    .rss-itunes-button-wrapper, .share-embed-button-wrapper, .play-all-button-wrapper {
-      float: left;
-    }
-    &:before, &:after { content: ""; display: table; }
-    &:after { clear: both; }    
-  }
 
-  .table-content {
-    .row {
-      .playlist-cell {
-        .media {
-          float: left;
-        }
-      }
-    }
-  
   }
+    
+  .playlist-cell {
+    .media {
+      float: left;
+    }
+  }
+  
 }
 
+.rss-itunes-button-wrapper, .share-embed-button-wrapper, .play-all-button-wrapper {
+  float: left;
+}
+  
 .side-bar {
-  width: $side-bar-width;
-  float: left;  
+  float: left;
 }
