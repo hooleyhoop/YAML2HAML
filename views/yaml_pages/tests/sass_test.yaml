@@ -1,0 +1,6 @@
+# window
+_simplest_window:
+  title: sass_test
+  scss: [sass_test]
+
+  _lorem_ipsum:

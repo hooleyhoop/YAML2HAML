@@ -1,0 +1,7 @@
+# ------------- Flex-box tests page ------------- #
+
+yaml#window: 
+  name: demo_window
+  content_for#1:
+
+    _flex_box_test:

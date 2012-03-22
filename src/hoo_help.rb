@@ -418,11 +418,12 @@ end
     # scss_dir = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/views/scss
     # required = http://0.0.0.0:4567scss/#{filename}.css
     
-    src_file = assertSingleFile( Dir.glob("#{settings.scss_directory}/**/#{filename}.scss"), filename )
+    src_file = assertSingleFile( Dir.glob("#{settings.scss_directory}/**/#{filename}.{scss,sass}"), filename )
+    ext = File.extname( src_file ).to_sym
 
     sass_cache = File.join( settings.root, '/caches-hoo/sass' )
     partials_paths = [ File.join( settings.scss_directory, 'partials' ) ]
-    compiled_style_sheet = Sass::Engine.for_file( src_file, { syntax: :scss, load_paths: partials_paths, cache: true , cache_location: sass_cache } ).render
+    compiled_style_sheet = Sass::Engine.for_file( src_file, { syntax: ext, load_paths: partials_paths, cache: true , cache_location: sass_cache } ).render
 
     # create and save the css
     absolute_dst_file_path = File.join( settings.css_directory, "generated/#{filename}.css" )
