@@ -62,7 +62,8 @@ def renderPage( page_name )
   $base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
 
   $inline_sass = Hash.new
-  
+  $inline_coffeescript = Hash.new
+ 
   ext = File.extname( page_name )
   if ext.nil? == false && ext.length > 0
     page_name_parts = page_name.split(".")

@@ -419,7 +419,7 @@ end
     # required = http://0.0.0.0:4567scss/#{filename}.css
     
     src_file = assertSingleFile( Dir.glob("#{settings.scss_directory}/**/#{filename}.{scss,sass}"), filename )
-    ext = File.extname( src_file ).to_sym
+    ext = File.extname( src_file )[1..-1].to_sym
 
     sass_cache = File.join( settings.root, '/caches-hoo/sass' )
     partials_paths = [ File.join( settings.scss_directory, 'partials' ) ]
