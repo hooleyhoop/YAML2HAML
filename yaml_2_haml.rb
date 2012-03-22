@@ -61,6 +61,8 @@ end
 def renderPage( page_name )
   $base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
 
+  $inline_sass = Hash.new
+  
   ext = File.extname( page_name )
   if ext.nil? == false && ext.length > 0
     page_name_parts = page_name.split(".")
@@ -74,7 +76,13 @@ def renderPage( page_name )
     end
 
   else
-    return renderYAML( page_name )
+    rendered_page = renderYAML( page_name )
+    
+    # rough test of inline sass rendering
+    raw_sass_string = $inline_sass.values.join('')
+    compiled_sass_string = sass(raw_sass_string)
+    return rendered_page << "<style>#{compiled_sass_string}</style>"
+    
   end
   return "failed to handle #{page_name}#{ext}"
 end
@@ -120,6 +128,19 @@ end
 #    "javascript --> #{text}"
 #  end
 #end
+
+# ---------------------------------
+# Over riding the Sass filter
+# ---------------------------------
+module Haml::Filters::Sass
+  def render_with_options(text, options)
+    fname = File.basename(options[:filename]).to_sym
+    unless $inline_sass.has_key?( fname )
+      $inline_sass[fname] = text;
+    end
+    nil
+  end
+end
 
 # ------------------------------
 # New Monkey filter, use :monkey

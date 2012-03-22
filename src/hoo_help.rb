@@ -452,7 +452,9 @@ end
     return javascriptHelper( filename )
   end      
      
-
+  def shaqAtaq
+    "oh yeah"
+  end
      
       
   end
