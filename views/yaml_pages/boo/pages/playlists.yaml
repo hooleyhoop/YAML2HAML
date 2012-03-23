@@ -8,10 +8,11 @@ yaml#window:
 
     # page header
     _three_col_layout#1:
-      # main column
+      # main column TODO: use the new named inserts to add custom buttons
       yaml#1:
         name: small_user_details
-                          
+        _button# put this in the button section
+        
       # left column
       _nil#2:
       

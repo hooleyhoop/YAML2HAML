@@ -1,7 +1,10 @@
-.share-embed-button-wrapper
-  %a.button-link( href='#' )
-    %span.button-icon
-    %p.button-text
-      Share / Embed
+- hide = _['hide', 'no_thankyou']
+
+- if hide=='no_thankyou'
+  .share-embed-button-wrapper
+    %a.button-link( href='#' )
+      %span.button-icon
+      %p.button-text
+        Share / Embed
 
     

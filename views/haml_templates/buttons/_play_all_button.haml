@@ -1,6 +1,9 @@
-.play-all-button-wrapper
-  %a.button-link( href='#' )
-    %span.button-icon
-    %p.button-text
-      Play All
-      
+- hide = _['hide', 'no_thankyou']
+
+- if hide=='no_thankyou'
+  .play-all-button-wrapper
+    %a.button-link( href='#' )
+      %span.button-icon
+      %p.button-text
+        Play All
+        

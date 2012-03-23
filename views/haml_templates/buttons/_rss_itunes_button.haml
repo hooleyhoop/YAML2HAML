@@ -1,5 +1,8 @@
-.rss-itunes-button-wrapper
-  %a.button-link( href='#' )
-    %span.button-icon
-    %p.button-text
-      RSS / iTunes
+- hide = _['hide', 'no_thankyou']
+
+- if hide=='no_thankyou'
+  .rss-itunes-button-wrapper
+    %a.button-link( href='#' )
+      %span.button-icon
+      %p.button-text
+        RSS / iTunes

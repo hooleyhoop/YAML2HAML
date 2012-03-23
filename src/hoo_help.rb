@@ -8,7 +8,7 @@ module Sinatra
   module HooHelp
 
   def installRenderEngines( renderer_hierachy, engine_hash )
-    renderer_hierachy.subrenderers.each do |renderer|
+    renderer_hierachy.indexed_subrenderers.each do |renderer|
       cached_engine = engine_hash[renderer.template_name]
       raise "failed to fine engine #{renderer.template_name.to_s}" if cached_engine.nil?
       renderer.engine = cached_engine       
@@ -23,7 +23,7 @@ module Sinatra
   
   # badly recursively get unique keys as symbols
   def uniqueTemplateKeys( root_renderer, result_set )
-    root_renderer.subrenderers.each do |renderer|
+    root_renderer.indexed_subrenderers.each do |renderer|
       result_set << renderer.template_name
       uniqueTemplateKeys( renderer, result_set )
     end
@@ -39,16 +39,10 @@ module Sinatra
       # hack to allow multiple same template keys in one hash - we dont use the index     
       key_parts = key.split("#")
       key_first = key_parts.first
-      key_index = key_parts[1] || '_anon'
+      key_index = key_parts[1]
       if key_first[0] == '_'
-        child_view = HooRenderer.new( key_first.to_sym )
-        unless value.nil?
-          buildViewContentsFromValue( child_view, value )
-        end
-        unless key_index.nil?        
-          child_view.setCustomProperty( '_index_string', key_index )
-        end
-        parent_renderer.addSubRenderer( child_view )
+        child_renderer = HooRenderer.new( key_first.to_sym )
+        addSubRendererToParent( parent_renderer, child_renderer, key_index, value )
 
       elsif key_first=='yaml'
           buildViewContentsFromValue( parent_renderer, value )
@@ -70,15 +64,32 @@ module Sinatra
     content_array.each do |value|
       if value[0] == '_'
         # hack to allow multiple same template keys in one hash - we dont use the index
-        value = value.split("#").first # remove #index
-        child_renderer = HooRenderer.new( value.to_sym )
-        parent_renderer.addSubRenderer( child_renderer )  
+        key_parts = key.split("#")
+        key_first = key_parts.first
+        key_index = key_parts[1]
+        
+        child_renderer = HooRenderer.new( key_first.to_sym )        
+        addSubRendererToParent( parent_renderer, child_renderer, key_index, nil )
+
       else
         buildViewContentsFromValue( parent_renderer, value )
       end    
     end
   end
 
+  #
+  def addSubRendererToParent( parent, child, key_index, value )
+
+    # not sure if really a string..
+    unless key_index.nil?        
+      child.setCustomProperty( '_index_string', key_index )
+    end
+    unless value.nil?
+      buildViewContentsFromValue( child, value )
+    end
+    parent.addSubRenderer( child, key_index )
+  end
+  
   #
   def buildViewContentsFromValue( parent_renderer, content_array_or_hash_or_value )
     raise "!!! parent_renderer is nil" if parent_renderer.nil?
