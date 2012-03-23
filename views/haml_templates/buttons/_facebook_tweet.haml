@@ -1,7 +1,10 @@
-.facebook-tweet-wrapper
-  %a( href='http://facebook.com')
-    %p
-      f
-  %a( href='http://twitter.com')
-    %p
-      t
+- hide = _['hide', 'no_thankyou']
+
+- if hide=='no_thankyou'
+  .facebook-tweet-wrapper
+    %a( href='http://facebook.com')
+      %p
+        f
+    %a( href='http://twitter.com')
+      %p
+        t

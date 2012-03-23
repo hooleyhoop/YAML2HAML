@@ -3,7 +3,8 @@
 __#side-bar:
 
   _facebook_tweet:
-  
+    hide: no_thankyou
+      
   __#heading:
     _body_text:
       text: Steve's Stuff

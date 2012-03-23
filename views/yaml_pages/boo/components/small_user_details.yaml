@@ -10,7 +10,7 @@ __#small-user-details:
     __#info:
       _h2:
         text: hooleyhoop
-        link: /user_page
+        link: /profile
       
       _body_text:
         text: Steven Hooley
