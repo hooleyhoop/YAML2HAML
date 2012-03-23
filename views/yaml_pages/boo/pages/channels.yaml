@@ -2,7 +2,7 @@
 
 yaml#window: 
   name: demo_window
-  title: hooleyhoop's Playlists
+  title: hooleyhoop's Channels
   
   content_for#1:
 
@@ -24,7 +24,7 @@ yaml#window:
       # main column
       yaml#3:
         name: playlists_table
-        _page_title.text: 6 Playlists
+        _page_title.text: 5 Channels
 
       # left column
       _nil#2:

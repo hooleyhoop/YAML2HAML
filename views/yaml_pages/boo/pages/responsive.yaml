@@ -1,9 +1,0 @@
-# ------------- Playlists page ------------- #
-
-yaml#window: 
-  name: responsive_window
-  content_for#1:
-
-    yaml#1:
-      name: small_user_details
-

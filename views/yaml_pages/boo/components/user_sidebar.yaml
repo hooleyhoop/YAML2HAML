@@ -1,19 +1,21 @@
 # ------------- usr sidebar ------------- #
 
 __#side-bar:
+
+  _facebook_tweet:
   
   __#heading:
     _body_text:
       text: Steve's Stuff
-  
+
   __#contents:  
     _list_renderer:
       name: playlists
       _text_link_cell:
       content: [
-        { title: 14 boos, link: apple.com },
-        { title: 6 channels, link: apple.com },
-        { title: 3 playlists, link: apple.com },
-        { title: 9 favourites, link: apple.com },
-        { title: 16 following, link: apple.com }      
+        { title: 14 boos, link: /boos },
+        { title: 5 channels, link: /channels },
+        { title: 6 playlists, link: /playlists },
+        { title: 9 favourites, link: /favourites },
+        { title: 16 following, link: /following }      
       ]

@@ -2,7 +2,7 @@
 
 yaml#window: 
   name: demo_window
-  title: hooleyhoop's Playlists
+  title: This is a Detail Page
   
   content_for#1:
 
@@ -24,7 +24,7 @@ yaml#window:
       # main column
       yaml#3:
         name: playlists_table
-        _page_title.text: 6 Playlists
+        _page_title.text: Caller Graham says why should Stephen turn down a salary that a company want to pay him?
 
       # left column
       _nil#2:
