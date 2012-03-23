@@ -1,0 +1,33 @@
+!!!
+%html( lang='en' )
+  %head
+    %meta( charset='utf-8' )
+    %title=_['title', 'untitled']
+    
+    -# load some CSS 
+    - _['css', []].each do |css_file_name|
+      %link( rel='stylesheet' href="#{cssHelper(css_file_name)}" type="text/css" )
+
+    - _['scss', []].each do |scss_file_name|
+      %link( rel='stylesheet' href="#{scssHelper(scss_file_name)}" type="text/css" )
+
+    -# load some script
+    - _['javascript', []].each do |js_file_name|
+      %script( src="#{javascriptHelper(js_file_name)}" type="text/javascript" )
+
+    - _['coffeescript', []].each do |coffee_file_name|
+      %script( src="#{coffeescriptHelper(coffee_file_name)}" type="text/javascript" )
+
+
+  %body
+    #page( style="position: relative; min-width:400px; max-width:600px; height:100px; margin:auto; background-color:#aaa; font-size:32px;")
+      shaq lorem ipsum
+      #left-side( style="position:absolute; right:100%; top:0; height:100px; margin:auto; background-color:#fff000" )
+        %div( style="width:10em" )
+          steve
+      #right-side( style="position:absolute; left:100%; top:0; max-width:50%; height:100px; margin:auto; background-color:#000fff" )
+        steve
+
+
+:coffeescript
+  alert("wat dat>");

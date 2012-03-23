@@ -9,9 +9,9 @@ $page-width: $main-col-width + $side-bar-width + $side-bar-width;
 
 #page {
   margin: 0 auto;
-  width: $page-width;
-  position: relative;
-  background-color: #ccc;
+  //width: $page-width;
+  //position: relative;
+  //background-color: #ccc;
 }
 
 .small-user-details {

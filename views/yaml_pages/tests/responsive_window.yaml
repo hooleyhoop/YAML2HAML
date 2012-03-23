@@ -1,0 +1,10 @@
+# ------------- Demo Window ------------- #
+
+_responsive_window:
+  title: YAML2Haml
+  css: [base, responsive]
+  #scss: [structure]
+  javascript: [jquery-1.7.1.min, flexie]
+  #coffeescript: [aboo_main]
+  
+  $yield#1:

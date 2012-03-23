@@ -2,22 +2,10 @@
   margin: 0 auto; }
 
 .small-user-details {
-  width: 1200px;
-  position: relative; }
-  .small-user-details .wrapper {
-    width: 600px;
-    background-color: #eee;
-    margin: 0 300px 0 300px;
-    display: -webkit-box;
-    display: box; }
-  .small-user-details .info {
-    border: 1px solid red;
-    -webkit-box-flex: 1;
-    box-flex: 1; }
-  .small-user-details .actions {
-    border: 1px solid red;
-    -webkit-box-flex: 0;
-    box-flex: 0; }
+  max-width: 600px;
+  min-width: 400px;
+  margin: auto;
+  background-color: #ccc; }
 
 .main-content {
   width: 600px;

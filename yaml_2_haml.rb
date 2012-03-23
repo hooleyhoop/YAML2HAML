@@ -58,6 +58,11 @@ def renderHAML( page_name )
 end
 
 #
+def renderHTML( page_name )
+  File.read(File.join('public', "#{page_name}.html"))
+end
+
+#
 def renderPage( page_name )
   $base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
 
@@ -74,6 +79,8 @@ def renderPage( page_name )
         return renderYAML( page_name )
       when 'haml'
         return renderHAML( page_name )
+      when 'html'
+        return renderHTML( page_name )        
     end
 
   else
@@ -82,8 +89,15 @@ def renderPage( page_name )
     # rough test of inline sass rendering
     raw_sass_string = $inline_sass.values.join('')
     compiled_sass_string = sass(raw_sass_string)
-    return rendered_page << "<style>#{compiled_sass_string}</style>"
     
+    #rough test of inline coffeescript rendering
+    raw_coffee_string = $inline_coffeescript.values.join('')
+    compiled_coffee_string = CoffeeScript.compile( raw_coffee_string )
+    
+    rendered_page << "<style>#{compiled_sass_string}</style>"
+    rendered_page << "<script>#{compiled_coffee_string}</script>"
+    
+    return rendered_page
   end
   return "failed to handle #{page_name}#{ext}"
 end
@@ -122,13 +136,18 @@ module Haml::Filters::Scss
 end
 
 # ---------------------------------
-# Over riding the Javascript filter
+# Over riding the Coffeescript filter
 # ---------------------------------
-#module Haml::Filters::Javascript
-#  def render_with_options(text, options)
-#    "javascript --> #{text}"
-#  end
-#end
+module Haml::Filters::Coffeescript
+  include Haml::Filters::Base
+  def render_with_options(text, options)
+    fname = File.basename(options[:filename]).to_sym
+    unless $inline_coffeescript.has_key?( fname )
+      $inline_coffeescript[fname] = text;
+    end  
+    nil
+  end
+end
 
 # ---------------------------------
 # Over riding the Sass filter
