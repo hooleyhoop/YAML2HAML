@@ -40,9 +40,22 @@ module Sinatra
       key_parts = key.split("#")
       key_first = key_parts.first
       key_index = key_parts[1]
+      
       if key_first[0] == '_'
-        child_renderer = HooRenderer.new( key_first.to_sym )
+        template_name = key_first.to_sym
+        child_renderer = HooRenderer.new( template_name )
         addSubRendererToParent( parent_renderer, child_renderer, key_index, value )
+
+      elsif key_first=='partial'
+        key2 = value['partial_name']
+        value.delete('partial_name')
+        key_parts2 = key2.split("#")
+        key_first2 = key_parts2.first
+        key_index2 = key_parts2[1]        
+        
+        template_name = key_first2.to_sym
+        child_renderer = HooRenderer.new( template_name )
+        addSubRendererToParent( parent_renderer, child_renderer, key_index2, value )
 
       elsif key_first=='yaml'
           buildViewContentsFromValue( parent_renderer, value )
@@ -56,7 +69,7 @@ module Sinatra
     end
   end
   
-  #
+  # USing the array form is only slightly supported?
   def buildViewContentsFromArray( parent_renderer, content_array )
     raise "!!! parent_renderer is nil" if parent_renderer.nil?
     raise "!!! content_array is nil" if content_array.nil?
@@ -293,11 +306,11 @@ end
 
     raise "nil args" if hash_of_properties.nil?
 
-    template_name = hash_of_properties['name']
+    template_name = hash_of_properties['yaml_name']
     
     # hash_of_properties has the name of one template
     if template_name.nil? == false
-      hash_of_properties.delete('name')  
+      hash_of_properties.delete('yaml_name')  
       # load the sub-template and move all key values to this a_hash
       new_hash_or_array = loadYAMLNamed( template_name, settings.page_directory )
 
@@ -327,6 +340,7 @@ end
         sub_template_hash_or_array = loadContentsOfYAMLTag( value )
         key_to_replace = "$yield##{index}"
 
+        # what if we didn't replace yield but we replaced any.. ?
         replaceValueKeyWithContents( hash_or_array, key_to_replace, sub_template_hash_or_array )
                 
       else

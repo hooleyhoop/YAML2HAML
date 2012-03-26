@@ -1,5 +1,5 @@
 - section_name = _['_index_string']
 
 .section( class="#{section_name}" )
-  - _.subrenderers.each_with_index do |subrenderer, i|
+  - _.indexed_subrenderers.each_with_index do |subrenderer, i|
     = _.insert(i)

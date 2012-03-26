@@ -5,6 +5,9 @@ __#main-content:
   yaml#1:
     name: table_header
 
+    # -- how to insert here from another yaml? yield? is that good enough? isnt there an easier way with key paths?
+    _niltemplate:
+    
   # -- Playlists -- #
   __#table-content:
     _row_renderer:

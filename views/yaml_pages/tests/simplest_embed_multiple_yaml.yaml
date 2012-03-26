@@ -1,17 +1,17 @@
 # ------------- Embed a template in a layout ------------- #
 
 yaml: 
-  name: simplest_layout
+  yaml_name: simplest_layout
   content_for#1:
 
     yaml#1: 
-      name: simplest_local_var
+      yaml_name: simplest_local_var
       title: This is the start
       
     yaml#2:
-      name: simplest_local_var
+      yaml_name: simplest_local_var
       title: This is the middle
     
     yaml#3:
-      name: simplest_local_var
+      yaml_name: simplest_local_var
       title: This is the end

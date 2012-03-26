@@ -1,0 +1,11 @@
+%p
+  = _[:title, 'unknown title']
+
+%p
+  before embed
+  
+#page( style="border: 1px solid red;")
+  = _.insert( 'named_partial' )
+
+%p
+  apres embed

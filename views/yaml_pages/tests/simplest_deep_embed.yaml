@@ -1,0 +1,12 @@
+# embed a yaml which in turn embeds a haml
+yaml: 
+  yaml_name: simplest_embed_haml
+
+  # hey look, overide a variable
+  title: if looks could kill
+  
+  # so, we are rendering _simplest_wrapper_for_embeded_content.hamlet
+  # how do we inject some custom content
+  
+  content_for#named_partial:
+    _lorem_ipsum:

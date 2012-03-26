@@ -1,0 +1,11 @@
+_simplest_wrapper_for_embeded_content:
+  title: "Ship wrecked"
+  
+  # use the long form
+  partial#1:
+    partial_name: _simplest_local_var#named_partial
+    title: overide success
+    
+  partial#2:
+    partial_name: _simplest_local_var#named_partial
+    title: twat success    

@@ -1,9 +1,10 @@
 # ------------- Embed a template in a layout ------------- #
 
 yaml: 
-  name: simplest_layout
+  yaml_name: simplest_layout
+  
   content_for#1:
-    name: simplest_local_var
+    yaml_name: simplest_local_var
     title: Yes, it's working
 
 
