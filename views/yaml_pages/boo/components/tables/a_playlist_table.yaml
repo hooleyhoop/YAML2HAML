@@ -3,8 +3,16 @@
 __#main-content:
 
   yaml#1:
-    name: table_header
-    _page_title.text: Hello i am a Playlist
+    yaml_name: table_header
+    _page_title.text: Playlist Name
+    # overide some default table header properties
+    __#main_table_action.partial:
+      partial_name: _general_button
+      label: Edit  
+          
+    #stick in the actions
+    content_for#small_actions:
+      yaml_name: boo_list_actions
     
   # -- Boo List -- #
   __#table-content:

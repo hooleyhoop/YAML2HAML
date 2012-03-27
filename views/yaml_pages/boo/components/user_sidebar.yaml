@@ -11,12 +11,12 @@ __#side-bar:
 
   __#contents:  
     _list_renderer:
-      name: playlists
+      name: persons_stuff
       _text_link_cell:
       content: [
-        { title: 14 boos, link: /boos },
-        { title: 5 channels, link: /channels },
-        { title: 6 playlists, link: /playlists },
-        { title: 9 favourites, link: /favourites },
-        { title: 16 following, link: /following }      
+        { title: 14 boos,           link: /boos },
+        { title: 5 channels,        link: /channels },
+        { title: 6 playlists,       link: /playlists },
+        { title: 9 favourite boos,  link: /favourite_boos },
+        { title: 16 contacts,       link: /contacts }      
       ]

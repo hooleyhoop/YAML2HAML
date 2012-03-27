@@ -52,6 +52,10 @@ $page-width: $main-col-width + $side-bar-width + $side-bar-width;
 
 
 .table-header {
+  .main_table_action {
+    float: right;
+  }
+
   .media {
     float: left;
     img {
@@ -62,8 +66,15 @@ $page-width: $main-col-width + $side-bar-width + $side-bar-width;
   .details {
     overflow: auto;   // prevent wrapping under the image
   }
+  .actions {
+  }  
 }
-
+.table-header:after {
+  clear:both;display:block;visibility:hidden;
+  overflow:hidden;height:0 !important;
+  line-height:0;font-size:xx-large;content:" x x x ";
+}  
+  
 .row {
   border-top: 1px solid black;  
 }

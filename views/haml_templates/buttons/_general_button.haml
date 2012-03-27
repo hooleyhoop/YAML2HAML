@@ -1,0 +1,12 @@
+- follow_link = 'http://audioboo.fm/streams/3924/unfollow'
+- authenticity_token = 'TbAoyvZ+Nuc8xv67Qw+o2RZky5+yivcd6FR8jBQJoNk='
+- title = 'general button'
+- label = _['label', 'Press here']
+- hide = _['hide', 'no_thankyou']
+
+- if hide=='no_thankyou'
+  .general-button-wrapper
+    %form( accept-charset='UTF-8' action=follow_link data-remote='true' method='post' )
+      %input( name='utf8' type='hidden' value='✓' )
+      %input( name='authenticity_token' type='hidden' value=authenticity_token )
+      %input( class="iefix" name="commit" title=title type="submit" value=label )

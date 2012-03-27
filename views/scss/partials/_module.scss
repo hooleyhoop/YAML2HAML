@@ -1,0 +1,47 @@
+/* should not output code */
+
+$base-font-family: Helvetica, Arial, sans-serif !default;
+$fixed-font-family: monospace !default;
+
+// Primary mixin
+@mixin buttons {
+  a.button, button {
+    @include button(black, silver);
+    &.blue  { @include button(white, blue); }
+    &.red   { @include button(white, red); }
+    &.green { @include button(white, green); }
+  }
+}
+
+// Button mixin
+@mixin button($text-color, $bg-color) {
+  font: 12px bold sans-serif;
+  padding: 3px 8px;
+  @include color-button($text-color, $bg-color));
+  &:hover, &:focus { @include color-button($text-color, lighten($bg-color, 10%)); }
+  &:active { background: darken($bg-color, 5%); }
+}
+
+// Color button mixin
+@mixin color-button($text-color, $bg-color) {
+  color: $text-color;
+  border: 1px solid mix(black, $bg-color);
+  @include background-image(
+    linear-gradient(
+      lighten($bg-color, 5%),
+      darken($bg-color, 5%)
+    )
+  );
+}
+
+
+
+to use ..
+
+.content {
+  @include typography;
+  @include buttons;
+  @include lists;
+  @include forms;
+  ...
+}

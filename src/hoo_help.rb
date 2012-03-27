@@ -54,6 +54,7 @@ module Sinatra
         key_index2 = key_parts2[1]        
         
         template_name = key_first2.to_sym
+        #puts "YES #{key_first2}"
         child_renderer = HooRenderer.new( template_name )
         addSubRendererToParent( parent_renderer, child_renderer, key_index2, value )
 

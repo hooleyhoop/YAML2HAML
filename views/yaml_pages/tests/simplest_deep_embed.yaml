@@ -1,3 +1,4 @@
+# simplest_deep_embed
 # embed a yaml which in turn embeds a haml
 yaml: 
   yaml_name: simplest_embed_haml
@@ -8,5 +9,9 @@ yaml:
   # so, we are rendering _simplest_wrapper_for_embeded_content.hamlet
   # how do we inject some custom content
   
-  content_for#named_partial:
-    _lorem_ipsum:
+  # if we were able to insert arbitrary templates - it would only be at the end, right?
+  
+  partial#1:
+    partial_name: _lorem_ipsum#named_partial1
+  partial#2:
+    partial_name: _lorem_ipsum#named_partial2

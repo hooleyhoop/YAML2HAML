@@ -1,8 +1,8 @@
 # ------------- Playlists page ------------- #
 
 yaml#window: 
-  name: demo_window
-  title: hooleyhoop's Favourites
+  yaml_name: demo_window
+  title: hooleyhoop's Favourite Boos
   
   content_for#1:
 
@@ -10,7 +10,7 @@ yaml#window:
     _three_col_layout#1:
       # main column
       yaml#1:
-        name: small_user_details
+        yaml_name: small_user_details
                           
       # left column
       _nil#2:
@@ -23,8 +23,8 @@ yaml#window:
 
       # main column
       yaml#3:
-        name: playlists_table
-        _page_title.text: 9 Favourites
+        yaml_name: boo_table
+        _page_title.text: 9 Favourite Boos
 
       # left column
       _nil#2:
@@ -32,5 +32,5 @@ yaml#window:
       # right column
       _section_renderer#2:
         yaml#4:
-          name: user_sidebar
+          yaml_name: user_sidebar
           _facebook_tweet.hide: yes_please          

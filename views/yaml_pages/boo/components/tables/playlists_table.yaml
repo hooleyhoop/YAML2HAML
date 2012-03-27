@@ -3,11 +3,13 @@
 __#main-content:
 
   yaml#1:
-    name: table_header
+    yaml_name: table_header
+    # overide some default table header properties
+    _page_title.text: xx Playlists
+    __#main_table_action.partial:
+      partial_name: _general_button
+      label: + Playlist      
 
-    # -- how to insert here from another yaml? yield? is that good enough? isnt there an easier way with key paths?
-    _niltemplate:
-    
   # -- Playlists -- #
   __#table-content:
     _row_renderer:

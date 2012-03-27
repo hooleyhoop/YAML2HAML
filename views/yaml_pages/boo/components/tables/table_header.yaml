@@ -1,0 +1,28 @@
+# ------------- a table header ------------- #
+
+__#table-header:
+
+    # The order is reversed so that we can float them correctly
+  __#main_table_action:
+    partial:
+      partial_name: _nil
+        
+  __#media:
+    _img:
+      src: Unknown-avatar.gif
+      link: /profile
+        
+  __#details:
+    _page_title:
+      text: Steam Trains Playlist
+
+
+    # I just dont think this works - overiding properties
+    # happens after yaml expansion so you cant overide a yaml template name
+    #yaml#1:
+    #  yaml_name: empty    
+
+    $yield#small_actions:
+      
+      
+      

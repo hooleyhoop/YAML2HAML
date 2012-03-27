@@ -1,7 +1,7 @@
 # ------------- Playlists page ------------- #
 
 yaml#window: 
-  name: demo_window
+  yaml_name: demo_window
   title: hooleyhoop's Profile Page
   
   content_for#1:
@@ -10,7 +10,7 @@ yaml#window:
     _three_col_layout#1:
       # main column
       yaml#1:
-        name: small_user_details
+        yaml_name: small_user_details
                           
       # left column
       _nil#2:
@@ -23,7 +23,7 @@ yaml#window:
 
       # main column
       yaml#3:
-        name: playlists_table
+        yaml_name: playlists_table
         _page_title.text: hooleyhoop
 
       # left column
@@ -32,4 +32,4 @@ yaml#window:
       # right column
       _section_renderer#2:
         yaml#4:
-          name: user_sidebar
+          yaml_name: user_sidebar

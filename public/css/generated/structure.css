@@ -23,6 +23,8 @@
 .small-user-details .actions {
   float: right; }
 
+.table-header .main_table_action {
+  float: right; }
 .table-header .media {
   float: left; }
   .table-header .media img {
@@ -30,6 +32,16 @@
     height: 96px; }
 .table-header .details {
   overflow: auto; }
+
+.table-header:after {
+  clear: both;
+  display: block;
+  visibility: hidden;
+  overflow: hidden;
+  height: 0 !important;
+  line-height: 0;
+  font-size: xx-large;
+  content: " x x x "; }
 
 .row {
   border-top: 1px solid black; }
