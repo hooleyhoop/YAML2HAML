@@ -17,3 +17,9 @@ Do not use IDs in CSS at all.
 .dropdown-nav li:hover ul{ top:100%; }
 
  I also set margin-bottom in rems 
+ 
+ ALL CSS IN MODULES
+ -------------------
+ 
+ IMPORTING A MODULE DOESNT IMPORT ANY CODE
+ -----------------------------------------

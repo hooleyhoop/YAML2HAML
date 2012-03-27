@@ -20,10 +20,10 @@ __#main-content:
       name: Boos
       _boo_cell:
       content: [
-        { title: The Rocket - Euston, img_file: cat.jpg, date: 3 minutes ago, link: /detail },
-        { title: The John Bull - Crewe, img_file: steam-train.jpg, date: 2 days ago, link: /detail },
-        { title: The Tom Thumb - Chicago, img_file: otter.jpg, date: 1 week ago, link: /detail },
-        { title: The Pride of India - New Delhi, img_file: cat.jpg, date: 3 minutes ago, link: /detail },
-        { title: The Sanspareil - Paris, img_file: steam-train.jpg, date: 2 days ago, link: /detail },
-        { title: The Flying Scotsman - Manchester, img_file: otter.jpg, date: 1 week ago, link: /detail }        
+        { title: The Rocket - Euston,               img_file: cat.jpg,          last_updated: 3 minutes ago,  link: /detail },
+        { title: The John Bull - Crewe,             img_file: steam-train.jpg,  last_updated: 2 days ago,     link: /detail },
+        { title: The Tom Thumb - Chicago,           img_file: otter.jpg,        last_updated: 1 week ago,     link: /detail },
+        { title: The Pride of India - New Delhi,    img_file: cat.jpg,          last_updated: 3 minutes ago,  link: /detail },
+        { title: The Sanspareil - Paris,            img_file: steam-train.jpg,  last_updated: 2 days ago,     link: /detail },
+        { title: The Flying Scotsman - Manchester,  img_file: otter.jpg,        last_updated: 1 week ago,     link: /detail }        
       ]

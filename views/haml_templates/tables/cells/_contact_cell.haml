@@ -1,14 +1,18 @@
 - usrname ||= 'anonymous'
 
 %a.contact-cell( href="#{link}" )
-  .media
-    %img( src="#{ imageHelper( img_file ) }" )
-  %h3.usrname
-    = usrname
-  .last_updated
-    = last_updated
-  .content_count
-    %span
+
+  .content-count
+    %span.number
       6
-    %span      
+    %span.number-label
       boos
+
+  .row-media
+    %img( src="#{ imageHelper( img_file ) }" )
+
+  .row-text
+    %h3.contact-name
+      = usrname
+    .last-updated
+      = last_updated

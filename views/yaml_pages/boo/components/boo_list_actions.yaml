@@ -1,9 +1,10 @@
 # ------------- list actions ------------- #
 
 __#boolist-actions:
-  __#left:
-    _play_all_button:      
 
   __#right:
     _share_embed_button:
     _rss_itunes_button:
+
+  __#left:
+    _play_all_button:

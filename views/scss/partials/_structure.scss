@@ -1,0 +1,113 @@
+/* check out http://designmodo.com/demo/futuricohtmlfree/# */
+
+// Primary mixin
+@mixin structure {
+
+  $side-bar-width: 300px !default;
+  $main-col-width: 600px !default;
+  $page-width: $main-col-width + $side-bar-width + $side-bar-width !default;
+
+
+  /* Page layout */
+  
+  .page-main-fixed-panel {
+    //background-color:#ccc;
+    position: relative; 
+    width: $main-col-width;
+    min-height: 100px;
+    margin: 0 auto;
+  }
+  
+  .page-left-fixed-panel {
+    //background-color:#777;
+    position:absolute; 
+    right:100%;
+    top:0;
+    width: $side-bar-width;
+    min-height: 100px;
+  }
+  
+  .page-right-fixed-panel {
+    //background-color:#777;
+    position:absolute;
+    left:100%;
+    top:0;
+    width: $side-bar-width;
+    min-height: 100px;
+  }
+  
+
+  /* User details */
+  
+  .small-user-details {
+    .info {
+      @include bor;
+      overflow: auto;         
+    }  
+    .actions {
+      @include bor;  
+      float: right;   
+    }
+  }
+  
+
+  /* TABLE */
+  
+  .table-header {
+    .main_table_action {
+      float: right;
+    }
+
+    .media {
+      float: left;
+      img {
+        width: 96px;
+        height: 96px;
+      }
+    }
+    .details {
+      overflow: auto;   // prevent wrapping under the image
+    }
+    
+    .boolist-actions .left {
+      float: left;
+    }
+    .boolist-actions .right {
+      float: right;
+    }
+
+    .play-all-button-wrapper, .rss-itunes-button-wrapper, .share-embed-button-wrapper {
+      display: inline-block;
+    }
+    
+  }
+  .table-header:after {
+    clear:both;display:block;visibility:hidden;
+    overflow:hidden;height:0 !important;
+    line-height:0;font-size:xx-large;content:" x x x ";
+  }  
+    
+  .row {
+    border-top: 1px solid black;  
+  }
+  
+  .content-count {
+    float: right;
+  }
+  .row-media {
+    float: left;
+  }
+  .row-text {
+    overflow: auto;
+  }
+        
+
+
+    
+
+  
+}
+
+@mixin bor {
+  //border: 1px solid red;
+}

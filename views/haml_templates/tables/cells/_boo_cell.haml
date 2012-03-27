@@ -1,17 +1,20 @@
 - title ||= 'Untitled'
 
-%a.playlist-cell( href="#{link}" )
-  .media
+%a.boo-cell( href="#{link}" )
+
+  .row-media
     %img( src="#{ imageHelper( img_file ) }" )
-  .details
-    %h3.boo-title
+
+  .row-text
+    %h3.title
       = title
-    %p.boo-author
+    %p.boo-author      
+      %span.last-updated
+        = last_updated      
       %span.boo-usrname
         hooleyhoop
       %span.boo-ampersand        
         @
       %span.boo-containing-channel
         bbcradiofour
-    .date
-      = date
+

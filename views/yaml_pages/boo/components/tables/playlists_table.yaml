@@ -16,10 +16,10 @@ __#main-content:
       name: playlists
       _playlist_cell:
       content: [
-        { title: The Ten Best AudioBoos, last_updated: 21st March 2012, link: /a_playlist },
-        { title: Italy 2010, last_updated: 2nd Feb 2010, link: /a_playlist },
-        { title: Glasgow Comedy Festival, last_updated: just now…, link: /a_playlist },
-        { title: Fruit Loops, last_updated: 21st March 2012, link: /a_playlist },
-        { title: Difficult Questions, last_updated: 2nd Feb 2010, link: /a_playlist },
-        { title: Carry on Up The Sainsburys, last_updated: just now…, link: /a_playlist }        
+        { title: The Ten Best AudioBoos,      last_updated: 21st March 2012,  link: /a_playlist },
+        { title: Italy 2010,                  last_updated: 2nd Feb 2010,     link: /a_playlist },
+        { title: Glasgow Comedy Festival,     last_updated: just now…,        link: /a_playlist },
+        { title: Fruit Loops,                 last_updated: 21st March 2012,  link: /a_playlist },
+        { title: Difficult Questions,         last_updated: 2nd Feb 2010,     link: /a_playlist },
+        { title: Carry on Up The Sainsburys,  last_updated: just now…,        link: /a_playlist }        
       ]

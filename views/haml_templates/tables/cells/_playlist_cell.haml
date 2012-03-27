@@ -1,12 +1,15 @@
 - title ||= 'Untitled'
 
 %a.playlist-cell( href="#{link}" )
-  %h3.playlist-title
-    = title
-  .last_updated
-    = last_updated
-  .content_count
-    %span
+
+  .content-count
+    %span.number
       6
-    %span      
+    %span.number-label
       boos
+
+  .row-text
+    %h3.playlist-title
+      = title
+    .last-updated
+      = last_updated
