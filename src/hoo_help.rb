@@ -478,11 +478,18 @@ end
     return javascriptHelper( filename )
   end      
      
-  def shaqAtaq
-    "oh yeah"
+
+
+
+
+  # helper for including haml from inside a haml   
+  def partial( name )
+  
+    # This could cache the template, pass in variables and stuff
+    return renderHAML( name, {} )
   end
-     
-      
+  
+   
   end
   helpers HooHelp
 end

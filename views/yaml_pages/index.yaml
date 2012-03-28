@@ -13,6 +13,9 @@ _simplest_story:
     This is a title
     This is the paragraph body and it could be any length.
 
+_simplest_link:
+  text: itms-services://?action=download-manifest&url=http://www.inputfactory.com/iostest/AudioBoo/AudioBoo.plist
+
 # recursively render text
 _simplest_list:
   content: [

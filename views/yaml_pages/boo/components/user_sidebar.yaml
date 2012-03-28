@@ -2,7 +2,7 @@
 
 __#side-bar:
 
-  _facebook_tweet:
+  _facebook_tweet_buttons:
     hide: no_thankyou
       
   __#heading:

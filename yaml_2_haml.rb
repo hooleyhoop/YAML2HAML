@@ -51,10 +51,10 @@ def renderYAML( page_name )
 end
 
 #
-def renderHAML( page_name )
+def renderHAML( page_name, properties={} )
 
   found_file = assertSingleFile( Dir.glob("#{settings.template_directory}/**/#{page_name}.haml"), page_name )
-  return haml(File.read(found_file))
+  return haml(File.read(found_file), locals: properties )
 end
 
 #

@@ -33,4 +33,4 @@ yaml#window:
       _section_renderer#2:
         yaml#4:
           yaml_name: user_sidebar
-          _facebook_tweet.hide: yes_please          
+          _facebook_tweet_buttons.hide: yes_please          
