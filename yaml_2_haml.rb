@@ -20,12 +20,12 @@ configure :development do |config|
   set :template_directory, File.join( settings.views_directory, 'haml_templates' )
   set :page_directory, File.join( settings.views_directory, 'yaml_pages' )
 
-  set :css_directory, File.join( settings.public_folder, 'css' )
-  set :images_directory, File.join( settings.public_folder, 'images' )
-  set :javascript_directory, File.join( settings.public_folder, 'javascript' )
-
+  set :css_directory, File.join( settings.views_directory, 'css' )
   set :scss_directory, File.join( settings.views_directory, 'scss' )  
+  set :javascript_directory, File.join( settings.views_directory, 'javascript' )
   set :coffeescript_directory, File.join( settings.views_directory, 'coffeescript' )
+
+  set :images_directory, File.join( settings.public_folder, 'images' )
 end
 
 #
@@ -110,11 +110,26 @@ end
 #  send_file File.expand_path('index.html', settings.public)
 #end
 
+# render css
+get '/assets/css/:asset_name.css' do
+  css_name = params[:asset_name]
+  found_file = assertSingleFile( Dir.glob("#{settings.css_directory}/**/#{css_name}.css"), css_name )
+  return send_file found_file
+end
 
+# render javascript
+get '/assets/javascript/:asset_name.javascript' do
+  js_name = params[:asset_name]
+  found_file = assertSingleFile( Dir.glob("#{settings.javascript_directory}/**/#{js_name}.js"), js_name )
+  return send_file found_file
+end
+
+# render named template
 get '/:page_name.?/?' do
   renderPage( params[:page_name] )
 end
 
+# render index
 get '/' do
   renderPage( 'index' )
 end

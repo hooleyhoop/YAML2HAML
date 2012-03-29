@@ -1,0 +1,30 @@
+# ------------- detail page main panel ------------- #
+
+__#detail_page_main_panel:
+
+  _boo_detail_player:
+  _boo_detail_image:
+  
+  _body_text#description: 
+    text: Lately, I've found myself in a number of discussions about Technical Debt and how it applies to project development. Overall, I think it's a very powerful tool that -- when used wisely -- can be a great asset to any team. It seems to me that most of the people that I've been talking to really don't agree, and see Technical Debt as a plague that should be eliminated at first sight. So, I figured I'd share my opinions, and see what you think...
+    
+  _boo_detail_map:
+  
+  _body_text#location: 
+    text: 3 minutes ago @ Tower Bridge Road, Southwark, London
+    
+  _h2#comments:
+    text: 4 Comments
+    
+
+  #description:
+
+  # TAGS
+  # REPORT THIS BOO
+  # COMMENT NOTIFICATIONS
+  # LOVE THIS
+  # + PLAYLIST
+  # EMBED
+  # SHARE
+  # EMAIL
+  

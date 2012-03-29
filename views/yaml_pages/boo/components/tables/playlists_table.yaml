@@ -1,25 +1,15 @@
 # ------------- playlists table ------------- #
 
-__#main-content:
-
-  yaml#1:
-    yaml_name: table_header
-    # overide some default table header properties
-    _page_title.text: xx Playlists
-    __#main_table_action.partial:
-      partial_name: _general_button
-      label: + Playlist      
-
-  # -- Playlists -- #
-  __#table-content:
-    _row_renderer:
-      name: playlists
-      _playlist_cell:
-      content: [
-        { title: The Ten Best AudioBoos,      last_updated: 21st March 2012,  link: /a_playlist },
-        { title: Italy 2010,                  last_updated: 2nd Feb 2010,     link: /a_playlist },
-        { title: Glasgow Comedy Festival,     last_updated: just now…,        link: /a_playlist },
-        { title: Fruit Loops,                 last_updated: 21st March 2012,  link: /a_playlist },
-        { title: Difficult Questions,         last_updated: 2nd Feb 2010,     link: /a_playlist },
-        { title: Carry on Up The Sainsburys,  last_updated: just now…,        link: /a_playlist }        
-      ]
+# -- Playlists -- #
+__#playlists-content:
+  _row_renderer:
+    name: playlists
+    _playlist_cell:
+    content: [
+      { title: The Ten Best AudioBoos,      last_updated: 21st March 2012,  link: /a_playlist },
+      { title: Italy 2010,                  last_updated: 2nd Feb 2010,     link: /a_playlist },
+      { title: Glasgow Comedy Festival,     last_updated: just now…,        link: /a_playlist },
+      { title: Fruit Loops,                 last_updated: 21st March 2012,  link: /a_playlist },
+      { title: Difficult Questions,         last_updated: 2nd Feb 2010,     link: /a_playlist },
+      { title: Carry on Up The Sainsburys,  last_updated: just now…,        link: /a_playlist }        
+    ]

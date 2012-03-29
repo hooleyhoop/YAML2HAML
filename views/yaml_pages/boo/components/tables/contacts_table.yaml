@@ -1,22 +1,15 @@
-# ------------- playlists table ------------- #
+# ------------- contacts table ------------- #
 
-__#main-content:
-
-  yaml#1:
-    yaml_name: table_header
-    # overide some default table header properties
-    _page_title.text: xx Contacts
-
-  # -- Playlists -- #
-  __#table-content:
-    _row_renderer:
-      name: contacts
-      _contact_cell:
-      content: [
-        { usrname: dippydave,                   img_file: cat.jpg,          last_updated: 21st March 2012,  link: /profile },
-        { usrname: wizard,                      img_file: steam-train.jpg,  last_updated: 2nd Feb 2010,     link: /profile },
-        { usrname: documentallty,               img_file: otter.jpg,        last_updated: just now…,        link: /profile },
-        { usrname: stephen-fry,                 img_file: cat.jpg,          last_updated: 21st March 2012,  link: /profile },
-        { usrname: skattyadz,                   img_file: steam-train.jpg,  last_updated: 2nd Feb 2010,     link: /profile },
-        { usrname: greenwich-royal-observatory, img_file: otter.jpg,        last_updated: just now…,        link: /profile }        
-      ]
+# -- Contacts -- #
+__#contacts-content:
+  _row_renderer:
+    name: contacts
+    _contact_cell:
+    content: [
+      { usrname: dippydave,                   img_file: cat.jpg,          last_updated: 21st March 2012,  link: /profile },
+      { usrname: wizard,                      img_file: steam-train.jpg,  last_updated: 2nd Feb 2010,     link: /profile },
+      { usrname: documentallty,               img_file: otter.jpg,        last_updated: just now…,        link: /profile },
+      { usrname: stephen-fry,                 img_file: cat.jpg,          last_updated: 21st March 2012,  link: /profile },
+      { usrname: skattyadz,                   img_file: steam-train.jpg,  last_updated: 2nd Feb 2010,     link: /profile },
+      { usrname: greenwich-royal-observatory, img_file: otter.jpg,        last_updated: just now…,        link: /profile }        
+    ]

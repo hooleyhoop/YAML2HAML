@@ -9,8 +9,9 @@ yaml#window:
     # page header
     _three_col_layout#1:
       # main column 
-      yaml#1:
-        yaml_name: small_user_details
+      _small_user_details:
+        user_real_name: Steven Hooley
+        user_short_name: hooleyhoop
         
       # left column
       _nil#2:
@@ -18,13 +19,32 @@ yaml#window:
       # right column
       _nil#3:
       
-    # main page stuff
+    # main page HEADER
     _three_col_layout#2:
+
+      # main column
+      _section_renderer#main-column:
+        yaml#1:
+          yaml_name: table_header
+          # overide some default table header properties
+          _page_title.text: 6 Playlists
+          __#main_table_action.partial:
+            partial_name: _general_button
+            label: + Playlist      
+
+      # left column
+      _nil#2:
+
+      # right column
+      _nil#3:
+
+
+    # main page MAIN
+    _three_col_layout#3:
 
       # main column
       yaml#3:
         yaml_name: playlists_table        
-        _page_title.text: 6 Playlists
         
       # left column
       _nil#2:
@@ -33,4 +53,3 @@ yaml#window:
       _section_renderer#2:
         yaml#4:
           yaml_name: user_sidebar
-          _facebook_tweet_buttons.hide: yes_please

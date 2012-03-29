@@ -20,9 +20,9 @@
     top: 0;
     width: 300px;
     min-height: 100px; }
-  #page .small-user-details .info {
+  #page .small-user-details .info, #page .large-user-details .info {
     overflow: auto; }
-  #page .small-user-details .actions {
+  #page .small-user-details .actions, #page .large-user-details .actions {
     float: right; }
   #page .table-header .main_table_action {
     float: right; }
@@ -49,10 +49,18 @@
     font-size: xx-large;
     content: " x x x "; }
   #page .row {
+    position: relative;
     border-top: 1px solid black; }
+    #page .row .comments-count {
+      background: url("../images/glyphish-08-chat.png") no-repeat;
+      padding-left: 24px; }
   #page .content-count {
     float: right; }
   #page .row-media {
     float: left; }
   #page .row-text {
     overflow: auto; }
+  #page .extend-left {
+    position: absolute;
+    width: 100px;
+    left: -100px; }

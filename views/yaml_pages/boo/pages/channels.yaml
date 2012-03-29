@@ -9,8 +9,9 @@ yaml#window:
     # page header
     _three_col_layout#1:
       # main column
-      yaml#1:
-        yaml_name: small_user_details
+      _small_user_details:
+        user_real_name: Steven Hooley
+        user_short_name: hooleyhoop
                           
       # left column
       _nil#2:
@@ -22,9 +23,24 @@ yaml#window:
     _three_col_layout#2:
 
       # main column
+      yaml#1:
+        yaml_name: table_header
+        # overide some default table header properties
+        _page_title.text: 5 Channels
+
+      # left column
+      _nil#2:
+
+      # right column
+      _nil#3:
+
+
+    # main page stuff
+    _three_col_layout#3:
+
+      # main column
       yaml#3:
         yaml_name: channels_table
-        _page_title.text: 5 Channels
 
       # left column
       _nil#2:
@@ -33,4 +49,3 @@ yaml#window:
       _section_renderer#2:
         yaml#4:
           yaml_name: user_sidebar
-          _facebook_tweet_buttons.hide: yes_please

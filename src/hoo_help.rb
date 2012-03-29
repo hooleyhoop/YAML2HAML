@@ -418,16 +418,14 @@ end
     absolute_file_path = File.join( '/',  relative_path )
   end
 
-  #
-  def cssHelper( filename )
-    found_file = assertSingleFile( Dir.glob("#{settings.css_directory}/**/#{filename}.css"), filename )
-    absolutePathFromPublicFolder( found_file )
+  # /css/third_party/base.css
+  def cssHelper( filename )    
+    return "/assets/css/#{filename}.css"
   end
   
   #
   def javascriptHelper( filename )
-    found_file = assertSingleFile( Dir.glob("#{settings.javascript_directory}/**/#{filename}.js"), filename )
-    absolutePathFromPublicFolder( found_file )
+    return "/assets/javascript/#{filename}.javascript"
   end
 
   #
@@ -483,10 +481,10 @@ end
 
 
   # helper for including haml from inside a haml   
-  def partial( name )
+  def partial( name, locals={} )
   
     # This could cache the template, pass in variables and stuff
-    return renderHAML( name, {} )
+    return renderHAML( name, locals )
   end
   
    

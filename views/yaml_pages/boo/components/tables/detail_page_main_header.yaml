@@ -1,0 +1,7 @@
+# ------------- detail page main header ------------- #
+
+__#detail_page_main_header:
+
+  yaml#1:
+    yaml_name: table_header
+    _page_title.text: Untitled Boo

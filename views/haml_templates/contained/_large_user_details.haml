@@ -1,0 +1,26 @@
+-# ------------- usr details section ------------- #
+
+- user_real_name = _['user_real_name','Anon']
+- user_short_name = _['user_short_name','anon']
+- user_description = _['user_description','I will enter a description later.']
+- img_file = 'Unknown-avatar.gif'
+
+.large-user-details
+  -# The order is reversed so that we can float them correctly
+  .actions
+    = partial( :_follow_button, { _: _} )
+
+  .row-media
+    %img( src="#{ imageHelper( img_file ) }" )
+  
+  .info
+    %h1.user-real-name
+      = user_real_name
+      
+    .user-short-name
+      = user_real_name
+
+    .user-description
+      - user_description.each_line do |line|
+        %p
+          = line

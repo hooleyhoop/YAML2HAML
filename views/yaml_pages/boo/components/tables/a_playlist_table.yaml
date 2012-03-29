@@ -1,29 +1,15 @@
 # ------------- a playlist table ------------- #
-
-__#main-content:
-
-  yaml#1:
-    yaml_name: table_header
-    _page_title.text: Playlist Name
-    # overide some default table header properties
-    __#main_table_action.partial:
-      partial_name: _general_button
-      label: Edit  
-          
-    #stick in the actions
-    content_for#small_actions:
-      yaml_name: boo_list_actions
     
-  # -- Boo List -- #
-  __#table-content:
-    _row_renderer:
-      name: Boos
-      _boo_cell:
-      content: [
-        { title: The Rocket - Euston,               img_file: cat.jpg,          last_updated: 3 minutes ago,  link: /detail },
-        { title: The John Bull - Crewe,             img_file: steam-train.jpg,  last_updated: 2 days ago,     link: /detail },
-        { title: The Tom Thumb - Chicago,           img_file: otter.jpg,        last_updated: 1 week ago,     link: /detail },
-        { title: The Pride of India - New Delhi,    img_file: cat.jpg,          last_updated: 3 minutes ago,  link: /detail },
-        { title: The Sanspareil - Paris,            img_file: steam-train.jpg,  last_updated: 2 days ago,     link: /detail },
-        { title: The Flying Scotsman - Manchester,  img_file: otter.jpg,        last_updated: 1 week ago,     link: /detail }        
-      ]
+# -- Boo List -- #
+__#table-content:
+  _row_renderer:
+    name: Boos
+    _draggable_boo_cell:
+    content: [
+      { title: The Rocket - Euston,               img_file: cat.jpg,          last_updated: 3 minutes ago,  link: /detail },
+      { title: The John Bull - Crewe,             img_file: steam-train.jpg,  last_updated: 2 days ago,     link: /detail },
+      { title: The Tom Thumb - Chicago,           img_file: otter.jpg,        last_updated: 1 week ago,     link: /detail },
+      { title: The Pride of India - New Delhi,    img_file: cat.jpg,          last_updated: 3 minutes ago,  link: /detail },
+      { title: The Sanspareil - Paris,            img_file: steam-train.jpg,  last_updated: 2 days ago,     link: /detail },
+      { title: The Flying Scotsman - Manchester,  img_file: otter.jpg,        last_updated: 1 week ago,     link: /detail }        
+    ]

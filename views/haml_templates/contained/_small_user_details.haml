@@ -1,0 +1,16 @@
+-# ------------- usr details section ------------- #
+
+- user_real_name = _['user_real_name','Anon']
+- user_short_name = _['user_short_name','anon']
+
+.small-user-details
+  -# The order is reversed so that we can float them correctly
+  .actions
+    = partial( :_follow_button, { _: _} )
+
+  %a.info( href='/profile')
+    %h2.user-real-name
+      = user_real_name
+      
+    .user-short-name      
+      = user_short_name

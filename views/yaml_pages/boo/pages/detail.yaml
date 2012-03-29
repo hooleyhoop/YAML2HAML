@@ -9,22 +9,44 @@ yaml#window:
     # page header
     _three_col_layout#1:
       # main column
-      yaml#1:
-        yaml_name: small_user_details
+      _small_user_details:
+        user_real_name: Steven Hooley
+        user_short_name: hooleyhoop
                           
       # left column
       _nil#2:
       
       # right column
       _nil#3:
+
       
     # main page stuff
     _three_col_layout#2:
 
       # main column
       yaml#3:
-        yaml_name: playlists_table
+        yaml_name: detail_page_main_header
         _page_title.text: Caller Graham says why should Stephen turn down a salary that a company want to pay him?
+
+      # left column
+      _nil#2:
+
+      # right column
+      #_section_renderer#2:
+      #  yaml#4:
+      #    yaml_name: user_sidebar
+          
+      _section_renderer#2:
+        _facebook_tweet_buttons:
+          hide: no_thankyou          
+          
+          
+    # main page stuff
+    _three_col_layout#3:
+
+      # main column
+      yaml#3:
+        yaml_name: detail_page_main_panel
 
       # left column
       _nil#2:
@@ -33,3 +55,4 @@ yaml#window:
       _section_renderer#2:
         yaml#4:
           yaml_name: user_sidebar
+            

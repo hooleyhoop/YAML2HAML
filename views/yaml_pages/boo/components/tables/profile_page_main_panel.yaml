@@ -1,0 +1,60 @@
+# ------------- profile_page_content ------------- #
+
+_section_renderer#profile_page_content:
+
+  # Channels
+  _h2#recent-channels:
+    text: Recent Channel Activity
+    link: /channels
+
+  yaml#recent_channels:
+    yaml_name: channels_table
+    content: [
+      { title: Glastonbury Radio,           img_file: cat.jpg,  last_updated: 21st March 2012,  link: /a_channel },
+      { title: Italy 2010,                  img_file: cat.jpg,  last_updated: 2nd Feb 2010,     link: /a_channel },
+      { title: Glasgow Comedy Festival,     img_file: cat.jpg,  last_updated: just now…,        link: /a_channel }       
+    ]
+  
+  # Playlists
+  
+  _h2#recent-playlists:
+    text: Recent Playlist Activity
+    link: /playlists
+    
+  yaml#recent_playlists:
+    yaml_name: playlists_table
+    content: [
+      { title: The Ten Best AudioBoos,      last_updated: 21st March 2012,  link: /a_playlist },
+      { title: Italy 2010,                  last_updated: 2nd Feb 2010,     link: /a_playlist },
+      { title: Glasgow Comedy Festival,     last_updated: just now…,        link: /a_playlist }      
+    ]    
+
+
+  # Boos
+
+  _h2#recent-boos:
+    text: Recent Boos Activity
+    link: /boos
+    
+  yaml#recent_boos:
+    yaml_name: boo_table
+    content: [
+      { title: The Rocket - Euston,               img_file: cat.jpg, date: 3 minutes ago,       last_updated: 1 day ago,  link: /detail },
+      { title: The John Bull - Crewe,             img_file: steam-train.jpg, date: 2 days ago,  last_updated: 1 day ago,  link: /detail },
+      { title: The Tom Thumb - Chicago,           img_file: otter.jpg, date: 1 week ago,        last_updated: 1 day ago,  link: /detail }
+    ]
+
+
+  # Contacts
+  
+  _h2#recent-contacts:
+    text: Recent Contacts Activity
+    link: /boos
+
+  yaml#recent_contacts:
+    yaml_name: contacts_table
+    content: [
+      { usrname: dippydave,                   img_file: cat.jpg,          last_updated: 21st March 2012,  link: /profile },
+      { usrname: wizard,                      img_file: steam-train.jpg,  last_updated: 2nd Feb 2010,     link: /profile },
+      { usrname: documentallty,               img_file: otter.jpg,        last_updated: just now…,        link: /profile }  
+    ]

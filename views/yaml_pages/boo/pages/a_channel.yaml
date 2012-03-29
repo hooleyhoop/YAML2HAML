@@ -2,7 +2,7 @@
 
 yaml#window: 
   yaml_name: demo_window
-  title: Steam Trains Playlist
+  title: Radio Four
   
   content_for#1:
   
@@ -25,7 +25,7 @@ yaml#window:
       # main column
       yaml#1:
         yaml_name: table_header
-        _page_title.text: Steam Trains Playlist
+        _page_title.text: Steam Trains Channel
         # overide some default table header properties
         __#main_table_action.partial:
           partial_name: _general_button
@@ -39,10 +39,9 @@ yaml#window:
       _nil#2:
 
       # right column
-      _section_renderer#2:
-        _facebook_tweet_buttons:
-          hide: no_thankyou
-          
+      _nil#3:
+
+
     # main page stuff
     _three_col_layout#3:
     
@@ -56,5 +55,4 @@ yaml#window:
       # right column
       _section_renderer#2:
         yaml#4:
-          yaml_name: user_sidebar          
-
+          yaml_name: user_sidebar

@@ -1,9 +1,6 @@
 # ------------- usr sidebar ------------- #
 
 __#side-bar:
-
-  _facebook_tweet_buttons:
-    hide: no_thankyou
       
   __#heading:
     _body_text:

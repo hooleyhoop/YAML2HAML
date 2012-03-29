@@ -1,5 +1,6 @@
 /* check out http://designmodo.com/demo/futuricohtmlfree/# */
 
+
 // Primary mixin
 @mixin structure {
 
@@ -39,13 +40,11 @@
 
   /* User details */
   
-  .small-user-details {
+  .small-user-details, .large-user-details {
     .info {
-      @include bor;
       overflow: auto;         
     }  
     .actions {
-      @include bor;  
       float: right;   
     }
   }
@@ -88,7 +87,13 @@
   }  
     
   .row {
-    border-top: 1px solid black;  
+    position: relative;
+    border-top: 1px solid black;
+    
+    .comments-count {
+      background: url('../images/glyphish-08-chat.png') no-repeat;
+      padding-left: 24px;
+    }
   }
   
   .content-count {
@@ -100,7 +105,11 @@
   .row-text {
     overflow: auto;
   }
-        
+  .extend-left {
+    position: absolute;
+    width: 100px;
+    left: -100px;
+  }
 
 
     
@@ -109,5 +118,5 @@
 }
 
 @mixin bor {
-  //border: 1px solid red;
+  border: 1px solid red;
 }
