@@ -2,9 +2,10 @@
 - if(!defined?(_))
   - title = 'This is the title'
   - description = 'This is the description and it can easily go onto two or more lines but it could well be less than one line or even empty'
-  - img_file = 'sample_detail_img.jpg'
+  - img_file = 'placeholder_img.jpg'
 - else
-  - title = _[:title]
+  - title = _[:title].nil? ? 'untitled' : _[:title]
+
   - description = _[:description]
   - img_file = _[:img_file]
   
