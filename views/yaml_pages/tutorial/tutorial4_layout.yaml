@@ -1,0 +1,15 @@
+# tutorial 4
+# content in layout
+_lovely_2col_layout:
+  _lovely_panel#main_column:
+    _lovely_media_element:
+      title: this is some dynamic content
+      description: lovely!
+      img_file: sample_detail_map.jpg
+
+  _lovely_panel#sidebar:
+    _lovely_media_element:
+      title: sidebar
+      description: lovely!
+      img_file: otter.jpg
+

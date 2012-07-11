@@ -1,0 +1,54 @@
+.lovely-2col-layout
+
+  - if( !defined?(_) || _.indexed_subrenderers.count==0 )
+    .main-content.placeholder
+      %p
+        placeholder content
+    .sidebar.placeholder
+      %p
+        placeholder content
+
+  - else
+    .main-content
+      = _.insert 'main_column'
+    .sidebar
+      = _.insert 'sidebar'
+    
+:css
+  * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+  .lovely-2col-layout .main-content {
+    width:65%;
+    float: left;
+  }
+  .lovely-2col-layout .main-content .placeholder {
+    background-color: rgba(0,0,255,0.2);  
+  }
+  .lovely-2col-layout .sidebar .placeholder {
+    background-color: rgba(0,255,0,0.2);  
+  }
+
+  .lovely-2col-layout .sidebar {
+    width:35%;
+    float: left;
+  }
+  @media all and (max-width: 480px){
+    .lovely-2col-layout .main-content {
+      width: 100%;
+    }
+    .lovely-2col-layout .sidebar {
+      width: 100%;
+    }    
+  }
+  @media all and (min-width: 481px){
+    .lovely-2col-layout .main-content {
+      width: 65%;
+      float: left;
+    }
+    .lovely-2col-layout .sidebar {
+      width: 35%;
+      float: left;
+      padding-left: 1em;
+    }
+  }
+  
