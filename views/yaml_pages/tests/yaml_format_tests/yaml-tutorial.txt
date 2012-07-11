@@ -10,6 +10,8 @@ _heading:
 _text:
 _text:
 
+see? duplicate aint going to work, is it?
+
 we could do this.. we have a top level array containg 3 strings
 
 - _heading

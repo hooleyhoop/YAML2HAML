@@ -1,32 +1,34 @@
 (function() {
   "use strict";
-  var moduleKeywords, namespace;
-  var __slice = Array.prototype.slice, __indexOf = Array.prototype.indexOf || function(item) {
-    for (var i = 0, l = this.length; i < l; i++) {
-      if (this[i] === item) return i;
-    }
-    return -1;
-  };
+
+  var moduleKeywords, namespace,
+    __slice = [].slice,
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+
   namespace = (function(target, name, block) {
-    var item, top, _i, _len, _ref, _ref2;
+    var item, top, _i, _len, _ref, _ref1;
     if (arguments.length < 3) {
       _ref = [(typeof exports !== 'undefined' ? exports : window)].concat(__slice.call(arguments)), target = _ref[0], name = _ref[1], block = _ref[2];
     }
     top = target;
-    _ref2 = name.split('.');
-    for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
-      item = _ref2[_i];
+    _ref1 = name.split('.');
+    for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+      item = _ref1[_i];
       target = target[item] || (target[item] = {});
     }
     return block(target, top);
   });
+
   namespace('ABoo', (function(exports) {
     return exports.main = function() {
       return console.log("starting up..");
     };
   }));
+
   moduleKeywords = ['extended', 'included'];
+
   ABoo.Module = (function() {
+
     Module.extend = function(obj) {
       var key, value, _ref;
       for (key in obj) {
@@ -40,6 +42,7 @@
       }
       return this;
     };
+
     Module.include = function(obj) {
       var key, value, _ref;
       for (key in obj) {
@@ -53,6 +56,7 @@
       }
       return this;
     };
+
     function Module(opts) {
       var k, v;
       if (opts == null) {
@@ -65,8 +69,12 @@
       } else {
         console.error( "wtf? " + k);
       };
+
       }
     }
+
     return Module;
+
   })();
+
 }).call(this);

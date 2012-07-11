@@ -1,0 +1,5 @@
+# simple template inclusion
+_lovely_media_element:
+  title: this is some dynamic content
+  description: lovely!
+  img_file: sample_detail_map.jpg

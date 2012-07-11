@@ -1,3 +1,13 @@
+
+• to render yaml http://0.0.0.0:4567/simplest_layout.yaml or http://0.0.0.0:4567/simplest_layout
+• hmmm, many haml pages wont render without help - is this right?
+• http://0.0.0.0:4567/_second_partial.haml
+• haml files begin with underscore
+
+Refresher course
+-----------------------------------------------------------------------------------------
+
+
 @template window1
 
 	@css wha/nona/formstuff1

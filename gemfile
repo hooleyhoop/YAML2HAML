@@ -1,8 +1,12 @@
 source :rubygems
+
 gem 'sinatra', :git => 'git://github.com/sinatra/sinatra.git'
-gem 'haml'
-gem 'sass'
-gem 'sinatra-reloader'
-gem 'thin'
+gem 'sinatra-contrib', :git => 'git://github.com/sinatra/sinatra-contrib.git'
+gem 'haml',	"3.1.6"
+gem 'sass', "3.1.20"
 gem 'coffee-script'
+gem 'thin', "1.4.1"
+
 # gem 'emk-sinatra-url-for'
+# gem 'sinatra-reloader', "1.0"
+

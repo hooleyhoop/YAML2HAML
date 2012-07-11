@@ -1,8 +1,9 @@
-require 'rubygems'
 require 'bundler/setup'
-require 'sinatra'
-require 'psych'
-require 'pp'
+Bundler.require(:default)
+#require 'sinatra'
+#require 'yaml'
+#require 'pp'
+require "sinatra/reloader" if development?
 
 require_relative 'src/hoo_renderer'
 require_relative 'src/hoo_help'

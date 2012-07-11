@@ -1,0 +1,16 @@
+-# ------------- add a comment ------------- #
+
+- img_file = 'otter.jpg'
+
+%h3
+  Add New Comment
+
+%p
+  Login | Signup to comment
+  
+.row-media
+  %img( src="#{ imageHelper( img_file ) }" )
+    
+%form( accept-charset="UTF-8" method="post" )
+  %textarea( cols="40" id="text_comment_body" name="text_comment[body]" rows="20" )
+  %input( name="commit" type="submit" value="Post Comment" )

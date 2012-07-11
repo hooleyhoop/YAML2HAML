@@ -5,20 +5,50 @@ __#detail_page_main_panel:
   _boo_detail_player:
   _boo_detail_image:
   
-  _body_text#description: 
-    text: Lately, I've found myself in a number of discussions about Technical Debt and how it applies to project development. Overall, I think it's a very powerful tool that -- when used wisely -- can be a great asset to any team. It seems to me that most of the people that I've been talking to really don't agree, and see Technical Debt as a plague that should be eliminated at first sight. So, I figured I'd share my opinions, and see what you think...
-    
   _boo_detail_map:
   
+  _body_text#description: 
+    text: Lately, I've found myself in a number of discussions about Technical Debt and how it applies to project development. Overall, I think it's a very powerful tool that -- when used wisely -- can be a great asset to any team. It seems to me that most of the people that I've been talking to really don't agree, and see Technical Debt as a plague that should be eliminated at first sight. So, I figured I'd share my opinions, and see what you think...
+      
   _body_text#location: 
     text: 3 minutes ago @ Tower Bridge Road, Southwark, London
     
   _h2#comments:
     text: 4 Comments
     
+  # -- Comments List -- #
+  
+  # sort comments by newest, oldest ? likes? 
+  __#comments-content:
+    _row_renderer:
+      name: Comments
+      _comment_cell:
+      content: [
+        { comment_text: 'This whole thing was great.' ,
+          img_file: cat.jpg, date: 3 minutes ago,       last_updated: 1 day ago,  user_name: HaFree , link: /detail },
+        
+        { comment_text: "These little features are perfect for those little spots in my day where I just don't need a video to distract my attentions, yet I can still appreciate my role-model's fine work. Thanks Phil and Linz!" ,
+          img_file: steam-train.jpg, date: 2 days ago,  last_updated: 1 day ago,  user_name: RoundRed, link: /detail },
+        
+        { comment_text: ".....I. Loved. This. X) I listened to the entire thing and I don't feel exhausted or overloaded, just...refreshed. Thank you, Phil. And thanks, Linz!" ,
+          img_file: otter.jpg, date: 1 week ago,        last_updated: 1 day ago,  user_name: StupidLogin, link: /detail },
+        
+        { comment_text: "ahhhh phillyd cradle robber lol. and linz your strong for the nation is sexy stuff though my gf has told me she would kill me lol. and phil harley quinn from batman arkham asylum, i agree :P hahaha cunt it a great word, and it doesn't always have to have a terrible meaning, just one of those words like fuck sometimes you need to say it. you guys are an amazing couple. love this podcast hope to hear more from you guys. ",
+          img_file: cat.jpg, date: 3 minutes ago,       last_updated: 1 day ago,  user_name: D_Mikos, link: /detail },
+        
+        { comment_text: "now imaging the thong song by him while doing it.....thong tho tho tho thong:P",
+          img_file: steam-train.jpg, date: 2 days ago,  last_updated: 1 day ago,  user_name: irishcartman, link: /detail },
+        
+        { comment_text: "|
+            loving this phil, photo bombing at its best by the hothothothot. 
+            phil im from ireland, would u take me as a intern :P",
+          img_file: otter.jpg, date: 1 week ago,        last_updated: 1 day ago,  user_name: scnellstp, link: /detail }        
+      ]
+  
 
-  #description:
-
+  # -- Comments form -- #
+  _add_comment_form:
+  
   # TAGS
   # REPORT THIS BOO
   # COMMENT NOTIFICATIONS

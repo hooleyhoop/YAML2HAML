@@ -1,5 +1,8 @@
 /* check out http://designmodo.com/demo/futuricohtmlfree/# */
 
+// 1 line Grid framework
+.dp50 {width:50%;  float:left;  display: inline;  *margin-right:-1px; }
+
 
 // Primary mixin
 @mixin structure {

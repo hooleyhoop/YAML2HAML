@@ -1,0 +1,26 @@
+
+.comment-cell
+
+  .row-media
+    %img( src="#{ imageHelper( img_file ) }" )
+    
+  .row-text
+    %p.boo-author  
+      %span.boo-usrname
+        %a( href="#{link}" )
+          hooleyhoop  
+      %span.boo-comma        
+        , 
+      %span.last-updated
+        = last_updated      
+      
+    .comment-text
+      - comment_text.each_line do |line|
+        %p
+          =line     
+
+
+-# Threaded comments and like'd comments? anyone?
+-# in reply to...
+-# Like
+-# Reply

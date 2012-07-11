@@ -1,2 +1,7 @@
+-# - if (local_variables-[:_hamlout, :_erbout, :__in_erb_template, :_haml_locals, :scope, :locals, :block, :source, :offset]).empty?
+-#  = "no arguments!!!!!"
+-# Object.new.tap{|o| class<<o; def method_missing(*args); 'hi'; end; end }
+- _ ||= { title:'placeholder string'}
+
 %p
-  = _[:title, 'unknown title']
+  = _[:title]

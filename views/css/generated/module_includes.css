@@ -1,4 +1,10 @@
 /* check out http://designmodo.com/demo/futuricohtmlfree/# */
+.dp50 {
+  width: 50%;
+  float: left;
+  display: inline;
+  *margin-right: -1px; }
+
 #page {
   /* Page layout */
   /* User details */

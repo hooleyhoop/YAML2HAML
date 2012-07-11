@@ -1,0 +1,33 @@
+.lovely-panel
+
+  - if(!defined?(_))
+    .placeholder
+      %p
+        placeholder content
+  - else
+    %p
+      = _[:title].nil? ? 'anonymous boo' : _[:title]
+
+:css
+  .lovely-panel {
+    padding: 1em;
+    border-radius: 9px; 
+    -moz-border-radius: 9px; 
+    -webkit-border-radius: 9px; 
+    border: 1px solid #456;
+    -webkit-box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.1);
+    background: #7db9e8; /* Old browsers */
+    background: -moz-linear-gradient(top,  #7db9e8 0%, #1e5799 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#7db9e8), color-stop(100%,#1e5799)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #7db9e8 0%,#1e5799 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #7db9e8 0%,#1e5799 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #7db9e8 0%,#1e5799 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #7db9e8 0%,#1e5799 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#1e5799',GradientType=0 ); /* IE6-9 */        
+  }
+  
+  .lovely-panel .placeholder {
+    color: #fff;
+    text-align: center;    
+  }

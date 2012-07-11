@@ -1,0 +1,68 @@
+
+- if(!defined?(_))
+  - title = 'This is the title'
+  - description = 'This is the description and it can easily go onto two or more lines but it could well be less than one line or even empty'
+  - img_file = 'sample_detail_img.jpg'
+- else
+  - title = _[:title]
+  - description = _[:description]
+  - img_file = _[:img_file]
+  
+.lovely-media-element
+  .media-container
+    %img( src="#{ imageHelper( img_file ) }" )
+  .meta-data-container
+    %h2
+      = title
+    %p 
+      = description
+
+:css
+  * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+  .lovely-media-element {
+    border: 1px solid rgba(0,0,0,0.1);
+    padding: 0.5em;
+  }
+  .lovely-media-element .media-container {
+    background-color: #ccc;      
+  }
+  .lovely-media-element .media-container img {
+    width: 100%;
+    display: block;
+  }
+  .lovely-media-element .meta-data-container {
+    overflow: auto;
+    padding: 1em 1em 0 1em;
+  }
+  
+  @media all and (max-width: 480px){
+    .lovely-media-element .media-container {
+      width: 100%;
+    }
+    .lovely-media-element .meta-data-container {
+      width: 100%;
+    }
+  }
+
+  @media all and (min-width: 481px){
+    .lovely-media-element .media-container {
+      float: left;
+      width: 50%;      
+    }
+    .lovely-media-element .meta-data-container {
+      float: left;
+      width: 50%;
+    }    
+  }
+  .lovely-media-element:before,
+  .lovely-media-element:after {
+      content: " ";
+      display: table;
+  }
+  .lovely-media-element:after {
+      clear: both;
+  }
+  .lovely-media-element {
+      *zoom: 1;
+  }  
