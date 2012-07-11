@@ -5,8 +5,8 @@
       %p
         placeholder content
   - else
-    %p
-      = _[:title].nil? ? 'anonymous boo' : _[:title]
+    - _.indexed_subrenderers.each_with_index do |subrenderer, i|
+      = _.insert(i)
 
 :css
   .lovely-panel {
