@@ -1,6 +1,6 @@
 .lovely-panel
 
-  - if(!defined?(_))
+  - if( !defined?(_) || _.indexed_subrenderers.count==0 )
     .placeholder
       %p
         placeholder content
