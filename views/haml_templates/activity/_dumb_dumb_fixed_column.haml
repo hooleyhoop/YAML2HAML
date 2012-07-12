@@ -1,0 +1,19 @@
+.dumb-dumb-fixed-column.haml
+  - if( !defined?(_) || _.indexed_subrenderers.count==0 )
+    .placeholder
+      %p
+        placeholder content
+  - else
+    - _.indexed_subrenderers.each_with_index do |subrenderer, i|
+      = _.insert(i)
+
+      
+:css
+  body {
+    background-color: grey!important;
+  }
+  .dumb-dumb-fixed-column {
+    margin: 0 auto;
+    width: 605px;
+    background-color: white;
+  }

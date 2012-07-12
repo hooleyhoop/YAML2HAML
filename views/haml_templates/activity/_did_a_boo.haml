@@ -1,0 +1,67 @@
+
+- img_file = 'placeholder_img.jpg'
+- title = 'Lennox the dog was killed by Belfast City Council today after a two year legal battle. Victoria Stillwell gave me her reaction'
+- description = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor'
+- likes = 'KimDee57, macmarlen, Kilsally'
+- comment1 = 'utterly disgraceful action by Belfast City council when there were other option including giving him to the Dog Whisper who had offered to take him and pay all expenses. Spiteful action by BCC trying to bury the news today and hope it blows over by the time the Twelfth holidays are over.'
+
+.did-a-boo
+  %img( src="#{ imageHelper( img_file ) }" )
+  .player
+    .play-button-wrapper
+      %img.play-button( src="#{ imageHelper( 'play_button2.png' ) }" )
+    .progress-wrapper
+      .progress
+  %h3.title
+    = title
+  %p.description
+    = description
+  %p.likes
+    = likes
+  %p.comment
+    = comment1
+
+:css
+  .did-a-boo img {
+    width: 100%;
+  }
+  .did-a-boo .player {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background-color: grey;
+  }
+  .did-a-boo .play-button-wrapper {
+    position: absolute;
+    right: 100%;
+    width: 100px;
+    height: 60px;
+  }
+  .did-a-boo .play-button {
+    width: 60px;
+    margin: auto;
+  }
+  .did-a-boo .progress-wrapper {
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+  }
+  .did-a-boo .progress {
+    width: 33%;
+    height: 100%;
+    background-color: cyan;
+  }
+  .did-a-boo .likes, .did-a-boo .comment {
+    position: relative;
+  }
+  .did-a-boo .likes:before, .did-a-boo .comment:before {
+    position: absolute;
+    right: 100%;
+    padding-right: 0.5em;    
+  }
+  .did-a-boo .likes::before {
+    content: "\263A";
+  }
+  .did-a-boo .comment::before {  
+    content: "\275D";
+  }  

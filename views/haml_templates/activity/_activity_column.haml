@@ -1,0 +1,20 @@
+.activity-column
+  - if( !defined?(_) || _.indexed_subrenderers.count==0 )
+    .placeholder
+      %p
+        placeholder content
+  - else
+    %dl.activity-list
+      - _.indexed_subrenderers.each_with_index do |subrenderer, i|
+        %dt.activity-list-item
+          = _.insert(i)
+        %dt.activity-list-item-spacer
+      
+:css
+  .activity-column {
+    width: auto;
+  }
+  .activity-column .activity-list-item-spacer {
+    height: 15px;
+    background-color: grey;
+  }

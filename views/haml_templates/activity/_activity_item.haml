@@ -1,0 +1,53 @@
+.activity-item.triangle-isosceles
+
+  - activity_content = capture_haml do 
+    - if( !defined?(_) || _.indexed_subrenderers.count==0 )
+      .placeholder
+        %p
+          placeholder content
+    - else
+      - _.indexed_subrenderers.each_with_index do |subrenderer, i|
+        = _.insert(i)
+        
+  %h4
+    Tim Ring uploaded a boo
+  %p
+    18th August
+  .activity-content-wrapper
+    = activity_content
+
+      
+:css
+  .activity-item {
+    position: relative;
+  }
+  .activity-item .activity-content-wrapper {
+    padding: 0 100px;
+  }
+  .activity-item h4 {
+    position: relative;
+  }
+  .activity-item h4::before {
+    position: absolute;
+    right: 100%;
+    content: "";
+    width: 32px;
+    height: 32px;
+    margin-right: 1em;
+    background-image: url(/images/Unknown-avatar.gif);
+    background-size: 32px 32px;    
+  }
+  
+  /* creates triangle */
+  .triangle-isosceles:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 100%;
+    border-style:solid;
+      /* reduce the damage in FF3.0 */
+      display:block; 
+      width:0;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #fff;      
+  }  

@@ -1,0 +1,13 @@
+_simplest_window:
+  title: temp tests
+  css: [base]
+  scss: [module_includes]
+  
+  _dumb_dumb_fixed_column:
+    _activity_column:
+      _activity_item#1:
+        _did_a_boo:
+      _activity_item#2:
+        _did_a_boo:
+      _activity_item#3:
+        _did_a_boo:            
