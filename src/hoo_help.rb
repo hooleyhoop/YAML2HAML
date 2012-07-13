@@ -408,11 +408,11 @@ end
     raise "cant find file #{filename}" if !isFile
     return absolute_path
   end
-  
+
   # --------------------------------------------------------------------------------------
   # VIEW HELPERS
   # --------------------------------------------------------------------------------------
-  
+
   def absolutePathFromPublicFolder( file_path )
     relative_path = Pathname.new( file_path ).relative_path_from( Pathname.new( settings.public_folder ) ).to_s
     absolute_file_path = File.join( '/',  relative_path )
@@ -422,7 +422,7 @@ end
   def cssHelper( filename )    
     return "/assets/css/#{filename}.css"
   end
-  
+
   #
   def javascriptHelper( filename )
     return "/assets/javascript/#{filename}.javascript"
@@ -433,15 +433,15 @@ end
     img_file = assertSingleFile( Dir.glob("#{settings.images_directory}/**/#{filename}"), filename )
     absolutePathFromPublicFolder( img_file )
   end     
-     
+
   #
   def scssHelper( filename )
-  
+
     # root = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test
     # base = http://0.0.0.0:4567
     # scss_dir = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/views/scss
     # required = http://0.0.0.0:4567scss/#{filename}.css
-    
+
     src_file = assertSingleFile( Dir.glob("#{settings.scss_directory}/**/#{filename}.{scss,sass}"), filename )
     ext = File.extname( src_file )[1..-1].to_sym
 
@@ -454,11 +454,11 @@ end
     dst_file = File.new( absolute_dst_file_path, "w" )
     dst_file.write( compiled_style_sheet )
     dst_file.close()
-    
+
     return cssHelper( filename )
   end
-      
-      
+
+
   # Compile a coffeescript to disk
   #
   def coffeescriptHelper( filename )

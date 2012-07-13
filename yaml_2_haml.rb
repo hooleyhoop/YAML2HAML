@@ -2,7 +2,8 @@ require 'bundler/setup'
 Bundler.require(:default)
 #require 'sinatra'
 #require 'yaml'
-#require 'pp'
+require 'pp'
+require 'nokogiri'
 require "sinatra/reloader" if development?
 
 require_relative 'src/hoo_renderer'
@@ -51,11 +52,32 @@ def renderYAML( page_name )
   return renderer_hierachy.render_the_engine( self )
 end
 
-#
+def cssDependenciesIncludeString
+  css_includes = ""
+  $css_deps.each { |x|
+    css_file = cssHelper(x)
+    css_includes += "<link rel='stylesheet' type='text/css' href='#{css_file}' />"
+  }
+  return css_includes
+end
+
+# A single haml file is output
 def renderHAML( page_name, properties={} )
 
   found_file = assertSingleFile( Dir.glob("#{settings.template_directory}/**/#{page_name}.haml"), page_name )
-  return haml(File.read(found_file), locals: properties )
+  rendered_haml = haml(File.read(found_file), locals: properties )
+  
+  # inject the css
+  css_includes = cssDependenciesIncludeString()
+  
+  return "<html>
+  <head>
+  #{css_includes}
+  </head>
+  <body>
+  #{rendered_haml}
+  </body>
+  </html>"
 end
 
 #
@@ -69,7 +91,8 @@ def renderPage( page_name )
 
   $inline_sass = Hash.new
   $inline_coffeescript = Hash.new
- 
+  $css_deps = Array.new
+  
   ext = File.extname( page_name )
   if ext.nil? == false && ext.length > 0
     page_name_parts = page_name.split(".")
@@ -95,10 +118,15 @@ def renderPage( page_name )
     raw_coffee_string = $inline_coffeescript.values.join('')
     compiled_coffee_string = CoffeeScript.compile( raw_coffee_string )
     
-    rendered_page << "<style>#{compiled_sass_string}</style>"
-    rendered_page << "<script>#{compiled_coffee_string}</script>"
+    # inject the css dependencies 
+    # Nokogiri test
+    doc = Nokogiri::HTML(rendered_page)
+    head = doc.at('//head')
+    head << cssDependenciesIncludeString()
+    head << "<style>#{compiled_sass_string}</style>"
+    head << "<script>#{compiled_coffee_string}</script>"
     
-    return rendered_page
+    return doc.to_s
   end
   return "failed to handle #{page_name}#{ext}"
 end
@@ -188,6 +216,20 @@ module Haml::Filters::Monkey
   end
 end
 
+# ------------------------------
+# New css_deps filter, use :cssdeps
+# ------------------------------
+module Haml::Filters::Cssdeps
+  include Haml::Filters::Base
+  def render(text)
+    text.split(/\r?\n|\r/).each { |line|
+      # keep a reference to css dependencies in global $css_deps
+      $css_deps << line  unless $css_deps.include? line 
+    }
+    nil
+  end
+end
 
 
 #puts YAML::dump(engine_hash)
+# use pretty print instead!

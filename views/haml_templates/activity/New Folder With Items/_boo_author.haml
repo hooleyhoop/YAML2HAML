@@ -1,0 +1,28 @@
+
+- usr_img_file = 'Unknown-avatar.gif'
+- boo_author = 'Sandra Smithers'
+- boo_date = '17th August'
+
+.boo-author
+  .media-container
+    %img( src="#{ imageHelper( usr_img_file ) }" )
+  .meta-data-container
+    %p
+      = boo_author
+    %p
+      = boo_date
+.clearfix
+
+
+
+:css
+  * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+  .boo-author .media-container {
+    float: left;
+    width: 12%;    
+  }
+  .boo-author .media-container img {
+    width: 100%;
+    display: block; 
+  }

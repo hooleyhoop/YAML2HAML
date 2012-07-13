@@ -1,0 +1,6 @@
+# tutorial 4
+# content in layout
+_simplest_window:
+  title: YAML2Haml
+
+  _css_dependency:

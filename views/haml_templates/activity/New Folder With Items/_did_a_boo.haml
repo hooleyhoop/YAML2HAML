@@ -1,26 +1,33 @@
 
-- img_file = 'placeholder_img.jpg'
-- title = 'Lennox the dog was killed by Belfast City Council today after a two year legal battle. Victoria Stillwell gave me her reaction'
-- description = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor'
+- boo_img_file = 'placeholder_img.jpg'
+- boo_title = 'Lennox the dog was killed by Belfast City Council today after a two year legal battle. Victoria Stillwell gave me her reaction'
+- boo_description = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor'
 - likes = 'KimDee57, macmarlen, Kilsally'
 - comment1 = 'utterly disgraceful action by Belfast City council when there were other option including giving him to the Dog Whisper who had offered to take him and pay all expenses. Spiteful action by BCC trying to bury the news today and hope it blows over by the time the Twelfth holidays are over.'
+- comment2 = 'LMFAO'
 
 .did-a-boo
-  %img( src="#{ imageHelper( img_file ) }" )
+  %img( src="#{ imageHelper( boo_img_file ) }" )
+
   .player
     .play-button-wrapper
       %img.play-button( src="#{ imageHelper( 'play_button2.png' ) }" )
     .progress-wrapper
       .progress
-  %h3.title
-    = title
-  %p.description
-    = description
+
+  %p.boo-title
+    = boo_title
+  %p.boo-description
+    = boo_description
   %p.likes
     = likes
-  %p.comment
-    = comment1
-
+  .comments
+    %p.comment
+      = comment1
+    %p.comment
+      = comment2
+  %p
+    %a see all 12 comments      
 :css
   .did-a-boo img {
     width: 100%;
@@ -42,19 +49,20 @@
     margin: auto;
   }
   .did-a-boo .progress-wrapper {
-    width: 100%;
+    width: auto;
     height: 100%;
-    padding: 2px;
+    box-sizing: border-box;
+    padding: 12px;
   }
   .did-a-boo .progress {
     width: 33%;
     height: 100%;
     background-color: cyan;
   }
-  .did-a-boo .likes, .did-a-boo .comment {
+  .did-a-boo .likes, .did-a-boo .comments {
     position: relative;
   }
-  .did-a-boo .likes:before, .did-a-boo .comment:before {
+  .did-a-boo .likes:before, .did-a-boo .comments:before {
     position: absolute;
     right: 100%;
     padding-right: 0.5em;    
@@ -62,6 +70,6 @@
   .did-a-boo .likes::before {
     content: "\263A";
   }
-  .did-a-boo .comment::before {  
+  .did-a-boo .comments::before {  
     content: "\275D";
   }  

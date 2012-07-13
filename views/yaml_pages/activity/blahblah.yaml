@@ -1,13 +1,27 @@
 _simplest_window:
+  
+  # header stuff
   title: temp tests
   css: [base]
   scss: [module_includes]
+  javascript: [jquery-1.7.1.min]
   
+  # fake panel
   _dumb_dumb_fixed_column:
     _activity_column:
+      #
       _activity_item#1:
-        _did_a_boo:
+        _playlist_header:
+        _playlist_item#1:
+        _playlist_item#2:
+        _playlist_item#3:
+      #
       _activity_item#2:
+        _boo_author:
         _did_a_boo:
+      #
       _activity_item#3:
-        _did_a_boo:            
+        _followed_a_booer:
+      #
+      _activity_item#4:
+        _did_a_boo:
