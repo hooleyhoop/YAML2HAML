@@ -4,9 +4,10 @@
     %meta( charset='utf-8' )
     %title=_['title', 'untitled']
     
-    -# load some CSS 
-    - _['css', []].each do |css_file_name|
-      %link( rel='stylesheet' href="#{cssHelper(css_file_name)}" type="text/css" )
+    -# load some CSS
+    -# NB now using cssdeps instead as it handles duplicates
+    -#- _['css', []].each do |css_file_name|
+    -#  %link( rel='stylesheet' href="#{cssHelper(css_file_name)}" type="text/css" )
 
     - _['scss', []].each do |scss_file_name|
       %link( rel='stylesheet' href="#{scssHelper(scss_file_name)}" type="text/css" )
@@ -28,3 +29,8 @@
       $(function(){
         ABoo.main()
       });
+
+-# global css dependencies
+-# TODO: sass and js etc
+:cssdeps
+  #{_['css', []].join('\n')}

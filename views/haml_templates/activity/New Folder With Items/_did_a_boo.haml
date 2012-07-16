@@ -9,11 +9,7 @@
 .did-a-boo
   %img( src="#{ imageHelper( boo_img_file ) }" )
 
-  .player
-    .play-button-wrapper
-      %img.play-button( src="#{ imageHelper( 'play_button2.png' ) }" )
-    .progress-wrapper
-      .progress
+  = partial( :_player )
 
   %p.boo-title
     = boo_title
@@ -27,37 +23,17 @@
     %p.comment
       = comment2
   %p
-    %a see all 12 comments      
+    %a see all 12 comments
+    
+-#
+:cssdeps
+  base
+:sassdeps  
+  sass_tests_includes
+  
 :css
   .did-a-boo img {
     width: 100%;
-  }
-  .did-a-boo .player {
-    position: relative;
-    width: 100%;
-    height: 60px;
-    background-color: grey;
-  }
-  .did-a-boo .play-button-wrapper {
-    position: absolute;
-    right: 100%;
-    width: 100px;
-    height: 60px;
-  }
-  .did-a-boo .play-button {
-    width: 60px;
-    margin: auto;
-  }
-  .did-a-boo .progress-wrapper {
-    width: auto;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 12px;
-  }
-  .did-a-boo .progress {
-    width: 33%;
-    height: 100%;
-    background-color: cyan;
   }
   .did-a-boo .likes, .did-a-boo .comments {
     position: relative;

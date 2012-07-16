@@ -8,13 +8,9 @@
 
 .playlist-item
   .media-container
-    %img( src="#{ imageHelper( boo_img_file ) }" )
+    %img.boo-img( src="#{ imageHelper( boo_img_file ) }" )
   
-    .player
-      .play-button-wrapper
-        %img.play-button( src="#{ imageHelper( 'play_button2.png' ) }" )
-      .progress-wrapper
-        .progress
+    = partial( :_player )
 
   .meta-data-container
     %p.boo-title
@@ -22,43 +18,18 @@
   
     boo author, etc
 .clearfix
-  
-:css
 
+-#
+:cssdeps
+  base
+
+-#
+:css
   .playlist-item .media-container {
     float: left;
     width: 30%;    
   }
-  .playlist-item .media-container img {
+  .playlist-item .boo-img {
     width: 100%;
     display: block; 
-  }
-  
-
-  .playlist-item .player {
-    position: relative;
-    width: 100%;
-    height: 60px;
-    background-color: grey;
-  }
-  .playlist-item .play-button-wrapper {
-    position: absolute;
-    right: 100%;
-    width: 100px;
-    height: 60px;
-  }
-  .playlist-item .play-button {
-    width: 60px;
-    margin: auto;
-  }
-  .playlist-item .progress-wrapper {
-    width: auto;
-    height: 100%;
-    box-sizing: border-box;
-    padding: 12px;
-  }
-  .playlist-item .progress {
-    width: 33%;
-    height: 100%;
-    background-color: cyan;
   }

@@ -437,6 +437,7 @@ end
   #
   def scssHelper( filename )
 
+    pp "Sass #{filename}"
     # root = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test
     # base = http://0.0.0.0:4567
     # scss_dir = http://0.0.0.0:4567/Users/shooley/Dropbox/Programming/sinatra_test/views/scss

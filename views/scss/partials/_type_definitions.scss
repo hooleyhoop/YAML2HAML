@@ -1,0 +1,50 @@
+$base-font-size: 13px;
+$base-line-height: 15px;
+$hoo_serif_font: Georgia, "Times New Roman", Times, serif;
+$hoo_sans_font: 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+$hoo_bold_sans_font: Helvetica, Arial, sans-serif;
+$hoo_condensed_sans_font: "HelveticaNeue-CondensedBold", "HelveticaNeue-BoldCondensed", "HelveticaNeueBoldCondensed", "HelveticaNeue-Bold-Condensed", "Helvetica Neue Bold Condensed", "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "Helvetica Neue", "HelveticaNeue", "Helvetica", "Arial Narrow", "Arial", sans-serif;
+
+@mixin sansSmall {
+  font: normal normal 12px/15px $hoo_sans_font;
+  text-decoration: none;
+  padding-top: 4px;
+  padding-bottom: 11px;
+  letter-spacing: 0.06pc;
+}
+
+@mixin sansVSmallBold {
+  font: normal bold 9px/15px $hoo_bold_sans_font;
+  text-decoration: none;
+  padding-top: 4px;
+  padding-bottom: 11px;
+  letter-spacing: 0.06pc;
+}
+    
+@mixin sansSolid {
+  font: normal normal 13px/15px $hoo_sans_font;
+  text-decoration: none;
+  padding-top: 2px;
+  padding-bottom: 13px;
+  //word-spacing: -0.1pc;
+}
+
+@mixin smallListType {
+  font: bold 11px/15px $hoo_serif_font;
+  padding-top: 4px;
+  padding-bottom:11px;
+  margin-bottom: -15px;
+}
+
+@mixin unselectable {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -o-user-select: none;
+   user-select: none;
+
+   // important for the toggle-button span in webkit
+   // Without this, we get mousedown, change the text label, then don't get mouseup
+   // By disabling pointer events, the click occurs on the form button instead of the span
+   pointer-events: none;
+}

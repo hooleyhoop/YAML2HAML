@@ -1,0 +1,34 @@
+.player
+  .play-button-wrapper
+    %img.play-button( src="#{ imageHelper( 'play_button2.png' ) }" )
+  .progress-wrapper
+    .progress
+    
+:css
+  .player {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background-color: grey;
+  }
+  .player .play-button-wrapper {
+    position: absolute;
+    right: 100%;
+    width: 100px;
+    height: 60px;
+  }
+  .player .play-button {
+    width: 60px;
+    margin: auto;
+  }
+  .player .progress-wrapper {
+    width: auto;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+  }
+  .player .progress {
+    width: 33%;
+    height: 100%;
+    background-color: cyan;
+  }

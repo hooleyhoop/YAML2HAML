@@ -2,7 +2,7 @@ _simplest_window:
   
   # header stuff
   title: temp tests
-  css: [base]
+  css: [base, holy_grail]
   scss: [module_includes]
   javascript: [jquery-1.7.1.min]
   
