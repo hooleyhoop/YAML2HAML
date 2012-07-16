@@ -1,6 +1,9 @@
+require 'compass' #must be loaded before sinatra
+
 require 'bundler/setup'
 Bundler.require(:default)
-#require 'sinatra'
+require 'sinatra'
+require 'haml'
 #require 'yaml'
 require 'pp'
 require 'nokogiri'
@@ -28,6 +31,11 @@ configure :development do |config|
   set :coffeescript_directory, File.join( settings.views_directory, 'coffeescript' )
 
   set :images_directory, File.join( settings.public_folder, 'images' )
+  
+  # http://openmonkey.com/blog/2009/01/27/using-compass-for-css-in-your-sinatra-application/
+  # http://compass-style.org/help/tutorials/integration/
+  Compass.add_project_configuration( File.join(Sinatra::Application.root, 'config', 'compass.rb'))
+  Compass.configuration.add_import_path( settings.scss_directory )
 end
 
 #

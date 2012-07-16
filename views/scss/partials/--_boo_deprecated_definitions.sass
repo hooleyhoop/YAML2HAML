@@ -1,0 +1,238 @@
+$gutter: 15px
+$fullPageWidth: 970px
+$miniPaneWidth: 642px
+$singlePaneWidth: $fullPageWidth
+
+$blueGreyColour: #88a0ad
+$purplyGrey: #807186
+
+$lightGreyColour: #f2f2f2
+$midGreyColour: #cbcccb
+$darkGreyColour: #272d32
+
+$nearlyWhiteBlue: #f5f9f8
+$mostlyWhiteColour: #f9f9ff
+
+$deepBlueColour: #006cb5 
+$blueBackingColour: #0f75ac
+$titleBlueColour: #4070cb
+$menubarBlueColour: #004f85
+
+//$pinkColour: #C61094
+$pinkColour: #E10D70
+$titlePinkColour: #d90b82
+$audioboo-logo-color: #9e005b
+$redGreyColour: #ad4088
+
+// Corners
+
+=roundedCorners($radius)
+  -moz-border-radius: $radius
+  -webkit-border-radius: $radius
+  border-radius: $radius
+
+=smallRoundedCorners
+  +roundedCorners($gutter / 2)
+
+=mediumRoundedCorners
+  +roundedCorners($gutter)
+
+=largeRoundedCorners
+  +roundedCorners($gutter * 2)
+
+=boxSizing($definition)
+  -webkit-box-sizing: $definition
+  -moz-box-sizing: border-box
+  box-sizing: $definition
+
+// Shadows
+
+=boxShadow($definition)
+  -moz-box-shadow: $definition
+  -webkit-box-shadow: $definition
+  box-shadow: $definition
+
+// Gradients
+
+=verticalGradient($from, $to, $fakeColor:false)
+  @if $fakeColor
+    background-color: mix($from, $to)
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(0, $to), color-stop(1, $from))
+  background: -moz-linear-gradient(center bottom, $to 0%, $from 100%)
+
+// Custom bits
+
+=coloredButton
+  +smallRoundedCorners
+  font-size: 1em
+  color: white
+  padding: 4px 20px
+  +boxShadow(0 0 3px rgba(0, 0, 0, 0.4))
+  &:active
+    background-position: 0 -5px
+  &:hover
+    cursor: pointer
+  &:focus::-moz-focus-inner
+    border-color: transparent !important
+  &.disabled
+    opacity: 0.33
+    cursor: default
+    &:active
+      background-position: 0 0
+
+=greenButton
+  +coloredButton
+  border: 1px solid rgb(19, 145, 14)
+  background: rgb(12, 138, 0) image-url("images/greenGradient.png") repeat-x
+
+=blueButton
+  +coloredButton
+  border: 1px solid rgb(28, 94, 144)
+  background: rgb(14, 117, 172) image-url("images/blueGradient.png") repeat-x
+  &:active
+    background-position: 0 -9px
+
+=redButton
+  +coloredButton
+  border: 1px solid rgb(142, 32, 28)
+  background: rgb(170, 15, 23) image-url("images/redGradient.png") repeat-x
+  &:active
+    background-position: 0 -9px
+
+=linkStyleButton
+  font-size: 1em
+  cursor: pointer
+  border-width: 0
+  padding: 0
+
+// seriously wtf is this?
+=bgGrey
+  background-color: $midGreyColour
+  color: #555555
+  h1,h2,h3,h4, h5, h6, label
+    color: $darkGreyColour
+  a
+    color: $deepBlueColour
+  // Reapply styles to deal with nested colors
+  .bgDarkGrey
+    +bgDarkGrey
+  .bgWhite
+    +bgWhite
+
+=bgDarkGrey
+  background-color: $darkGreyColour
+  color: #e0e0e0
+  a
+    color: #cbcbcb
+  .noLinkUnderlines a:hover
+    color: #eeeeee
+  h1, h2, h3, h4, h5, h6, label
+    color: white
+
+=bgWhite
+  background-color: white
+  color: $darkGreyColour
+  h2,h3,h4,h5,h6,label
+    color: $darkGreyColour
+  h1,a
+    color: $deepBlueColour
+
+=transparentBlackBackground
+  background-image: image-url("images/transparentBlack50.png")
+  background: rgba(0, 0, 0, 0.5)
+
+=roundedWhitePanel
+  background-color: white
+  +mediumRoundedCorners
+  border: 2px solid $midGreyColour + #111111
+  padding: $gutter
+
+=roundedSmallWhitePanel
+  background-color: white
+  +smallRoundedCorners
+  border: 2px solid $midGreyColour + #111111
+  padding: $gutter - 2
+
+=georgia
+  font-family: Georgia, Verdana, serif
+=helvetica
+  font-family: Helvetica, Geneva, Verdana, Arial, sans-serif
+=helveticaNeue
+  font-family: "Helvetica Neue", HelveticaNeue, Helvetica, Arial, sans-serif
+// Spacing
+
+=inset
+  padding: $gutter
+
+=smallInset
+  padding: $gutter / 2
+
+=largeInset
+  padding: $gutter * 2
+
+=noExtraPadding
+  h1, h2, h3, h4, h5, h6, ul, ol,dl, p
+    padding: 0
+  p
+    margin-top: 0
+    margin-bottom: 0
+
+// Behaviours
+
+=underlinedHover
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+=createBooButton
+  width: 234px
+  margin: 10px auto 0
+  display: block
+  height: 34px
+  cursor: pointer
+  background-image: image-url("launchRecordButton.png")
+  background-position: 0 -68px
+  &.hover
+    background-position: 0 -34px
+  &.mousedown
+    background-position: 0 0
+
+=cursorSelectable
+  cursor: pointer
+  &.selected, &.no_click
+    cursor: default
+
+=croppedThumbnailImage($width, $height:$width, $padding:0)
+  width: $width+$padding*2
+  height: $height+$padding*2
+  position: relative
+  overflow: hidden
+  >*, img
+    position: absolute
+    height: $height
+  img.tall
+    height: auto
+    width: $width
+
+=sidebarPanel
+  +clearfix
+  margin-bottom: $gutter
+  .titleBar
+    padding: $gutter/2 2px
+    line-height: 15px
+    background-color: #00609e
+    +verticalGradient(#2275ab,#00558d)
+    border: 1px solid black
+    h4, a
+      color: white!important
+      font-weight: bold
+      margin-right: 5px
+      display: inline
+    h4
+      padding: $gutter/2 2px
+    a
+      float: right
+
+=hiddenText
+  text-indent: -9999px
+  text-align: left

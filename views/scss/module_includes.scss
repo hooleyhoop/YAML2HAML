@@ -1,6 +1,11 @@
+@import "partials/definitions";
 @import "partials/structure";
+@import "partials/style";
+@import "partials/type_styles_new";
 
-#page {
-  @include structure;
-}
+
+@include definitions;
+@include structure;
+@include boo-style;
+
 

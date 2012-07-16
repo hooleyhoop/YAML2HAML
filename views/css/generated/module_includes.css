@@ -1,72 +1,134 @@
+/* _rounded.scss */
 /* check out http://designmodo.com/demo/futuricohtmlfree/# */
+/* line 4, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
 .dp50 {
   width: 50%;
   float: left;
   display: inline;
-  *margin-right: -1px; }
+  *margin-right: -1px;
+}
 
-#page {
-  /* Page layout */
-  /* User details */
-  /* TABLE */ }
-  #page .page-main-fixed-panel {
-    position: relative;
-    width: 600px;
-    min-height: 100px;
-    margin: 0 auto; }
-  #page .page-left-fixed-panel {
-    position: absolute;
-    right: 100%;
-    top: 0;
-    width: 300px;
-    min-height: 100px; }
-  #page .page-right-fixed-panel {
-    position: absolute;
-    left: 100%;
-    top: 0;
-    width: 300px;
-    min-height: 100px; }
-  #page .small-user-details .info, #page .large-user-details .info {
-    overflow: auto; }
-  #page .small-user-details .actions, #page .large-user-details .actions {
-    float: right; }
-  #page .table-header .main_table_action {
-    float: right; }
-  #page .table-header .media {
-    float: left; }
-    #page .table-header .media img {
-      width: 96px;
-      height: 96px; }
-  #page .table-header .details {
-    overflow: auto; }
-  #page .table-header .boolist-actions .left {
-    float: left; }
-  #page .table-header .boolist-actions .right {
-    float: right; }
-  #page .table-header .play-all-button-wrapper, #page .table-header .rss-itunes-button-wrapper, #page .table-header .share-embed-button-wrapper {
-    display: inline-block; }
-  #page .table-header:after {
-    clear: both;
-    display: block;
-    visibility: hidden;
-    overflow: hidden;
-    height: 0 !important;
-    line-height: 0;
-    font-size: xx-large;
-    content: " x x x "; }
-  #page .row {
-    position: relative;
-    border-top: 1px solid black; }
-    #page .row .comments-count {
-      background: url("../images/glyphish-08-chat.png") no-repeat;
-      padding-left: 24px; }
-  #page .content-count {
-    float: right; }
-  #page .row-media {
-    float: left; }
-  #page .row-text {
-    overflow: auto; }
-  #page .extend-left {
-    position: absolute;
-    width: 100px;
-    left: -100px; }
+/* Page layout */
+/* line 17, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.page-main-fixed-panel {
+  position: relative;
+  width: 600px;
+  min-height: 100px;
+  margin: 0 auto;
+}
+
+/* line 25, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.page-left-fixed-panel {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  width: 300px;
+  min-height: 100px;
+}
+
+/* line 34, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.page-right-fixed-panel {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 300px;
+  min-height: 100px;
+}
+
+/* User details */
+/* line 47, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.small-user-details .info, .large-user-details .info {
+  overflow: auto;
+}
+/* line 50, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.small-user-details .actions, .large-user-details .actions {
+  float: right;
+}
+
+/* TABLE */
+/* line 59, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.table-header .main_table_action {
+  float: right;
+}
+/* line 63, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.table-header .media {
+  float: left;
+}
+/* line 65, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.table-header .media img {
+  width: 96px;
+  height: 96px;
+}
+/* line 70, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.table-header .details {
+  overflow: auto;
+}
+/* line 74, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.table-header .boolist-actions .left {
+  float: left;
+}
+/* line 77, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.table-header .boolist-actions .right {
+  float: right;
+}
+/* line 81, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.table-header .play-all-button-wrapper, .table-header .rss-itunes-button-wrapper, .table-header .share-embed-button-wrapper {
+  display: inline-block;
+}
+
+/* line 86, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.table-header:after {
+  clear: both;
+  display: block;
+  visibility: hidden;
+  overflow: hidden;
+  height: 0 !important;
+  line-height: 0;
+  font-size: xx-large;
+  content: " x x x ";
+}
+
+/* line 92, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.row {
+  position: relative;
+  border-top: 1px solid black;
+}
+/* line 96, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.row .comments-count {
+  background: url("../images/glyphish-08-chat.png") no-repeat;
+  padding-left: 24px;
+}
+
+/* line 102, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.content-count {
+  float: right;
+}
+
+/* line 105, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.row-media {
+  float: left;
+}
+
+/* line 108, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.row-text {
+  overflow: auto;
+}
+
+/* line 111, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+.extend-left {
+  position: absolute;
+  width: 100px;
+  left: -100px;
+}
+
+/* The One True Background */
+/* line 7, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_style.scss */
+html {
+  background: #e6e4e9 url('/images/backgrounds/audioboo.jpg') repeat-x 0 0 !important;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(183, 200, 250, 0.5)), color-stop(100%, rgba(0, 0, 60, 0.03)));
+  background-image: -webkit-linear-gradient(rgba(183, 200, 250, 0.5), rgba(0, 0, 60, 0.03));
+  background-image: -moz-linear-gradient(rgba(183, 200, 250, 0.5), rgba(0, 0, 60, 0.03));
+  background-image: -o-linear-gradient(rgba(183, 200, 250, 0.5), rgba(0, 0, 60, 0.03));
+  background-image: linear-gradient(rgba(183, 200, 250, 0.5), rgba(0, 0, 60, 0.03));
+  min-height: 100%;
+}

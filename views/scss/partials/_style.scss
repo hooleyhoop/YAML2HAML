@@ -1,15 +1,14 @@
-@import "partials/definitions";
+@import "compass/css3";
 
-.serifVSmall {
-  text-decoration: none;
-}
+// Primary mixin
+@mixin boo-style {
 
-# http://cssarrowplease.com/
-
-html {
-	background: url(images/bg.jpg) no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+  /* The One True Background */
+  html {
+    //background:#b0c2ea;
+    background:#e6e4e9 image-url("backgrounds/audioboo.jpg") repeat-x 0 0 !important;
+    //background:#b9c1d5 image-url("hoo/backgrounds/noise.png") repeat-x 0 0 !important;
+    @include background-image(linear-gradient(rgba(183,200,250,0.5),rgba(0,0,60,0.03)));
+    min-height:100%;
+  }
 }

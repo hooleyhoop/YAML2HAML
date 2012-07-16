@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'compass'
 require 'erb'
 require 'coffee-script'
 require 'sass'
@@ -448,7 +449,16 @@ end
 
     sass_cache = File.join( settings.root, '/caches-hoo/sass' )
     partials_paths = [ File.join( settings.scss_directory, 'partials' ) ]
-    compiled_style_sheet = Sass::Engine.for_file( src_file, { syntax: ext, load_paths: partials_paths, cache: true , cache_location: sass_cache } ).render
+    
+    partials_paths << "#{Gem.loaded_specs['compass'].full_gem_path}/frameworks/compass/stylesheets"
+
+    
+    opts = { syntax: ext, load_paths: partials_paths, cache: true , cache_location: sass_cache }
+    
+    opts = Compass.configuration.to_sass_engine_options.merge(opts)
+    pp opts
+
+    compiled_style_sheet = Sass::Engine.for_file( src_file, opts ).render
 
     # create and save the css
     absolute_dst_file_path = File.join( settings.css_directory, "generated/#{filename}.css" )
