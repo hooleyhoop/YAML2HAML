@@ -1,27 +1,28 @@
 /* _rounded.scss */
 
-@mixin definitions {
+$blueGreyColour: #88a0ad;
+$purplyGrey: #807186;
 
-  $blueGreyColour: #88a0ad;
-  $purplyGrey: #807186;
-  
-  $lighterGreyColour: #c2c1c0;
-  $lightGreyColour: #f2f2f2;
-  $midGreyColour: #cbcccb;
-  $darkGreyColour: #272d32;
-  
-  $nearlyWhiteBlue: #f5f9f8;
-  $mostlyWhiteColour: #f9f9ff;
-  
-  $deepBlueColour: #006cb5;
-  $blueBackingColour: #0f75ac;
-  $titleBlueColour: #4070cb;
-  $menubarBlueColour: #004f85;
-  
-  //$pinkColour: #C61094;
-  $pinkColour: #E10D70;
-  $titlePinkColour: #d90b82;
-  $audioboo-logo-color: #9e005b;
-  $redGreyColour: #ad4088;
+$lightGreyColour: #f2f2f2;
+$midLightGreyColour: #c2c1c0;
+$midGreyColour: #cbcccb;
+$midDarkGrey: #666;
+$darkGreyColour: #272d32;
+
+$nearlyWhiteBlue: #f5f9f8;
+$mostlyWhiteColour: #f9f9ff;
+
+$deepBlueColour: #006cb5;
+$blueBackingColour: #0f75ac;
+$titleBlueColour: #4070cb;
+$menubarBlueColour: #004f85;
+
+//$pinkColour: #C61094;
+$pinkColour: #E10D70;
+$titlePinkColour: #d90b82;
+$audioboo-logo-color: #9e005b;
+$redGreyColour: #ad4088;
+
+@mixin definitions {
 
 }

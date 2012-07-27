@@ -7,18 +7,22 @@
 
 .followed-a-booer
   .media-container
-    %img( src="#{ imageHelper( img_file ) }" )
+    %a
+      %img( src="#{ imageHelper( img_file ) }" )
 
   .meta-data-container
     %p
-      = real_name
+      %a= real_name
     %p
-      = user_name
+      %a= user_name
     %a.follow-button( href="#" ) follow
     %p 
-      = description
+      %a= description
     %p 
-      3 boos, 12 likes, 169 followers
+      %a 3 boos
+      %a 12 likes
+      %a 169 followers
+  
 .clearfix
 
 :css
@@ -38,6 +42,7 @@
   @media all and (max-width: 480px){
     .followed-a-booer .media-container {
       width: 100%;
+      padding-bottom: 1em;            
     }
     .followed-a-booer .meta-data-container {
       width: 100%;
@@ -47,7 +52,8 @@
   @media all and (min-width: 481px){
     .followed-a-booer .media-container {
       float: left;
-      width: 33%;      
+      width: 33%;
+      padding-right: 1em;      
     }
     .followed-a-booer .meta-data-container {
       float: left;

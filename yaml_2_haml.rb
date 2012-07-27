@@ -78,6 +78,20 @@ def sassDependenciesIncludeString
   }
   return sass_includes
 end
+def compiledInlineCoffeescript
+  inline_coffee = ""
+  $inline_coffeescript.values.each { |x|
+    inline_coffee += "<script>#{CoffeeScript.compile( x )}</script>"
+  }
+  return inline_coffee
+end
+def compiledInlineSass
+  inline_sass = ""
+  $inline_sass.values.each { |x|
+    inline_sass += "<style>#{sass( x )}</style>"  
+  }
+  return inline_sass
+end
 
 # A single haml file is output
 def render_single_haml( page_name, properties={} )
@@ -87,13 +101,19 @@ def render_single_haml( page_name, properties={} )
   # pp caller[0][/`.*'/][1..-2]
   css_includes = cssDependenciesIncludeString()
   sass_includes = sassDependenciesIncludeString()
+  
+  inline_sass = compiledInlineSass()  
+  inline_coffee = compiledInlineCoffeescript()
+  
   return "<html>
   <head>
   #{css_includes}
   #{sass_includes}
+  #{inline_sass}  
   </head>
   <body>
   #{rendered_haml}
+  #{inline_coffee}
   </body>
   </html>"  
 end
@@ -132,16 +152,14 @@ def renderPage( page_name )
     end
 
   else
-    rendered_page = renderYAML( page_name )
-    
-    # rough test of inline sass rendering
-    raw_sass_string = $inline_sass.values.join('')
-    compiled_sass_string = sass(raw_sass_string)
-    
-    #rough test of inline coffeescript rendering
-    raw_coffee_string = $inline_coffeescript.values.join('')
-    compiled_coffee_string = CoffeeScript.compile( raw_coffee_string )
-    
+  
+    # Cant remember how you get here
+    rendered_page = renderYAML( page_name ) 
+
+    inline_sass = compiledInlineSass()
+    inline_coffee = compiledInlineCoffeescript()
+
+
     # inject the css dependencies 
     # Nokogiri test
     doc = Nokogiri::HTML(rendered_page)

@@ -1,3 +1,10 @@
+
+- title = 'Tim Ring uploaded a boo'
+- date = '18th August'
+- if(defined?(_))
+  - title = _[:title] || title
+  - date = _[:date] || date
+
 .activity-item.triangle-isosceles
 
   - activity_content = capture_haml do 
@@ -9,17 +16,26 @@
       - _.indexed_subrenderers.each_with_index do |subrenderer, i|
         = _.insert(i)
         
-  %h4
-    Tim Ring uploaded a boo
-  %p
-    18th August
+  .activity-item-header
+    %h4
+      = title
+    %p
+      = date
   .activity-content-wrapper
     = activity_content
+.clearfix
 
-      
+-#
+:cssdeps
+  base
+:sassdeps  
+  module_includes
+  
+-#
 :css
   .activity-item {
     position: relative;
+    overflow: visible;
   }
   .activity-item .activity-content-wrapper {
     padding: 0 100px;
@@ -28,7 +44,7 @@
     margin: 0;
     position: relative;
   }
-  .activity-item p {
+  .activity-item .activity-item-header p {
     margin: 0;  
   }  
   .activity-item h4::before {
@@ -37,8 +53,8 @@
     content: "";
     width: 32px;
     height: 32px;
-    margin-right: 1em;
-    background-image: url(/images/Unknown-avatar.gif);
+    margin-right: 2em;
+    background-image: url(/images/a_user_pic.jpg);
     background-size: 32px 32px;    
   }
   

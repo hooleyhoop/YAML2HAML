@@ -1,0 +1,65 @@
+:ruby
+  boo_img_file = 'placeholder_img.jpg'
+  boo_title = 'Lennox the dog was killed by Belfast City Council today after a two year legal battle. Victoria Stillwell gave me her reaction'
+  boo_description = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor'
+  likes = ['KimDee57', 'macmarlen', 'Kilsally']
+  comments_array = [ 
+  { user: 'terry_towling', text: 'utterly disgraceful action by Belfast City council when there were other option including giving him to the Dog Whisper who had offered to take him and pay all expenses. Spiteful action by BCC trying to bury the news today and hope it blows over by the time the Twelfth holidays are over.' },
+  { user: 'bobMcGoff', text: 'LMFAO' }
+  ]
+
+  if(defined?(_))
+    boo_img_file = _[:boo_img_file] || boo_img_file
+    #pp imageHelper( boo_img_file )
+  end
+    
+.did-a-boo
+  %a(href='#')
+    %img( src="#{ imageHelper( boo_img_file ) }" )
+
+  = partial( :_player )
+
+  %p.boo-title
+    %a(href='#')
+      = boo_title
+  %p.boo-description
+    = boo_description
+  %p.likes
+    - likes.each do |item|
+      %a(href='#')
+        =item
+      =',' unless item == likes.last
+  .comments
+    - comments_array.each do |comment_hash|
+      %p.a-comment  
+        %a(href='#')
+          =comment_hash[:user]
+        %span
+          =comment_hash[:text]
+    %p
+      %a(href='#') see all 12 comments
+
+-#
+:cssdeps
+  base
+:sassdeps  
+  module_includes
+  
+:css
+  .did-a-boo img {
+    width: 100%;
+  }
+  .did-a-boo .likes, .did-a-boo .comments {
+    position: relative;
+  }
+  .did-a-boo .likes:before, .did-a-boo .comments:before {
+    position: absolute;
+    right: 100%;
+    padding-right: 0.5em;    
+  }
+  .did-a-boo .likes::before {
+    content: "\263A";
+  }
+  .did-a-boo .comments::before {  
+    content: "\275D";
+  }  

@@ -1,4 +1,4 @@
-.dumb-dumb-fixed-column
+.playlist
   - if( !defined?(_) || _.indexed_subrenderers.count==0 )
     .placeholder
       %p
@@ -6,13 +6,6 @@
   - else
     - _.indexed_subrenderers.each_with_index do |subrenderer, i|
       = _.insert(i)
-
       
-:css
-  body {
-  }
-  .dumb-dumb-fixed-column {
-    margin: 0 auto;
-    width: 605px;
-    //background-color: white;
-  }
+  %p
+    %a( href='apple.com') see more

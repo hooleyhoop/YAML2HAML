@@ -2,26 +2,38 @@ _simplest_window:
   
   # header stuff
   title: temp tests
-  css: [base, holy_grail]
+  css: [base]
   scss: [module_includes]
   javascript: [jquery-1.7.1.min]
   
   # fake panel
   _dumb_dumb_fixed_column:
+    _activity_column_header:
     _activity_column:
       #
-      _activity_item#1:
-        _playlist_header:
-        _playlist_item#1:
-        _playlist_item#2:
-        _playlist_item#3:
+      #_activity_item#1:
+      #  title: Tim Ring created a playlist
+      #  _playlist_header:
+      #    playlist_banner: cropped_banner.png
+      #  _playlist:
+      #    _playlist_item#1:
+      #      boo_img_file: insta_sample1.jpg
+      #    _playlist_item#2:
+      #      boo_img_file: insta_sample2.jpg          
+      #    _playlist_item#3:
+      #      boo_img_file: insta_sample3.jpg          
       #
       _activity_item#2:
+        title: Tim Ring commented on a boo      
         _boo_author:
         _did_a_boo:
+          boo_img_file: insta_sample.jpg
       #
       _activity_item#3:
+        title: Tim Ring followed Sandra Smithers     
         _followed_a_booer:
       #
       _activity_item#4:
+        title: Tim Ring uploaded a boo      
         _did_a_boo:
+          boo_img_file: sample_detail_img.jpg

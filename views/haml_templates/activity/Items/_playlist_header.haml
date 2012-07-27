@@ -1,0 +1,32 @@
+- playlist_banner = 'cropped_banner.png'
+- playlist_title = 'Steam Trains of Leeds'
+- playlist_count = '13 Boos'
+
+
+.playlist-header
+  .media-container
+    %a( href='apple.com')
+      %img( src="#{ imageHelper( playlist_banner ) }" )
+
+  .meta-data-container
+    %p
+      %a( href='apple.com')= playlist_title
+    %p
+      %a( href='apple.com')= playlist_count
+.clearfix
+
+:css
+
+  .playlist-header {
+    margin-bottom: 0.5em;
+  }
+  
+  .playlist-header .media-container {
+    margin-bottom: 0.5em;
+  }
+  
+  .playlist-header .media-container img {
+    width: 100%;
+    display: block;
+  }
+ 

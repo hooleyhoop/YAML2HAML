@@ -6,6 +6,9 @@
 - comment1 = 'utterly disgraceful action by Belfast City council when there were other option including giving him to the Dog Whisper who had offered to take him and pay all expenses. Spiteful action by BCC trying to bury the news today and hope it blows over by the time the Twelfth holidays are over.'
 - comment2 = 'LMFAO'
 
+- if(defined?(_))
+  - boo_img_file = _[:boo_img_file] || boo_img_file
+  
 .playlist-item
   .media-container
     %img.boo-img( src="#{ imageHelper( boo_img_file ) }" )
@@ -25,11 +28,25 @@
 
 -#
 :css
+  .playlist-item {
+    margin-bottom: 1em;
+  }
+   
   .playlist-item .media-container {
     float: left;
-    width: 30%;    
+    width: 60px;
+    margin-right: 1em;
   }
   .playlist-item .boo-img {
     width: 100%;
     display: block; 
+  }
+  .playlist-item .player {
+    height: 0px;
+  }
+  .playlist-item .progress-wrapper, .playlist-item .progress {
+    display: none;
+  }
+  .playlist-item .play-button-wrapper {
+    top: -60px;
   }

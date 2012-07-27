@@ -1,0 +1,21 @@
+// Primary mixin
+@mixin type-styles-new
+
+  // mixins
+  .heading-colour
+    color: $titleBlueColour !important
+  .normal-text-colour
+    color: $midDarkGrey !important
+  .normal-link-colour
+    color: darken($blueGreyColour,60%) !important
+  .normal-link-hover-colour
+    color: $titleBlueColour !important
+    
+  h1, h2, h3, h4
+    @extend .heading-colour
+  p
+    @extend .normal-text-colour
+  a, a:visited
+    @extend .normal-link-colour
+  a:hover
+    @extend .normal-link-hover-colour

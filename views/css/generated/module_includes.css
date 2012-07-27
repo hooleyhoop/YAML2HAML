@@ -1,6 +1,6 @@
 /* _rounded.scss */
 /* check out http://designmodo.com/demo/futuricohtmlfree/# */
-/* line 4, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 4, ./views/scss/partials/_structure.scss */
 .dp50 {
   width: 50%;
   float: left;
@@ -8,8 +8,9 @@
   *margin-right: -1px;
 }
 
+/* _rounded.scss */
 /* Page layout */
-/* line 17, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 17, ./views/scss/partials/_structure.scss */
 .page-main-fixed-panel {
   position: relative;
   width: 600px;
@@ -17,7 +18,7 @@
   margin: 0 auto;
 }
 
-/* line 25, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 25, ./views/scss/partials/_structure.scss */
 .page-left-fixed-panel {
   position: absolute;
   right: 100%;
@@ -26,7 +27,7 @@
   min-height: 100px;
 }
 
-/* line 34, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 34, ./views/scss/partials/_structure.scss */
 .page-right-fixed-panel {
   position: absolute;
   left: 100%;
@@ -36,47 +37,47 @@
 }
 
 /* User details */
-/* line 47, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 47, ./views/scss/partials/_structure.scss */
 .small-user-details .info, .large-user-details .info {
   overflow: auto;
 }
-/* line 50, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 50, ./views/scss/partials/_structure.scss */
 .small-user-details .actions, .large-user-details .actions {
   float: right;
 }
 
 /* TABLE */
-/* line 59, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 59, ./views/scss/partials/_structure.scss */
 .table-header .main_table_action {
   float: right;
 }
-/* line 63, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 63, ./views/scss/partials/_structure.scss */
 .table-header .media {
   float: left;
 }
-/* line 65, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 65, ./views/scss/partials/_structure.scss */
 .table-header .media img {
   width: 96px;
   height: 96px;
 }
-/* line 70, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 70, ./views/scss/partials/_structure.scss */
 .table-header .details {
   overflow: auto;
 }
-/* line 74, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 74, ./views/scss/partials/_structure.scss */
 .table-header .boolist-actions .left {
   float: left;
 }
-/* line 77, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 77, ./views/scss/partials/_structure.scss */
 .table-header .boolist-actions .right {
   float: right;
 }
-/* line 81, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 81, ./views/scss/partials/_structure.scss */
 .table-header .play-all-button-wrapper, .table-header .rss-itunes-button-wrapper, .table-header .share-embed-button-wrapper {
   display: inline-block;
 }
 
-/* line 86, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 86, ./views/scss/partials/_structure.scss */
 .table-header:after {
   clear: both;
   display: block;
@@ -88,33 +89,33 @@
   content: " x x x ";
 }
 
-/* line 92, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 92, ./views/scss/partials/_structure.scss */
 .row {
   position: relative;
   border-top: 1px solid black;
 }
-/* line 96, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 96, ./views/scss/partials/_structure.scss */
 .row .comments-count {
   background: url("../images/glyphish-08-chat.png") no-repeat;
   padding-left: 24px;
 }
 
-/* line 102, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 102, ./views/scss/partials/_structure.scss */
 .content-count {
   float: right;
 }
 
-/* line 105, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 105, ./views/scss/partials/_structure.scss */
 .row-media {
   float: left;
 }
 
-/* line 108, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 108, ./views/scss/partials/_structure.scss */
 .row-text {
   overflow: auto;
 }
 
-/* line 111, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_structure.scss */
+/* line 111, ./views/scss/partials/_structure.scss */
 .extend-left {
   position: absolute;
   width: 100px;
@@ -122,13 +123,68 @@
 }
 
 /* The One True Background */
-/* line 7, /Users/shooley/Dropbox/Programming/YAML2HAML/views/scss/partials/_style.scss */
+/* line 8, ./views/scss/partials/_style.scss */
 html {
-  background: #e6e4e9 url('/images/backgrounds/audioboo.jpg') repeat-x 0 0 !important;
+  background: #e6e4e9 url('//public/images/backgrounds/audioboo.jpg?1338205707') repeat-x 0 0 !important;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(183, 200, 250, 0.5)), color-stop(100%, rgba(0, 0, 60, 0.03)));
   background-image: -webkit-linear-gradient(rgba(183, 200, 250, 0.5), rgba(0, 0, 60, 0.03));
   background-image: -moz-linear-gradient(rgba(183, 200, 250, 0.5), rgba(0, 0, 60, 0.03));
   background-image: -o-linear-gradient(rgba(183, 200, 250, 0.5), rgba(0, 0, 60, 0.03));
   background-image: linear-gradient(rgba(183, 200, 250, 0.5), rgba(0, 0, 60, 0.03));
   min-height: 100%;
+}
+
+/* line 16, ./views/scss/partials/_style.scss */
+.activity-item {
+  margin-bottom: 2em;
+}
+
+/* line 19, ./views/scss/partials/_style.scss */
+.activity-item .activity-item-header {
+  padding: 1em;
+}
+
+/* line 22, ./views/scss/partials/_style.scss */
+.activity-item h4::before {
+  border: 1px solid #c2c1c0;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 2px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 2px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 2px;
+}
+
+/* line 27, ./views/scss/partials/_style.scss */
+.activity-column .activity-list-item-spacer {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 6px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 6px inset;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 6px inset;
+}
+
+/* line 31, ./views/scss/partials/_style.scss */
+.boo-author img {
+  border: 1px solid #c2c1c0;
+}
+
+/* line 5, ./views/scss/partials/_type_styles_new.sass */
+.heading-colour, h1, h2, h3, h4 {
+  color: #4070cb !important;
+}
+
+/* line 7, ./views/scss/partials/_type_styles_new.sass */
+.normal-text-colour, p {
+  color: #666666 !important;
+}
+
+/* line 9, ./views/scss/partials/_type_styles_new.sass */
+.normal-link-colour, a, a:visited {
+  color: #010202 !important;
+}
+
+/* line 11, ./views/scss/partials/_type_styles_new.sass */
+.normal-link-hover-colour, a:hover {
+  color: #4070cb !important;
 }

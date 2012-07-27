@@ -8,21 +8,36 @@
     %img( src="#{ imageHelper( usr_img_file ) }" )
   .meta-data-container
     %p
-      = boo_author
+      %a(href='#')= boo_author
     %p
       = boo_date
 .clearfix
 
 
-
+-#
+:cssdeps
+  base
+:sassdeps  
+  module_includes
+  
+-#
 :css
   * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
+  .boo-author {
+    margin-bottom: 0.5em;
+  }
+  
   .boo-author .media-container {
     float: left;
-    width: 12%;    
+    width: 2.2em;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
   }
   .boo-author .media-container img {
     width: 100%;
-    display: block; 
+    display: block;
+  }
+  .boo-author .meta-data-container p {
+    margin: 0;
   }
